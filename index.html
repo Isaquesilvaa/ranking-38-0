@@ -458,48 +458,43 @@ const DEFAULT_EXTRA_STATS = [
 let players = [];
 let extraStats = [];
 let unlocked = false;
-const DATA_KEY = "ranking38-0-jogadores";
-const STATS_KEY = "ranking38-0-stats-extra";
-const AUTH_KEY = "ranking38-0-auth-cred";
 
-/* ---------- armazenamento (window.storage ou localStorage) ---------- */
-const store = {
-  async get(key){
-    try{
-      if (window.storage){
-        const res = await window.storage.get(key, true);
-        if (res && res.value != null) return res.value;
-      }
-    }catch(e){}
-    try{
-      return localStorage.getItem(key);
-    }catch(e){ return null; }
-  },
-  async set(key, value){
-    try{
-      if (window.storage){
-        await window.storage.set(key, value, true);
-        return true;
-      }
-    }catch(e){}
-    try{
-      localStorage.setItem(key, value);
-      return true;
-    }catch(e){ return false; }
-  },
-  async del(key){
-    try{
-      if (window.storage){
-        await window.storage.delete(key, true);
-        return true;
-      }
-    }catch(e){}
-    try{
-      localStorage.removeItem(key);
-      return true;
-    }catch(e){ return false; }
+/* ---------- armazenamento compartilhado (JSONBin.io) ----------
+   Todos os visitantes leem/gravam o MESMO bin na nuvem, então
+   qualquer edição feita por quem está logado aparece pra todo
+   mundo, em qualquer aparelho. */
+const JSONBIN_ID = "6a91ee0e23a2f6593e5a0f1d";
+const JSONBIN_KEY = "$2a$10$nqRMwpkNc2ZnrMV28sGpcOpGBz/p26JUUkqyxWXOSxYTrD/4ZtATm";
+const JSONBIN_BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
+async function remoteGet(){
+  try{
+    const res = await fetch(`${JSONBIN_BASE}/latest`, {
+      headers: { "X-Master-Key": JSONBIN_KEY }
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.record || null;
+  }catch(e){
+    return null;
   }
-};
+}
+
+async function remoteSet(data){
+  try{
+    const res = await fetch(JSONBIN_BASE, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": JSONBIN_KEY
+      },
+      body: JSON.stringify(data)
+    });
+    return res.ok;
+  }catch(e){
+    return false;
+  }
+}
 
 /* ---------- hashing simples (SHA-256) ---------- */
 async function hashText(text){
@@ -527,25 +522,47 @@ async function initAuth(){
   const alt = document.getElementById("authAlt");
   const visitorBtn = document.getElementById("visitorBtn");
 
-  let stored = null; // { username, hash }
-  try{
-    const raw = await store.get(AUTH_KEY);
-    if (raw) stored = JSON.parse(raw);
-  }catch(e){ /* nenhuma credencial definida ainda */ }
-
-  // Se não houver credencial salva, grava a padrão (isaque / 99197480)
-  if (!stored){
-    stored = {...DEFAULT_AUTH};
-    try{ await store.set(AUTH_KEY, JSON.stringify(stored)); }catch(e){}
-  }
-
   overlay.style.display = "flex";
+  title.textContent = "⏳ Carregando...";
+  desc.textContent = "Buscando os dados da liga, um instante.";
+  userInput.style.display = "none";
+  input1.style.display = "none";
+  input2.style.display = "none";
+  btn.style.display = "none";
+  visitorBtn.style.display = "none";
+  alt.innerHTML = "";
 
-  // sempre pede login (credenciais já prontas)
+  // busca (ou cria, se ainda não existir) os dados remotos, incluindo a credencial
+  let remote = await remoteGet();
+  let needsBootstrap = false;
+  if (!remote || typeof remote !== "object"){
+    remote = {};
+    needsBootstrap = true;
+  }
+  if (!remote.auth){
+    remote.auth = {...DEFAULT_AUTH};
+    needsBootstrap = true;
+  }
+  if (!remote.players){
+    remote.players = cloneDefault();
+    needsBootstrap = true;
+  }
+  if (!remote.extraStats){
+    remote.extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+    needsBootstrap = true;
+  }
+  if (needsBootstrap){
+    await remoteSet(remote);
+  }
+  const stored = remote.auth;
+
+  userInput.style.display = "block";
+  input1.style.display = "block";
+  input2.style.display = "none";
+  btn.style.display = "block";
+  visitorBtn.style.display = "block";
   title.textContent = "🔒 Acesso restrito";
   desc.textContent = "Digite seu usuário e senha para editar o ranking, ou entre como visitante para só visualizar.";
-  userInput.style.display = "block";
-  input2.style.display = "none";
   btn.textContent = "Entrar";
   alt.innerHTML = `<a id="forgotLink">esqueci minhas credenciais / redefinir</a>`;
 
@@ -572,8 +589,11 @@ async function initAuth(){
   };
 
   document.getElementById("forgotLink").onclick = async () => {
-    if (!confirm("Redefinir o usuário e a senha vai apagar as credenciais atuais e restaurar o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?")) return;
-    try{ await store.del(AUTH_KEY); }catch(e){}
+    if (!confirm("Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?")) return;
+    const current = await remoteGet();
+    const payload = current || remote;
+    payload.auth = {...DEFAULT_AUTH};
+    await remoteSet(payload);
     initAuth();
   };
 
@@ -597,34 +617,30 @@ function cloneDefault(){
 }
 
 async function loadData(){
-  let gotPlayers = false, gotStats = false;
-  try{
-    const raw = await store.get(DATA_KEY);
-    if (raw){ players = JSON.parse(raw); gotPlayers = true; }
-  }catch(e){ /* sem dados salvos ainda, usa o padrão */ }
-  try{
-    const raw = await store.get(STATS_KEY);
-    if (raw){ extraStats = JSON.parse(raw); gotStats = true; }
-  }catch(e){ /* sem estatísticas salvas ainda, usa o padrão */ }
-
-  if (!gotPlayers) players = cloneDefault();
-  if (!gotStats) extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+  const remote = await remoteGet();
+  if (remote && remote.players){
+    players = remote.players;
+    extraStats = remote.extraStats || DEFAULT_EXTRA_STATS.map(s => ({...s}));
+  } else {
+    players = cloneDefault();
+    extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+  }
   render();
-  // só grava dados padrão automaticamente quando alguém autenticado entra pela 1ª vez;
-  // o visitante nunca deve escrever nada no armazenamento
-  if (unlocked && (!gotPlayers || !gotStats)) persist();
 }
 
 async function persist(){
   if (!unlocked) return; // trava extra: visitante jamais salva
   const note = document.getElementById("saveNote");
-  try{
-    const ok1 = await store.set(DATA_KEY, JSON.stringify(players));
-    const ok2 = await store.set(STATS_KEY, JSON.stringify(extraStats));
-    note.textContent = (ok1 && ok2) ? "salvo ✓" : "não foi possível salvar";
-  }catch(e){
-    note.textContent = "não foi possível salvar";
-  }
+  note.textContent = "salvando...";
+  // busca o registro remoto atual pra não sobrescrever a credencial de login
+  const current = await remoteGet();
+  const payload = {
+    players,
+    extraStats,
+    auth: (current && current.auth) ? current.auth : {...DEFAULT_AUTH}
+  };
+  const ok = await remoteSet(payload);
+  note.textContent = ok ? "salvo ✓" : "não foi possível salvar";
   setTimeout(()=>{ note.textContent = ""; }, 2500);
 }
 
