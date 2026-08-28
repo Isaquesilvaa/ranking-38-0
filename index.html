@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking 38-0</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root{
     --verde: #005C36;
@@ -137,6 +138,56 @@
     font-weight:700;
   }
   tr.risk .nome{ color:var(--vermelho-tx); }
+
+  .nome-cell{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .avatar-wrap{
+    position:relative;
+    width:30px;
+    height:30px;
+    flex-shrink:0;
+  }
+  .avatar-img{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    border:1px solid #D6D0C2;
+  }
+  .avatar-fallback{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--verde);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  tr.risk .avatar-fallback{ background:var(--vermelho-tx); }
+  .avatar-edit{
+    position:absolute;
+    bottom:-3px;
+    right:-3px;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid var(--verde);
+    font-size:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    line-height:1;
+  }
+  .avatar-edit:hover{ background:var(--verde); }
   input[type=number]{
     width:56px;
     padding:5px 6px;
@@ -418,6 +469,7 @@
       <button id="addBtn">+ adicionar jogador</button>
       <button id="resetBtn">restaurar dados originais</button>
       <button id="saveBtn" class="primary">salvar</button>
+      <button id="exportBtn">📸 exportar como imagem</button>
       <span class="save-note" id="saveNote"></span>
     </div>
 
@@ -574,7 +626,7 @@ async function initAuth(){
       overlay.style.display = "none";
       unlocked = true;
       document.getElementById("visitorPill").style.display = "none";
-      loadData();
+      applyData(remote);
     } else {
       errorEl.textContent = "Usuário ou senha incorretos.";
     }
@@ -585,7 +637,7 @@ async function initAuth(){
     overlay.style.display = "none";
     unlocked = false;
     document.getElementById("visitorPill").style.display = "inline-block";
-    loadData();
+    applyData(remote);
   };
 
   document.getElementById("forgotLink").onclick = async () => {
@@ -618,6 +670,10 @@ function cloneDefault(){
 
 async function loadData(){
   const remote = await remoteGet();
+  applyData(remote);
+}
+
+function applyData(remote){
   if (remote && remote.players){
     players = remote.players;
     extraStats = remote.extraStats || DEFAULT_EXTRA_STATS.map(s => ({...s}));
@@ -648,6 +704,43 @@ function sortedRanking(){
   return [...players].sort((a,b)=>{
     if (b.titulos !== a.titulos) return b.titulos - a.titulos;
     return a.rebaixamentos - b.rebaixamentos;
+  });
+}
+
+/* ---------- avatar / foto do jogador ---------- */
+function avatarHTML(p, idx){
+  const initials = (p.nome || "?").trim().charAt(0).toUpperCase();
+  const editBtn = unlocked
+    ? `<label class="avatar-edit" title="Trocar foto">📷<input type="file" accept="image/*" data-idx="${idx}" class="avatar-input" hidden></label>`
+    : "";
+  const inner = p.foto
+    ? `<img src="${p.foto}" class="avatar-img" alt="${p.nome}">`
+    : `<span class="avatar-fallback">${initials}</span>`;
+  return `<span class="avatar-wrap">${inner}${editBtn}</span>`;
+}
+
+function readAndCompressImage(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const size = 96;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        const minSide = Math.min(img.width, img.height);
+        const sx = (img.width - minSide) / 2;
+        const sy = (img.height - minSide) / 2;
+        ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+        resolve(canvas.toDataURL("image/jpeg", 0.75));
+      };
+      img.onerror = () => reject(new Error("imagem inválida"));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error("falha ao ler arquivo"));
+    reader.readAsDataURL(file);
   });
 }
 
@@ -685,7 +778,7 @@ function render(){
 
     tr.innerHTML = `
       <td class="center pos">#${rank}</td>
-      <td class="nome">${p.nome}</td>
+      <td><div class="nome-cell">${avatarHTML(p, originalIndex)}<span class="nome">${p.nome}</span></div></td>
       <td class="center"><input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}></td>
       <td class="center"><input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}></td>
       <td class="status">${badgeFor(p, rank, ranked.length, maxReb)}</td>
@@ -693,7 +786,7 @@ function render(){
     tbody.appendChild(tr);
   });
 
-  tbody.querySelectorAll("input").forEach(inp => {
+  tbody.querySelectorAll("input[type=number]").forEach(inp => {
     inp.addEventListener("change", (e) => {
       if (!unlocked) return; // reforço: visitante nunca altera dados
       const idx = Number(e.target.dataset.idx);
@@ -702,6 +795,22 @@ function render(){
       if (isNaN(val) || val < 0) val = 0;
       players[idx][field] = val;
       render();
+    });
+  });
+
+  tbody.querySelectorAll(".avatar-input").forEach(inp => {
+    inp.addEventListener("change", async (e) => {
+      if (!unlocked) return; // reforço: visitante nunca altera dados
+      const idx = Number(e.target.dataset.idx);
+      const file = e.target.files[0];
+      if (!file) return;
+      try{
+        const dataUrl = await readAndCompressImage(file);
+        players[idx].foto = dataUrl;
+        render();
+      }catch(err){
+        alert("Não foi possível carregar essa imagem.");
+      }
     });
   });
 
@@ -803,6 +912,29 @@ document.getElementById("resetBtn").addEventListener("click", () => {
 document.getElementById("saveBtn").addEventListener("click", () => {
   if (!unlocked) return;
   persist();
+});
+
+document.getElementById("exportBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("exportBtn");
+  const originalText = btn.textContent;
+  btn.textContent = "gerando imagem...";
+  btn.disabled = true;
+  try{
+    const target = document.querySelector(".gradient-frame");
+    const canvas = await html2canvas(target, {
+      backgroundColor: "#EDEBE3",
+      scale: 2,
+      useCORS: true
+    });
+    const link = document.createElement("a");
+    link.download = "ranking-38-0.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  }catch(e){
+    alert("Não foi possível gerar a imagem. Tente novamente.");
+  }
+  btn.textContent = originalText;
+  btn.disabled = false;
 });
 
 // mostra a tabela (bloqueada) enquanto a autenticação carrega, e inicia o fluxo de login
