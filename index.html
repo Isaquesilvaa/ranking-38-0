@@ -53,6 +53,7 @@
     align-items:center;
     gap:16px;
     margin-bottom:4px;
+    flex-wrap:wrap;
   }
   .badge38{
     font-family:'Impact', 'Arial Narrow', sans-serif;
@@ -86,6 +87,10 @@
     font-size:12px;
     padding:5px 12px;
     border-radius:20px;
+  }
+  .pill.visitor{
+    background:var(--dourado);
+    color:#1A1815;
   }
   .desc{
     color:var(--texto-suave);
@@ -325,8 +330,33 @@
     color:var(--texto-suave);
     text-align:center;
     margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
   }
   .auth-alt a{ color:var(--verde-claro); cursor:pointer; text-decoration:underline; }
+  .auth-divider{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:14px 0 12px;
+    color:var(--texto-suave);
+    font-size:11px;
+  }
+  .auth-divider::before, .auth-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:#D6D0C2;
+  }
+  .visitor-btn{
+    width:100%;
+    padding:10px;
+    background:var(--creme2);
+    color:var(--verde);
+    border:1px solid var(--verde);
+  }
+  .visitor-btn:hover{ background:var(--verde); color:#fff; }
 </style>
 </head>
 <body>
@@ -340,6 +370,10 @@
     <input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
     <div class="auth-error" id="authError"></div>
     <button class="primary" id="authBtn">Entrar</button>
+
+    <div class="auth-divider">ou</div>
+    <button class="visitor-btn" id="visitorBtn">👁️ Entrar como visitante (só visualizar)</button>
+
     <div class="auth-alt" id="authAlt"></div>
   </div>
 </div>
@@ -350,18 +384,19 @@
     <div class="header">
       <div class="badge38">38-0</div>
       <h1>RANKING GERAL DA LIGA (38-0)</h1>
-      <div class="lock-icon" id="lockBtn" title="Trocar senha / bloquear">🔒 protegido</div>
+      <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">🔒 protegido</div>
     </div>
     <div class="sub-row">
       <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
       <span class="desc">FUTEBOL DE BOTÃO · CAMPANHA INVICTA</span>
+      <span class="pill visitor" id="visitorPill" style="display:none;">👁️ MODO VISITANTE</span>
     </div>
 
     <div class="rule-box">
       🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
       Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
       Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
-      Acesso protegido por usuário e senha — só quem tiver as credenciais consegue editar e ver as mudanças salvas.
+      Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
     </div>
 
     <table>
@@ -490,6 +525,7 @@ async function initAuth(){
   const errorEl = document.getElementById("authError");
   const btn = document.getElementById("authBtn");
   const alt = document.getElementById("authAlt");
+  const visitorBtn = document.getElementById("visitorBtn");
 
   let stored = null; // { username, hash }
   try{
@@ -507,7 +543,7 @@ async function initAuth(){
 
   // sempre pede login (credenciais já prontas)
   title.textContent = "🔒 Acesso restrito";
-  desc.textContent = "Digite seu usuário e senha para acessar e editar o ranking.";
+  desc.textContent = "Digite seu usuário e senha para editar o ranking, ou entre como visitante para só visualizar.";
   userInput.style.display = "block";
   input2.style.display = "none";
   btn.textContent = "Entrar";
@@ -520,10 +556,19 @@ async function initAuth(){
     if (u && hash === stored.hash && u.toLowerCase() === stored.username.toLowerCase()){
       overlay.style.display = "none";
       unlocked = true;
+      document.getElementById("visitorPill").style.display = "none";
       loadData();
     } else {
       errorEl.textContent = "Usuário ou senha incorretos.";
     }
+  };
+
+  // acesso de visitante: entra sem senha, mas fica somente leitura (nada de edição/salvamento)
+  visitorBtn.onclick = () => {
+    overlay.style.display = "none";
+    unlocked = false;
+    document.getElementById("visitorPill").style.display = "inline-block";
+    loadData();
   };
 
   document.getElementById("forgotLink").onclick = async () => {
@@ -539,6 +584,7 @@ async function initAuth(){
 
 document.getElementById("lockBtn").addEventListener("click", () => {
   unlocked = false;
+  document.getElementById("visitorPill").style.display = "none";
   document.getElementById("authUser").value = "";
   document.getElementById("authInput").value = "";
   document.getElementById("authInput2").value = "";
@@ -564,10 +610,13 @@ async function loadData(){
   if (!gotPlayers) players = cloneDefault();
   if (!gotStats) extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
   render();
-  if (!gotPlayers || !gotStats) persist(); // já grava os dados padrão na primeira vez
+  // só grava dados padrão automaticamente quando alguém autenticado entra pela 1ª vez;
+  // o visitante nunca deve escrever nada no armazenamento
+  if (unlocked && (!gotPlayers || !gotStats)) persist();
 }
 
 async function persist(){
+  if (!unlocked) return; // trava extra: visitante jamais salva
   const note = document.getElementById("saveNote");
   try{
     const ok1 = await store.set(DATA_KEY, JSON.stringify(players));
@@ -630,6 +679,7 @@ function render(){
 
   tbody.querySelectorAll("input").forEach(inp => {
     inp.addEventListener("change", (e) => {
+      if (!unlocked) return; // reforço: visitante nunca altera dados
       const idx = Number(e.target.dataset.idx);
       const field = e.target.dataset.field;
       let val = parseInt(e.target.value, 10);
@@ -671,7 +721,7 @@ function renderStats(ranked, maxReb){
     grid.appendChild(div);
   });
 
-  // estatísticas manuais (editáveis quando desbloqueado)
+  // estatísticas manuais (editáveis somente quando autenticado, não no modo visitante)
   extraStats.forEach((s, idx) => {
     const div = document.createElement("div");
     if (unlocked){
