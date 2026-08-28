@@ -408,6 +408,131 @@
     border:1px solid var(--verde);
   }
   .visitor-btn:hover{ background:var(--verde); color:#fff; }
+
+  .table-wrap{ width:100%; overflow-x:auto; }
+  .mobile-cards{ display:none; }
+
+  /* ============ CARTÕES PARA CELULAR (mais fácil de ver) ============ */
+  .mcard{
+    background:#fff;
+    border:1px solid #E7E2D6;
+    border-radius:16px;
+    padding:14px 14px 12px;
+    margin-bottom:12px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  }
+  .mcard--gold{ border:2px solid var(--dourado); background:var(--creme2); }
+  .mcard--silver{ border:2px solid #A8A196; }
+  .mcard--bronze{ border:2px solid #C08A4E; }
+  .mcard--risk{ border:2px solid var(--vermelho-tx); background:var(--vermelho-bg); }
+
+  .mcard-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .mcard-rank{
+    font-family:'Courier New', monospace;
+    font-weight:800;
+    font-size:22px;
+    color:var(--texto-suave);
+    min-width:38px;
+  }
+  .mcard--gold .mcard-rank{ color:#92400E; }
+  .mcard--risk .mcard-rank{ color:var(--vermelho-tx); }
+  .mcard-name{
+    font-size:18px;
+    font-weight:800;
+    color:var(--verde-claro);
+    flex:1;
+    line-height:1.2;
+  }
+  .mcard--risk .mcard-name{ color:var(--vermelho-tx); }
+  .mcard .avatar-wrap{ width:42px; height:42px; }
+  .mcard .avatar-img, .mcard .avatar-fallback{ width:42px; height:42px; font-size:16px; }
+  .mcard .avatar-edit{ width:18px; height:18px; font-size:11px; }
+
+  .mcard-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .stat-box{
+    background:var(--creme);
+    border-radius:12px;
+    padding:10px 6px 8px;
+    text-align:center;
+  }
+  .mcard--gold .stat-box, .mcard--risk .stat-box{ background:#ffffffb0; }
+  .stat-box .stat-lbl{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--texto-suave);
+    margin-bottom:4px;
+  }
+  .stat-box input[type=number]{
+    width:100%;
+    font-size:28px;
+    font-weight:800;
+    text-align:center;
+    border:none;
+    background:transparent;
+    color:var(--texto);
+    padding:0;
+  }
+  .stat-box input[type=number]:disabled{ color:var(--texto); -webkit-text-fill-color:var(--texto); opacity:1; background:transparent; }
+  .stat-box input[type=number]:focus{ outline:2px solid var(--dourado); border-radius:6px; }
+
+  .mcard-badge{
+    background:var(--verde);
+    color:#fff;
+    font-size:12.5px;
+    font-weight:800;
+    padding:9px 8px;
+    border-radius:9px;
+    text-align:center;
+    letter-spacing:0.2px;
+  }
+  .mcard--gold .mcard-badge{ background:var(--dourado); color:#1A1815; }
+  .mcard--risk .mcard-badge{ background:var(--vermelho-tx); color:#fff; }
+
+  /* ============ RESPONSIVO / CELULAR ============ */
+  @media (max-width: 680px){
+    body{ padding:16px 8px; }
+    .gradient-frame{ border-radius:14px; padding:4px; }
+    .card{ padding:18px 14px 26px; border-radius:11px; }
+    .badge38{ font-size:20px; padding:5px 10px; }
+    h1{ font-size:16px; line-height:1.25; }
+    .header{ gap:10px; }
+    .lock-icon{ margin-left:0; font-size:11.5px; }
+    .sub-row{ margin:8px 0 16px; }
+    .pill, .pill.visitor{ font-size:10.5px; padding:4px 9px; }
+    .desc{ font-size:11px; }
+    .rule-box{ font-size:12.5px; padding:10px 12px; line-height:1.5; }
+
+    .table-wrap{ display:none; }
+    .mobile-cards{ display:block; }
+
+    .btn-row{ gap:8px; }
+    .btn-row button{ flex:1 1 auto; min-width:calc(50% - 4px); padding:11px 8px; font-size:13px; }
+    .save-note{ margin-left:0; width:100%; text-align:center; order:99; }
+
+    .total-row{ font-size:14px; text-align:center; }
+
+    .stats-title{ font-size:15px; margin:26px 0 10px; }
+    .stats-grid{ grid-template-columns:1fr; gap:10px; }
+    .stat-card .val{ font-size:14.5px; }
+
+    .auth-box{ padding:22px 18px; max-width:100%; }
+    .auth-box h2{ font-size:17px; }
+  }
+
+  @media (max-width: 380px){
+    .btn-row button{ min-width:100%; }
+  }
 </style>
 </head>
 <body>
@@ -450,6 +575,7 @@
       Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
     </div>
 
+    <div class="table-wrap">
     <table>
       <thead>
         <tr>
@@ -462,6 +588,9 @@
       </thead>
       <tbody id="tbody"></tbody>
     </table>
+    </div>
+
+    <div class="mobile-cards" id="mobileCards"></div>
 
     <div class="total-row" id="totalRow"></div>
 
@@ -760,33 +889,66 @@ function render(){
   const ranked = sortedRanking();
   const maxReb = Math.max(...ranked.map(p=>p.rebaixamentos));
   const tbody = document.getElementById("tbody");
+  const mobileCards = document.getElementById("mobileCards");
   tbody.innerHTML = "";
+  mobileCards.innerHTML = "";
 
   ranked.forEach((p, idx) => {
     const rank = idx + 1;
-    const tr = document.createElement("tr");
-    if (rank === 1){
-      tr.className = "gold";
-    } else if (p.titulos === 0){
-      tr.className = "risk";
-    } else {
-      tr.className = idx % 2 === 0 ? "zebra" : "";
-    }
-
     const originalIndex = players.indexOf(p);
     const disabledAttr = unlocked ? "" : "disabled";
 
+    let rowClass = "";
+    let cardClass = "";
+    if (rank === 1){
+      rowClass = "gold"; cardClass = "mcard--gold";
+    } else if (p.titulos === 0){
+      rowClass = "risk"; cardClass = "mcard--risk";
+    } else {
+      rowClass = idx % 2 === 0 ? "zebra" : "";
+      if (rank === 2) cardClass = "mcard--silver";
+      else if (rank === 3) cardClass = "mcard--bronze";
+    }
+
+    const badgeText = badgeFor(p, rank, ranked.length, maxReb);
+
+    // ---- linha da tabela (telas maiores) ----
+    const tr = document.createElement("tr");
+    tr.className = rowClass;
     tr.innerHTML = `
       <td class="center pos">#${rank}</td>
-      <td><div class="nome-cell">${avatarHTML(p, originalIndex)}<span class="nome">${p.nome}</span></div></td>
-      <td class="center"><input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}></td>
-      <td class="center"><input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}></td>
-      <td class="status">${badgeFor(p, rank, ranked.length, maxReb)}</td>
+      <td data-label="Jogador"><div class="nome-cell">${avatarHTML(p, originalIndex)}<span class="nome">${p.nome}</span></div></td>
+      <td class="center" data-label="🏆 Títulos"><input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}></td>
+      <td class="center" data-label="🅱️ Rebaixamentos"><input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}></td>
+      <td class="status" data-label="Status">${badgeText}</td>
     `;
     tbody.appendChild(tr);
+
+    // ---- cartão (celular) ----
+    const mc = document.createElement("div");
+    mc.className = `mcard ${cardClass}`;
+    mc.innerHTML = `
+      <div class="mcard-top">
+        <span class="mcard-rank">#${rank}</span>
+        ${avatarHTML(p, originalIndex)}
+        <span class="mcard-name">${p.nome}</span>
+      </div>
+      <div class="mcard-stats">
+        <div class="stat-box">
+          <span class="stat-lbl">🏆 Títulos</span>
+          <input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}>
+        </div>
+        <div class="stat-box">
+          <span class="stat-lbl">🅱️ Rebaixamentos</span>
+          <input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}>
+        </div>
+      </div>
+      <div class="mcard-badge">${badgeText}</div>
+    `;
+    mobileCards.appendChild(mc);
   });
 
-  tbody.querySelectorAll("input[type=number]").forEach(inp => {
+  document.querySelectorAll("input[type=number][data-field]").forEach(inp => {
     inp.addEventListener("change", (e) => {
       if (!unlocked) return; // reforço: visitante nunca altera dados
       const idx = Number(e.target.dataset.idx);
@@ -798,7 +960,7 @@ function render(){
     });
   });
 
-  tbody.querySelectorAll(".avatar-input").forEach(inp => {
+  document.querySelectorAll(".avatar-input").forEach(inp => {
     inp.addEventListener("change", async (e) => {
       if (!unlocked) return; // reforço: visitante nunca altera dados
       const idx = Number(e.target.dataset.idx);
