@@ -598,7 +598,8 @@
       <button id="addBtn">+ adicionar jogador</button>
       <button id="resetBtn">restaurar dados originais</button>
       <button id="saveBtn" class="primary">salvar</button>
-      <button id="exportBtn">📸 exportar como imagem</button>
+      <button id="exportBtn">📸 baixar imagem</button>
+      <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
       <span class="save-note" id="saveNote"></span>
     </div>
 
@@ -1076,11 +1077,7 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   persist();
 });
 
-document.getElementById("exportBtn").addEventListener("click", async () => {
-  const btn = document.getElementById("exportBtn");
-  const originalText = btn.textContent;
-  btn.textContent = "gerando imagem...";
-  btn.disabled = true;
+async function gerarCanvasRanking(){
   const target = document.querySelector(".gradient-frame");
 
   // html2canvas não desenha o texto de <input> com precisão (os números saem
@@ -1105,24 +1102,70 @@ document.getElementById("exportBtn").addEventListener("click", async () => {
   });
 
   try{
-    const canvas = await html2canvas(target, {
+    return await html2canvas(target, {
       backgroundColor: "#EDEBE3",
       scale: 2,
       useCORS: true
     });
+  } finally {
+    swaps.forEach(({ inp, span }) => {
+      inp.style.display = "";
+      span.remove();
+    });
+  }
+}
+
+document.getElementById("exportBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("exportBtn");
+  const originalText = btn.textContent;
+  btn.textContent = "gerando imagem...";
+  btn.disabled = true;
+  try{
+    const canvas = await gerarCanvasRanking();
     const link = document.createElement("a");
     link.download = "ranking-38-0.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   }catch(e){
     alert("Não foi possível gerar a imagem. Tente novamente.");
-  }finally{
-    swaps.forEach(({ inp, span }) => {
-      inp.style.display = "";
-      span.remove();
-    });
   }
+  btn.textContent = originalText;
+  btn.disabled = false;
+});
 
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("shareBtn");
+  const originalText = btn.textContent;
+  btn.textContent = "preparando...";
+  btn.disabled = true;
+  try{
+    const canvas = await gerarCanvasRanking();
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    const file = new File([blob], "ranking-38-0.png", { type: "image/png" });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })){
+      try{
+        await navigator.share({
+          files: [file],
+          title: "Ranking 38-0",
+          text: "🏆 Confere o ranking atualizado da liga 38-0!"
+        });
+      }catch(shareErr){
+        // usuário cancelou o compartilhamento — não precisa avisar nada
+        if (shareErr.name !== "AbortError") throw shareErr;
+      }
+    } else {
+      // navegador (geralmente desktop) sem suporte a compartilhar arquivos:
+      // baixa a imagem pra anexar manualmente no WhatsApp
+      const link = document.createElement("a");
+      link.download = "ranking-38-0.png";
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      alert("Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web.");
+    }
+  }catch(e){
+    alert("Não foi possível preparar a imagem. Tente novamente.");
+  }
   btn.textContent = originalText;
   btn.disabled = false;
 });
