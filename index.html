@@ -1,23 +1,23 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking 38-0</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
   :root{
-    --verde: #005C36;
-    --verde-claro: #059669;
-    --creme: #FBF9F4;
-    --creme2: #FAF4E6;
-    --dourado: #EAB308;
-    --vermelho-bg: #FEE2E2;
-    --vermelho-tx: #991B1B;
-    --texto: #1A1815;
-    --texto-suave: #78716C;
+    --verde:#005C36;
+    --verde-claro:#059669;
+    --creme:#FBF9F4;
+    --creme2:#FAF4E6;
+    --dourado:#EAB308;
+    --vermelho-bg:#FEE2E2;
+    --vermelho-tx:#991B1B;
+    --texto:#1A1815;
+    --texto-suave:#78716C;
   }
 
   *{box-sizing:border-box;}
@@ -26,7 +26,7 @@
     margin:0;
     padding:40px 16px;
     background:#EDEBE3;
-    font-family:'Segoe UI', Arial, sans-serif;
+    font-family:'Segoe UI',Arial,sans-serif;
     color:var(--texto);
     display:flex;
     justify-content:center;
@@ -37,10 +37,17 @@
     width:100%;
     padding:5px;
     border-radius:18px;
-    background:linear-gradient(135deg,
-      #F22424 0%, #F25E24 15%, #F29824 30%,
-      #F2D224 45%, #24F2CB 62%, #24B8F2 78%,
-      #2457F2 100%, #F22424 115%);
+    background:linear-gradient(
+      135deg,
+      #F22424 0%,
+      #F25E24 15%,
+      #F29824 30%,
+      #F2D224 45%,
+      #24F2CB 62%,
+      #24B8F2 78%,
+      #2457F2 100%,
+      #F22424 115%
+    );
     background-size:300% 300%;
     animation:gradientShift 10s ease infinite;
   }
@@ -82,7 +89,7 @@
     font-size:22px;
     color:var(--verde);
     margin:0;
-    letter-spacing:0.5px;
+    letter-spacing:.5px;
   }
 
   .sub-row{
@@ -140,7 +147,9 @@
   }
 
   thead th.center,
-  tbody td.center{text-align:center;}
+  tbody td.center{
+    text-align:center;
+  }
 
   tbody td{
     padding:9px 8px;
@@ -148,7 +157,7 @@
   }
 
   tbody tr.gold{background:var(--creme2);}
-  tbody tr.zebra{background:#FFFFFF;}
+  tbody tr.zebra{background:#fff;}
   tbody tr.risk{background:var(--vermelho-bg);}
 
   .pos{
@@ -261,6 +270,250 @@
     color:#92400E;
   }
 
+  /* ================================
+     NOVOS ÍCONES DOS CAMPEONATOS
+     ================================ */
+
+  .titles-header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+  }
+
+  .titles-icons{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:7px;
+  }
+
+  .title-icon{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    width:58px;
+  }
+
+  .title-icon img{
+    width:38px;
+    height:38px;
+    object-fit:contain;
+    display:block;
+    margin-bottom:4px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));
+  }
+
+  .title-icon-label{
+    font-size:8px;
+    font-weight:800;
+    line-height:1;
+    color:var(--texto-suave);
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+
+  .title-icon input{
+    width:42px !important;
+    height:28px;
+    padding:2px !important;
+    font-size:13px !important;
+  }
+
+  .titles-total{
+    display:block;
+    font-size:9px;
+    font-weight:700;
+    color:var(--verde);
+    margin-top:3px;
+  }
+
+  /* MOBILE */
+
+  .table-wrap{
+    width:100%;
+    overflow-x:auto;
+  }
+
+  .mobile-cards{
+    display:none;
+  }
+
+  .mcard{
+    background:#fff;
+    border:1px solid #E7E2D6;
+    border-radius:16px;
+    padding:14px 14px 12px;
+    margin-bottom:12px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05);
+  }
+
+  .mcard--gold{
+    border:2px solid var(--dourado);
+    background:var(--creme2);
+  }
+
+  .mcard--silver{
+    border:2px solid #A8A196;
+  }
+
+  .mcard--bronze{
+    border:2px solid #C08A4E;
+  }
+
+  .mcard--risk{
+    border:2px solid var(--vermelho-tx);
+    background:var(--vermelho-bg);
+  }
+
+  .mcard-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+  }
+
+  .mcard-rank{
+    font-family:'Courier New',monospace;
+    font-weight:800;
+    font-size:22px;
+    color:var(--texto-suave);
+    min-width:38px;
+  }
+
+  .mcard--gold .mcard-rank{
+    color:#92400E;
+  }
+
+  .mcard--risk .mcard-rank{
+    color:var(--vermelho-tx);
+  }
+
+  .mcard-name{
+    font-size:18px;
+    font-weight:800;
+    color:var(--verde-claro);
+    flex:1;
+    line-height:1.2;
+  }
+
+  .mcard--risk .mcard-name{
+    color:var(--vermelho-tx);
+  }
+
+  .mcard .avatar-wrap{
+    width:42px;
+    height:42px;
+  }
+
+  .mcard .avatar-img,
+  .mcard .avatar-fallback{
+    width:42px;
+    height:42px;
+    font-size:16px;
+  }
+
+  .mcard .avatar-edit{
+    width:18px;
+    height:18px;
+    font-size:11px;
+  }
+
+  .mcard-stats{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-bottom:12px;
+  }
+
+  .stat-box{
+    background:var(--creme);
+    border-radius:12px;
+    padding:10px 6px 8px;
+    text-align:center;
+  }
+
+  .mcard--gold .stat-box,
+  .mcard--risk .stat-box{
+    background:#ffffffb0;
+  }
+
+  .stat-box .stat-lbl{
+    display:block;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--texto-suave);
+    margin-bottom:4px;
+  }
+
+  .mobile-title-icons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+  }
+
+  .mobile-title-item{
+    background:rgba(255,255,255,.65);
+    border-radius:10px;
+    padding:7px 3px;
+    text-align:center;
+  }
+
+  .mobile-title-item img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 3px;
+  }
+
+  .mobile-title-item .mobile-label{
+    font-size:9px;
+    font-weight:800;
+    color:var(--texto-suave);
+    display:block;
+    margin-bottom:4px;
+  }
+
+  .mobile-title-item input{
+    width:48px !important;
+    font-size:20px !important;
+    font-weight:800;
+    text-align:center;
+  }
+
+  .mobile-total-titles{
+    margin-top:7px;
+    text-align:center;
+    font-size:12px;
+    font-weight:800;
+    color:var(--verde);
+  }
+
+  .mcard-badge{
+    background:var(--verde);
+    color:#fff;
+    font-size:12.5px;
+    font-weight:800;
+    padding:9px 8px;
+    border-radius:9px;
+    text-align:center;
+    letter-spacing:.2px;
+  }
+
+  .mcard--gold .mcard-badge{
+    background:var(--dourado);
+    color:#1A1815;
+  }
+
+  .mcard--risk .mcard-badge{
+    background:var(--vermelho-tx);
+    color:#fff;
+  }
+
+  /* BOTÕES */
+
   .btn-row{
     display:flex;
     gap:10px;
@@ -292,7 +545,7 @@
   }
 
   button.primary:hover{
-    background:#00432793;
+    background:#004327;
   }
 
   button:disabled{
@@ -307,6 +560,8 @@
     color:var(--texto-suave);
     margin-left:auto;
   }
+
+  /* ESTATÍSTICAS */
 
   .stats-title{
     font-family:'Impact','Arial Narrow',sans-serif;
@@ -382,14 +637,14 @@
   }
 
   .stat-card.auto{
-    opacity:0.92;
+    opacity:.92;
   }
 
   .stat-card .auto-tag{
     font-size:9.5px;
     font-weight:700;
     color:#6B5A00;
-    opacity:0.7;
+    opacity:.7;
   }
 
   .add-stat-card{
@@ -419,6 +674,8 @@
     text-align:right;
   }
 
+  /* LOCK */
+
   .lock-icon{
     margin-left:auto;
     font-size:13px;
@@ -434,6 +691,8 @@
   .lock-icon:hover{
     color:var(--verde);
   }
+
+  /* AUTH */
 
   .auth-overlay{
     position:fixed;
@@ -452,7 +711,7 @@
     padding:28px 26px;
     width:100%;
     max-width:340px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
   }
 
   .auth-box h2{
@@ -545,168 +804,13 @@
     color:#fff;
   }
 
-  .table-wrap{
-    width:100%;
-    overflow-x:auto;
-  }
+  /* RESPONSIVO */
 
-  .mobile-cards{
-    display:none;
-  }
+  @media(max-width:680px){
 
-  .mcard{
-    background:#fff;
-    border:1px solid #E7E2D6;
-    border-radius:16px;
-    padding:14px 14px 12px;
-    margin-bottom:12px;
-    box-shadow:0 1px 4px rgba(0,0,0,0.05);
-  }
-
-  .mcard--gold{
-    border:2px solid var(--dourado);
-    background:var(--creme2);
-  }
-
-  .mcard--silver{
-    border:2px solid #A8A196;
-  }
-
-  .mcard--bronze{
-    border:2px solid #C08A4E;
-  }
-
-  .mcard--risk{
-    border:2px solid var(--vermelho-tx);
-    background:var(--vermelho-bg);
-  }
-
-  .mcard-top{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:12px;
-  }
-
-  .mcard-rank{
-    font-family:'Courier New',monospace;
-    font-weight:800;
-    font-size:22px;
-    color:var(--texto-suave);
-    min-width:38px;
-  }
-
-  .mcard--gold .mcard-rank{
-    color:#92400E;
-  }
-
-  .mcard--risk .mcard-rank{
-    color:var(--vermelho-tx);
-  }
-
-  .mcard-name{
-    font-size:18px;
-    font-weight:800;
-    color:var(--verde-claro);
-    flex:1;
-    line-height:1.2;
-  }
-
-  .mcard--risk .mcard-name{
-    color:var(--vermelho-tx);
-  }
-
-  .mcard .avatar-wrap{
-    width:42px;
-    height:42px;
-  }
-
-  .mcard .avatar-img,
-  .mcard .avatar-fallback{
-    width:42px;
-    height:42px;
-    font-size:16px;
-  }
-
-  .mcard .avatar-edit{
-    width:18px;
-    height:18px;
-    font-size:11px;
-  }
-
-  .mcard-stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:12px;
-  }
-
-  .stat-box{
-    background:var(--creme);
-    border-radius:12px;
-    padding:10px 6px 8px;
-    text-align:center;
-  }
-
-  .mcard--gold .stat-box,
-  .mcard--risk .stat-box{
-    background:#ffffffb0;
-  }
-
-  .stat-box .stat-lbl{
-    display:block;
-    font-size:11.5px;
-    font-weight:700;
-    color:var(--texto-suave);
-    margin-bottom:4px;
-  }
-
-  .stat-box input[type=number]{
-    width:100%;
-    font-size:28px;
-    font-weight:800;
-    text-align:center;
-    border:none;
-    background:transparent;
-    color:var(--texto);
-    padding:0;
-  }
-
-  .stat-box input[type=number]:disabled{
-    color:var(--texto);
-    -webkit-text-fill-color:var(--texto);
-    opacity:1;
-    background:transparent;
-  }
-
-  .stat-box input[type=number]:focus{
-    outline:2px solid var(--dourado);
-    border-radius:6px;
-  }
-
-  .mcard-badge{
-    background:var(--verde);
-    color:#fff;
-    font-size:12.5px;
-    font-weight:800;
-    padding:9px 8px;
-    border-radius:9px;
-    text-align:center;
-    letter-spacing:0.2px;
-  }
-
-  .mcard--gold .mcard-badge{
-    background:var(--dourado);
-    color:#1A1815;
-  }
-
-  .mcard--risk .mcard-badge{
-    background:var(--vermelho-tx);
-    color:#fff;
-  }
-
-  @media (max-width:680px){
-    body{padding:16px 8px;}
+    body{
+      padding:16px 8px;
+    }
 
     .gradient-frame{
       border-radius:14px;
@@ -812,7 +916,8 @@
     }
   }
 
-  @media (max-width:380px){
+  @media(max-width:380px){
+
     .btn-row button{
       min-width:100%;
     }
@@ -824,245 +929,704 @@
 
 <div id="authOverlay" class="auth-overlay" style="display:none;">
   <div class="auth-box">
-    <h2 id="authTitle">🔒 Acesso restrito</h2>
-    <p id="authDesc">Digite seu usuário e senha para acessar o ranking.</p>
 
-    <input type="text" id="authUser" placeholder="Usuário" autocomplete="off">
-    <input type="password" id="authInput" placeholder="Senha" autocomplete="off">
-    <input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
+    <h2 id="authTitle">🔒 Acesso restrito</h2>
+
+    <p id="authDesc">
+      Digite seu usuário e senha para acessar o ranking.
+    </p>
+
+    <input
+      type="text"
+      id="authUser"
+      placeholder="Usuário"
+      autocomplete="off"
+    >
+
+    <input
+      type="password"
+      id="authInput"
+      placeholder="Senha"
+      autocomplete="off"
+    >
+
+    <input
+      type="password"
+      id="authInput2"
+      placeholder="Confirme a senha"
+      style="display:none;"
+    >
 
     <div class="auth-error" id="authError"></div>
 
-    <button class="primary" id="authBtn">Entrar</button>
+    <button class="primary" id="authBtn">
+      Entrar
+    </button>
 
-    <div class="auth-divider">ou</div>
+    <div class="auth-divider">
+      ou
+    </div>
 
     <button class="visitor-btn" id="visitorBtn">
       👁️ Entrar como visitante (só visualizar)
     </button>
 
     <div class="auth-alt" id="authAlt"></div>
+
   </div>
 </div>
 
 <div class="gradient-frame">
+
   <div class="card">
 
     <div class="header">
-      <div class="badge38">38-0</div>
-      <h1>RANKING GERAL DA LIGA (38-0)</h1>
 
-      <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">
+      <div class="badge38">
+        38-0
+      </div>
+
+      <h1>
+        RANKING GERAL DA LIGA (38-0)
+      </h1>
+
+      <div
+        class="lock-icon"
+        id="lockBtn"
+        title="Entrar / trocar de acesso"
+      >
         🔒 protegido
       </div>
+
     </div>
 
     <div class="sub-row">
-      <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
+
+      <span class="pill">
+        ⚡ DESAFIO DA LIGA #38-0
+      </span>
 
       <span class="desc">
         FUTEBOL DE BOTÃO · CAMPANHA INVICTA
       </span>
 
-      <span class="pill visitor" id="visitorPill" style="display:none;">
+      <span
+        class="pill visitor"
+        id="visitorPill"
+        style="display:none;"
+      >
         👁️ MODO VISITANTE
       </span>
+
     </div>
 
     <div class="rule-box">
-      🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
-      Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
-      Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
-      Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
+
+      🔒 Edite os títulos por competição e os
+      <b>Rebaixamentos</b> — a posição, o pódio e os selos
+      se recalculam sozinhos.
+
+      Critério: mais títulos primeiro; empatados,
+      quem tem <b>menos rebaixamentos</b> fica acima.
+
+      Nas estatísticas abaixo você também pode editar,
+      remover e adicionar novos recordes livremente.
+
+      Edição protegida por usuário e senha.
+      Quem não tiver as credenciais pode entrar como
+      <b>visitante</b> para só ver o ranking.
+
     </div>
 
     <div class="table-wrap">
+
       <table>
+
         <thead>
+
           <tr>
-            <th class="center">Pos</th>
-            <th>Jogador</th>
-            <th class="center">🏆 Títulos</th>
-            <th class="center">🅱️ Rebaixamentos</th>
-            <th>Status / Insígnia</th>
+
+            <th class="center">
+              Pos
+            </th>
+
+            <th>
+              Jogador
+            </th>
+
+            <th class="center">
+
+              <div class="titles-header">
+                🏆 Títulos
+              </div>
+
+              <div class="titles-icons">
+
+                <div class="title-icon">
+
+                  <img
+                    src="cdb.png"
+                    alt="Copa do Brasil"
+                  >
+
+                  <span class="title-icon-label">
+                    CDB
+                  </span>
+
+                </div>
+
+                <div class="title-icon">
+
+                  <img
+                    src="libertadores.png"
+                    alt="Libertadores"
+                  >
+
+                  <span class="title-icon-label">
+                    LIBERTA
+                  </span>
+
+                </div>
+
+                <div class="title-icon">
+
+                  <img
+                    src="brasileirao.png"
+                    alt="Brasileirão"
+                  >
+
+                  <span class="title-icon-label">
+                    BR
+                  </span>
+
+                </div>
+
+              </div>
+
+            </th>
+
+            <th class="center">
+              🅱️ Rebaixamentos
+            </th>
+
+            <th>
+              Status / Insígnia
+            </th>
+
           </tr>
+
         </thead>
 
         <tbody id="tbody"></tbody>
+
       </table>
+
     </div>
 
-    <div class="mobile-cards" id="mobileCards"></div>
+    <div
+      class="mobile-cards"
+      id="mobileCards"
+    ></div>
 
-    <div class="total-row" id="totalRow"></div>
+    <div
+      class="total-row"
+      id="totalRow"
+    ></div>
 
     <div class="btn-row">
-      <button id="addBtn">+ adicionar jogador</button>
-      <button id="resetBtn">restaurar dados originais</button>
-      <button id="saveBtn" class="primary">salvar</button>
-      <button id="exportBtn">📸 baixar imagem</button>
-      <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
 
-      <span class="save-note" id="saveNote"></span>
+      <button id="addBtn">
+        + adicionar jogador
+      </button>
+
+      <button id="resetBtn">
+        restaurar dados originais
+      </button>
+
+      <button
+        id="saveBtn"
+        class="primary"
+      >
+        salvar
+      </button>
+
+      <button id="exportBtn">
+        📸 baixar imagem
+      </button>
+
+      <button
+        id="shareBtn"
+        class="primary"
+      >
+        📲 enviar no WhatsApp
+      </button>
+
+      <span
+        class="save-note"
+        id="saveNote"
+      ></span>
+
     </div>
 
-    <div class="stats-title" style="display:flex;align-items:center;gap:10px;">
+    <div
+      class="stats-title"
+      style="display:flex;align-items:center;gap:10px;"
+    >
       📌 ESTATÍSTICAS DA LIGA
     </div>
 
-    <div class="stats-grid" id="statsGrid"></div>
+    <div
+      class="stats-grid"
+      id="statsGrid"
+    ></div>
 
   </div>
+
 </div>
 
 <script>
 
+/* =========================================================
+   DADOS ORIGINAIS
+   ========================================================= */
+
 const DEFAULT_DATA = [
-  {nome:"Isaque", titulos:8, rebaixamentos:4},
-  {nome:"Rafoso", titulos:7, rebaixamentos:1},
-  {nome:"Ricardo", titulos:4, rebaixamentos:0},
-  {nome:"Gabbay", titulos:3, rebaixamentos:1},
-  {nome:"Matheus", titulos:3, rebaixamentos:1},
-  {nome:"Wendel", titulos:2, rebaixamentos:0},
-  {nome:"Adm", titulos:1, rebaixamentos:0},
-  {nome:"Mateus Amaral", titulos:1, rebaixamentos:0},
-  {nome:"Roland", titulos:1, rebaixamentos:0},
-  {nome:"Vinão", titulos:1, rebaixamentos:0},
-  {nome:"Fala Mansa", titulos:1, rebaixamentos:0},
-  {nome:"Vini Macumbinha", titulos:1, rebaixamentos:1},
-  {nome:"Alex", titulos:1, rebaixamentos:5},
-  {nome:"Adriano", titulos:0, rebaixamentos:7},
-  {nome:"William", titulos:0, rebaixamentos:9},
+
+  {
+    nome:"Isaque",
+    titulos:8,
+    cdb:8,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:4
+  },
+
+  {
+    nome:"Rafoso",
+    titulos:7,
+    cdb:7,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:1
+  },
+
+  {
+    nome:"Ricardo",
+    titulos:4,
+    cdb:4,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Gabbay",
+    titulos:3,
+    cdb:3,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:1
+  },
+
+  {
+    nome:"Matheus",
+    titulos:3,
+    cdb:3,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:1
+  },
+
+  {
+    nome:"Wendel",
+    titulos:2,
+    cdb:2,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Adm",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Mateus Amaral",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Roland",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Vinão",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Fala Mansa",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:0
+  },
+
+  {
+    nome:"Vini Macumbinha",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:1
+  },
+
+  {
+    nome:"Alex",
+    titulos:1,
+    cdb:1,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:5
+  },
+
+  {
+    nome:"Adriano",
+    titulos:0,
+    cdb:0,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:7
+  },
+
+  {
+    nome:"William",
+    titulos:0,
+    cdb:0,
+    libertadores:0,
+    brasileirao:0,
+    rebaixamentos:9
+  }
+
 ];
 
+
+/* =========================================================
+   ESTATÍSTICAS
+   ========================================================= */
+
 const DEFAULT_EXTRA_STATS = [
-  {cat:"⚡ Melhor campanha", jogador:"Rafoso", detalhe:"91 pontos"},
-  {cat:"📉 Pior campanha", jogador:"Adriano", detalhe:"12 pts / 32 derrotas"},
-  {cat:"🔁 Bicampeão seguido", jogador:"Isaque", detalhe:"2 títulos seguidos"},
+
+  {
+    cat:"⚡ Melhor campanha",
+    jogador:"Rafoso",
+    detalhe:"91 pontos"
+  },
+
+  {
+    cat:"📉 Pior campanha",
+    jogador:"Adriano",
+    detalhe:"12 pts / 32 derrotas"
+  },
+
+  {
+    cat:"🔁 Bicampeão seguido",
+    jogador:"Isaque",
+    detalhe:"2 títulos seguidos"
+  }
+
 ];
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
 
 let players = [];
 let extraStats = [];
 let unlocked = false;
 
-const JSONBIN_ID = "6a91efa0da38895dfe1db6ca";
-const JSONBIN_KEY = "$2a$10$nqRMwpkNc2ZnrMV28sGpcOpGBz/p26JUUkqyxWXOSxYTrD/4ZtATm";
-const JSONBIN_BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
+/* =========================================================
+   JSONBIN
+   ========================================================= */
+
+const JSONBIN_ID =
+  "6a91efa0da38895dfe1db6ca";
+
+const JSONBIN_KEY =
+  "$2a$10$nqRMwpkNc2ZnrMV28sGpcOpGBz/p26JUUkqyxWXOSxYTrD/4ZtATm";
+
+const JSONBIN_BASE =
+  `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
 
 async function remoteGet(){
-  try{
-    const res = await fetch(`${JSONBIN_BASE}/latest`, {
-      headers: {
-        "X-Master-Key": JSONBIN_KEY
-      }
-    });
 
-    if (!res.ok) return null;
+  try{
+
+    const res = await fetch(
+      `${JSONBIN_BASE}/latest`,
+      {
+        headers:{
+          "X-Master-Key":JSONBIN_KEY
+        }
+      }
+    );
+
+    if(!res.ok) return null;
 
     const json = await res.json();
+
     return json.record || null;
 
   }catch(e){
+
     return null;
+
   }
+
 }
 
+
 async function remoteSet(data){
+
   try{
-    const res = await fetch(JSONBIN_BASE, {
-      method:"PUT",
 
-      headers:{
-        "Content-Type":"application/json",
-        "X-Master-Key":JSONBIN_KEY
-      },
+    const res = await fetch(
+      JSONBIN_BASE,
+      {
+        method:"PUT",
 
-      body:JSON.stringify(data)
-    });
+        headers:{
+          "Content-Type":"application/json",
+          "X-Master-Key":JSONBIN_KEY
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
 
     return res.ok;
 
   }catch(e){
+
     return false;
+
   }
+
 }
+
+
+/* =========================================================
+   HASH
+   ========================================================= */
 
 async function hashText(text){
-  const enc = new TextEncoder().encode(text);
 
-  const buf = await crypto.subtle.digest(
-    "SHA-256",
-    enc
-  );
+  const enc =
+    new TextEncoder().encode(text);
 
-  return Array.from(
-    new Uint8Array(buf)
-  ).map(
-    b => b.toString(16).padStart(2,"0")
-  ).join("");
+  const buf =
+    await crypto.subtle.digest(
+      "SHA-256",
+      enc
+    );
+
+  return Array
+    .from(new Uint8Array(buf))
+    .map(
+      b =>
+        b.toString(16).padStart(2,"0")
+    )
+    .join("");
+
 }
 
+
+/* =========================================================
+   AUTENTICAÇÃO
+   ========================================================= */
+
 const DEFAULT_AUTH = {
+
   username:"isaque",
-  hash:"ebd643c02382c53592c3f85a125d2e852932631290dc242677c915b960b1e983"
+
+  hash:
+    "ebd643c02382c53592c3f85a125d2e852932631290dc242677c915b960b1e983"
+
 };
+
 
 async function initAuth(){
 
-  const overlay = document.getElementById("authOverlay");
-  const title = document.getElementById("authTitle");
-  const desc = document.getElementById("authDesc");
-  const userInput = document.getElementById("authUser");
-  const input1 = document.getElementById("authInput");
-  const input2 = document.getElementById("authInput2");
-  const errorEl = document.getElementById("authError");
-  const btn = document.getElementById("authBtn");
-  const alt = document.getElementById("authAlt");
-  const visitorBtn = document.getElementById("visitorBtn");
+  const overlay =
+    document.getElementById("authOverlay");
+
+  const title =
+    document.getElementById("authTitle");
+
+  const desc =
+    document.getElementById("authDesc");
+
+  const userInput =
+    document.getElementById("authUser");
+
+  const input1 =
+    document.getElementById("authInput");
+
+  const input2 =
+    document.getElementById("authInput2");
+
+  const errorEl =
+    document.getElementById("authError");
+
+  const btn =
+    document.getElementById("authBtn");
+
+  const alt =
+    document.getElementById("authAlt");
+
+  const visitorBtn =
+    document.getElementById("visitorBtn");
+
 
   overlay.style.display = "flex";
 
   title.textContent = "⏳ Carregando...";
-  desc.textContent = "Buscando os dados da liga, um instante.";
+
+  desc.textContent =
+    "Buscando os dados da liga, um instante.";
 
   userInput.style.display = "none";
   input1.style.display = "none";
   input2.style.display = "none";
   btn.style.display = "none";
   visitorBtn.style.display = "none";
+
   alt.innerHTML = "";
 
-  let remote = await remoteGet();
+
+  let remote =
+    await remoteGet();
 
   let needsBootstrap = false;
 
-  if (!remote || typeof remote !== "object"){
+
+  if(!remote || typeof remote !== "object"){
+
     remote = {};
+
     needsBootstrap = true;
+
   }
 
-  if (!remote.auth){
-    remote.auth = {...DEFAULT_AUTH};
+
+  if(!remote.auth){
+
+    remote.auth =
+      {...DEFAULT_AUTH};
+
     needsBootstrap = true;
+
   }
 
-  if (!remote.players){
-    remote.players = cloneDefault();
+
+  if(!remote.players){
+
+    remote.players =
+      cloneDefault();
+
     needsBootstrap = true;
+
   }
 
-  if (!remote.extraStats){
+
+  if(!remote.extraStats){
+
     remote.extraStats =
-      DEFAULT_EXTRA_STATS.map(s => ({...s}));
+      DEFAULT_EXTRA_STATS.map(
+        s => ({...s})
+      );
 
     needsBootstrap = true;
+
   }
 
-  if (needsBootstrap){
+
+  /*
+   * Compatibilidade com os dados antigos.
+   * Se já existirem jogadores salvos sem os
+   * novos campos, o total antigo é colocado
+   * inicialmente em CDB.
+   */
+
+  remote.players =
+    remote.players.map(p => {
+
+      if(
+        typeof p.cdb !== "number" &&
+        typeof p.libertadores !== "number" &&
+        typeof p.brasileirao !== "number"
+      ){
+
+        p.cdb =
+          Number(p.titulos) || 0;
+
+        p.libertadores = 0;
+
+        p.brasileirao = 0;
+
+      }
+
+      p.cdb =
+        Number(p.cdb) || 0;
+
+      p.libertadores =
+        Number(p.libertadores) || 0;
+
+      p.brasileirao =
+        Number(p.brasileirao) || 0;
+
+      p.titulos =
+        p.cdb +
+        p.libertadores +
+        p.brasileirao;
+
+      return p;
+
+    });
+
+
+  if(needsBootstrap){
+
     await remoteSet(remote);
+
   }
 
-  const stored = remote.auth;
+
+  const stored =
+    remote.auth;
+
 
   userInput.style.display = "block";
   input1.style.display = "block";
@@ -1070,30 +1634,42 @@ async function initAuth(){
   btn.style.display = "block";
   visitorBtn.style.display = "block";
 
-  title.textContent = "🔒 Acesso restrito";
+
+  title.textContent =
+    "🔒 Acesso restrito";
 
   desc.textContent =
     "Digite seu usuário e senha para editar o ranking, ou entre como visitante para só visualizar.";
 
   btn.textContent = "Entrar";
 
+
   alt.innerHTML =
-    `<a id="forgotLink">esqueci minhas credenciais / redefinir</a>`;
+    `<a id="forgotLink">
+      esqueci minhas credenciais / redefinir
+    </a>`;
+
 
   btn.onclick = async () => {
 
     errorEl.textContent = "";
 
-    const u = userInput.value.trim();
+    const u =
+      userInput.value.trim();
 
-    const hash = await hashText(
-      u.toLowerCase() + "::" + input1.value.trim()
-    );
+    const hash =
+      await hashText(
+        u.toLowerCase() +
+        "::" +
+        input1.value.trim()
+      );
+
 
     if(
       u &&
       hash === stored.hash &&
-      u.toLowerCase() === stored.username.toLowerCase()
+      u.toLowerCase() ===
+      stored.username.toLowerCase()
     ){
 
       overlay.style.display = "none";
@@ -1110,8 +1686,11 @@ async function initAuth(){
 
       errorEl.textContent =
         "Usuário ou senha incorretos.";
+
     }
+
   };
+
 
   visitorBtn.onclick = () => {
 
@@ -1124,53 +1703,73 @@ async function initAuth(){
     ).style.display = "inline-block";
 
     applyData(remote);
+
   };
 
-  document.getElementById("forgotLink").onclick =
-    async () => {
 
-      if(
-        !confirm(
-          "Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?"
-        )
-      ) return;
+  document.getElementById(
+    "forgotLink"
+  ).onclick = async () => {
 
-      const current = await remoteGet();
+    if(
+      !confirm(
+        "Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?"
+      )
+    ) return;
 
-      const payload = current || remote;
 
-      payload.auth = {...DEFAULT_AUTH};
+    const current =
+      await remoteGet();
 
-      await remoteSet(payload);
+    const payload =
+      current || remote;
 
-      initAuth();
-    };
+    payload.auth =
+      {...DEFAULT_AUTH};
+
+    await remoteSet(payload);
+
+    initAuth();
+
+  };
+
 
   userInput.addEventListener(
     "keydown",
     e => {
-      if(e.key === "Enter") btn.click();
+      if(e.key === "Enter")
+        btn.click();
     }
   );
+
 
   input1.addEventListener(
     "keydown",
     e => {
-      if(e.key === "Enter") btn.click();
+      if(e.key === "Enter")
+        btn.click();
     }
   );
+
 
   input2.addEventListener(
     "keydown",
     e => {
-      if(e.key === "Enter") btn.click();
+      if(e.key === "Enter")
+        btn.click();
     }
   );
+
 }
 
-document.getElementById("lockBtn").addEventListener(
-  "click",
-  () => {
+
+/* =========================================================
+   BOTÃO DE LOGIN
+   ========================================================= */
+
+document
+  .getElementById("lockBtn")
+  .addEventListener("click",() => {
 
     unlocked = false;
 
@@ -1178,32 +1777,73 @@ document.getElementById("lockBtn").addEventListener(
       "visitorPill"
     ).style.display = "none";
 
-    document.getElementById("authUser").value = "";
-    document.getElementById("authInput").value = "";
-    document.getElementById("authInput2").value = "";
+    document.getElementById(
+      "authUser"
+    ).value = "";
+
+    document.getElementById(
+      "authInput"
+    ).value = "";
+
+    document.getElementById(
+      "authInput2"
+    ).value = "";
 
     initAuth();
-  }
-);
+
+  });
+
+
+/* =========================================================
+   DADOS
+   ========================================================= */
 
 function cloneDefault(){
-  return DEFAULT_DATA.map(
-    p => ({...p})
-  );
+
+  return DEFAULT_DATA.map(p => ({
+    ...p
+  }));
+
 }
+
 
 async function loadData(){
 
-  const remote = await remoteGet();
+  const remote =
+    await remoteGet();
 
   applyData(remote);
+
 }
+
 
 function applyData(remote){
 
-  if(remote && remote.players){
+  if(
+    remote &&
+    remote.players
+  ){
 
-    players = remote.players;
+    players =
+      remote.players.map(p => {
+
+        p.cdb =
+          Number(p.cdb) || 0;
+
+        p.libertadores =
+          Number(p.libertadores) || 0;
+
+        p.brasileirao =
+          Number(p.brasileirao) || 0;
+
+        p.titulos =
+          p.cdb +
+          p.libertadores +
+          p.brasileirao;
+
+        return p;
+
+      });
 
     extraStats =
       remote.extraStats ||
@@ -1213,42 +1853,85 @@ function applyData(remote){
 
   }else{
 
-    players = cloneDefault();
+    players =
+      cloneDefault();
 
     extraStats =
       DEFAULT_EXTRA_STATS.map(
         s => ({...s})
       );
+
   }
 
   render();
+
 }
+
+
+/* =========================================================
+   SALVAR
+   ========================================================= */
 
 async function persist(){
 
   if(!unlocked) return;
 
   const note =
-    document.getElementById("saveNote");
+    document.getElementById(
+      "saveNote"
+    );
 
-  note.textContent = "salvando...";
+  note.textContent =
+    "salvando...";
 
-  const current = await remoteGet();
+
+  const current =
+    await remoteGet();
+
+
+  /*
+   * Garante que o total seja sempre
+   * a soma das três competições.
+   */
+
+  players.forEach(p => {
+
+    p.titulos =
+      (Number(p.cdb) || 0) +
+      (Number(p.libertadores) || 0) +
+      (Number(p.brasileirao) || 0);
+
+  });
+
 
   const payload = {
+
     players,
+
     extraStats,
 
     auth:
-      (current && current.auth)
-      ? current.auth
-      : {...DEFAULT_AUTH}
+      (
+        current &&
+        current.auth
+      )
+      ?
+      current.auth
+      :
+      {...DEFAULT_AUTH}
+
   };
 
-  const ok = await remoteSet(payload);
+
+  const ok =
+    await remoteSet(payload);
+
 
   note.textContent =
-    ok ? "salvo ✓" : "não foi possível salvar";
+    ok
+      ? "salvo ✓"
+      : "não foi possível salvar";
+
 
   setTimeout(
     () => {
@@ -1256,23 +1939,47 @@ async function persist(){
     },
     2500
   );
+
 }
+
+
+/* =========================================================
+   RANKING
+   ========================================================= */
 
 function sortedRanking(){
 
   return [...players].sort(
     (a,b) => {
 
-      if(b.titulos !== a.titulos){
-        return b.titulos - a.titulos;
+      if(
+        b.titulos !==
+        a.titulos
+      ){
+
+        return (
+          b.titulos -
+          a.titulos
+        );
+
       }
 
-      return a.rebaixamentos - b.rebaixamentos;
+      return (
+        a.rebaixamentos -
+        b.rebaixamentos
+      );
+
     }
   );
+
 }
 
-function avatarHTML(p, idx){
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+function avatarHTML(p,idx){
 
   const initials =
     (p.nome || "?")
@@ -1280,37 +1987,50 @@ function avatarHTML(p, idx){
     .charAt(0)
     .toUpperCase();
 
-  const editBtn = unlocked
-    ? `
-      <label
-        class="avatar-edit"
-        title="Trocar foto"
-      >
-        📷
-        <input
-          type="file"
-          accept="image/*"
-          data-idx="${idx}"
-          class="avatar-input"
-          hidden
-        >
-      </label>
-    `
-    : "";
 
-  const inner = p.foto
-    ? `
-      <img
-        src="${p.foto}"
-        class="avatar-img"
-        alt="${p.nome}"
+  const editBtn =
+    unlocked
+
+    ?
+
+    `<label
+      class="avatar-edit"
+      title="Trocar foto"
+    >
+      📷
+      <input
+        type="file"
+        accept="image/*"
+        data-idx="${idx}"
+        class="avatar-input"
+        hidden
       >
-    `
-    : `
-      <span class="avatar-fallback">
-        ${initials}
-      </span>
-    `;
+    </label>`
+
+    :
+
+    "";
+
+
+  const inner =
+    p.foto
+
+    ?
+
+    `<img
+      src="${p.foto}"
+      class="avatar-img"
+      alt="${p.nome}"
+    >`
+
+    :
+
+    `<span
+      class="avatar-fallback"
+    >
+      ${initials}
+    </span>`;
+
 
   return `
     <span class="avatar-wrap">
@@ -1318,31 +2038,47 @@ function avatarHTML(p, idx){
       ${editBtn}
     </span>
   `;
+
 }
+
+
+/* =========================================================
+   FOTO
+   ========================================================= */
 
 function readAndCompressImage(file){
 
   return new Promise(
     (resolve,reject) => {
 
-      const reader = new FileReader();
+      const reader =
+        new FileReader();
+
 
       reader.onload = e => {
 
-        const img = new Image();
+        const img =
+          new Image();
+
 
         img.onload = () => {
 
           const size = 96;
 
           const canvas =
-            document.createElement("canvas");
+            document.createElement(
+              "canvas"
+            );
 
           canvas.width = size;
           canvas.height = size;
 
+
           const ctx =
-            canvas.getContext("2d");
+            canvas.getContext(
+              "2d"
+            );
+
 
           const minSide =
             Math.min(
@@ -1350,11 +2086,15 @@ function readAndCompressImage(file){
               img.height
             );
 
+
           const sx =
-            (img.width - minSide) / 2;
+            (img.width -
+              minSide) / 2;
 
           const sy =
-            (img.height - minSide) / 2;
+            (img.height -
+              minSide) / 2;
+
 
           ctx.drawImage(
             img,
@@ -1368,31 +2108,52 @@ function readAndCompressImage(file){
             size
           );
 
+
           resolve(
             canvas.toDataURL(
               "image/jpeg",
-              0.75
+              .75
             )
           );
+
         };
 
-        img.onerror =
-          () => reject(
-            new Error("imagem inválida")
-          );
 
-        img.src = e.target.result;
+        img.onerror =
+          () =>
+            reject(
+              new Error(
+                "imagem inválida"
+              )
+            );
+
+
+        img.src =
+          e.target.result;
+
       };
 
+
       reader.onerror =
-        () => reject(
-          new Error("falha ao ler arquivo")
-        );
+        () =>
+          reject(
+            new Error(
+              "falha ao ler arquivo"
+            )
+          );
+
 
       reader.readAsDataURL(file);
+
     }
   );
+
 }
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
 
 function badgeFor(
   p,
@@ -1430,11 +2191,215 @@ function badgeFor(
     return "MEMBRO TOP 5";
 
   return "CAMPEÃO DE EDIÇÃO";
+
 }
+
+
+/* =========================================================
+   ÍCONES DOS TÍTULOS - DESKTOP
+   ========================================================= */
+
+function titleIconsHTML(
+  p,
+  originalIndex
+){
+
+  const disabled =
+    unlocked
+      ? ""
+      : "disabled";
+
+
+  return `
+
+    <div class="titles-icons">
+
+      <div class="title-icon">
+
+        <img
+          src="cdb.png"
+          alt="Copa do Brasil"
+        >
+
+        <span class="title-icon-label">
+          CDB
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.cdb}"
+          data-idx="${originalIndex}"
+          data-field="cdb"
+          ${disabled}
+        >
+
+      </div>
+
+
+      <div class="title-icon">
+
+        <img
+          src="libertadores.png"
+          alt="Libertadores"
+        >
+
+        <span class="title-icon-label">
+          LIBERTA
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.libertadores}"
+          data-idx="${originalIndex}"
+          data-field="libertadores"
+          ${disabled}
+        >
+
+      </div>
+
+
+      <div class="title-icon">
+
+        <img
+          src="brasileirao.png"
+          alt="Brasileirão"
+        >
+
+        <span class="title-icon-label">
+          BR
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.brasileirao}"
+          data-idx="${originalIndex}"
+          data-field="brasileirao"
+          ${disabled}
+        >
+
+      </div>
+
+    </div>
+
+    <span class="titles-total">
+      TOTAL: ${p.titulos}
+    </span>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ÍCONES DOS TÍTULOS - CELULAR
+   ========================================================= */
+
+function mobileTitleIconsHTML(
+  p,
+  originalIndex
+){
+
+  const disabled =
+    unlocked
+      ? ""
+      : "disabled";
+
+
+  return `
+
+    <div class="mobile-title-icons">
+
+      <div class="mobile-title-item">
+
+        <img
+          src="cdb.png"
+          alt="Copa do Brasil"
+        >
+
+        <span class="mobile-label">
+          CDB
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.cdb}"
+          data-idx="${originalIndex}"
+          data-field="cdb"
+          ${disabled}
+        >
+
+      </div>
+
+
+      <div class="mobile-title-item">
+
+        <img
+          src="libertadores.png"
+          alt="Libertadores"
+        >
+
+        <span class="mobile-label">
+          LIBERTADORES
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.libertadores}"
+          data-idx="${originalIndex}"
+          data-field="libertadores"
+          ${disabled}
+        >
+
+      </div>
+
+
+      <div class="mobile-title-item">
+
+        <img
+          src="brasileirao.png"
+          alt="BRASILEIRÃO"
+        >
+
+        <span class="mobile-label">
+          BRASILEIRÃO
+        </span>
+
+        <input
+          type="number"
+          min="0"
+          value="${p.brasileirao}"
+          data-idx="${originalIndex}"
+          data-field="brasileirao"
+          ${disabled}
+        >
+
+      </div>
+
+    </div>
+
+    <div class="mobile-total-titles">
+      🏆 TOTAL DE TÍTULOS: ${p.titulos}
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER PRINCIPAL
+   ========================================================= */
 
 function render(){
 
-  const ranked = sortedRanking();
+  const ranked =
+    sortedRanking();
+
 
   const maxReb =
     Math.max(
@@ -1443,35 +2408,52 @@ function render(){
       )
     );
 
+
   const tbody =
-    document.getElementById("tbody");
+    document.getElementById(
+      "tbody"
+    );
+
 
   const mobileCards =
-    document.getElementById("mobileCards");
+    document.getElementById(
+      "mobileCards"
+    );
+
 
   tbody.innerHTML = "";
   mobileCards.innerHTML = "";
 
+
   ranked.forEach(
     (p,idx) => {
 
-      const rank = idx + 1;
+      const rank =
+        idx + 1;
+
 
       const originalIndex =
         players.indexOf(p);
 
+
       const disabledAttr =
-        unlocked ? "" : "disabled";
+        unlocked
+          ? ""
+          : "disabled";
+
 
       let rowClass = "";
       let cardClass = "";
+
 
       if(rank === 1){
 
         rowClass = "gold";
         cardClass = "mcard--gold";
 
-      }else if(p.titulos === 0){
+      }else if(
+        p.titulos === 0
+      ){
 
         rowClass = "risk";
         cardClass = "mcard--risk";
@@ -1480,15 +2462,20 @@ function render(){
 
         rowClass =
           idx % 2 === 0
-          ? "zebra"
-          : "";
+            ? "zebra"
+            : "";
+
 
         if(rank === 2)
-          cardClass = "mcard--silver";
+          cardClass =
+            "mcard--silver";
 
         else if(rank === 3)
-          cardClass = "mcard--bronze";
+          cardClass =
+            "mcard--bronze";
+
       }
+
 
       const badgeText =
         badgeFor(
@@ -1498,43 +2485,64 @@ function render(){
           maxReb
         );
 
-      const tr =
-        document.createElement("tr");
 
-      tr.className = rowClass;
+      /* =========================
+         TABELA DESKTOP
+         ========================= */
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.className =
+        rowClass;
+
 
       tr.innerHTML = `
+
         <td class="center pos">
           #${rank}
         </td>
 
+
         <td data-label="Jogador">
+
           <div class="nome-cell">
-            ${avatarHTML(p,originalIndex)}
+
+            ${avatarHTML(
+              p,
+              originalIndex
+            )}
+
             <span class="nome">
               ${p.nome}
             </span>
+
           </div>
+
         </td>
+
 
         <td
           class="center"
           data-label="🏆 Títulos"
         >
-          <input
-            type="number"
-            min="0"
-            value="${p.titulos}"
-            data-idx="${originalIndex}"
-            data-field="titulos"
-            ${disabledAttr}
-          >
+
+          ${titleIconsHTML(
+            p,
+            originalIndex
+          )}
+
         </td>
+
 
         <td
           class="center"
           data-label="🅱️ Rebaixamentos"
         >
+
           <input
             type="number"
             min="0"
@@ -1543,7 +2551,9 @@ function render(){
             data-field="rebaixamentos"
             ${disabledAttr}
           >
+
         </td>
+
 
         <td
           class="status"
@@ -1551,24 +2561,39 @@ function render(){
         >
           ${badgeText}
         </td>
+
       `;
+
 
       tbody.appendChild(tr);
 
+
+      /* =========================
+         CARTÃO MOBILE
+         ========================= */
+
       const mc =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       mc.className =
         `mcard ${cardClass}`;
 
+
       mc.innerHTML = `
+
         <div class="mcard-top">
 
           <span class="mcard-rank">
             #${rank}
           </span>
 
-          ${avatarHTML(p,originalIndex)}
+          ${avatarHTML(
+            p,
+            originalIndex
+          )}
 
           <span class="mcard-name">
             ${p.nome}
@@ -1576,29 +2601,27 @@ function render(){
 
         </div>
 
+
         <div class="mcard-stats">
 
           <div class="stat-box">
 
             <span class="stat-lbl">
-              🏆 Títulos
+              🏆 TÍTULOS
             </span>
 
-            <input
-              type="number"
-              min="0"
-              value="${p.titulos}"
-              data-idx="${originalIndex}"
-              data-field="titulos"
-              ${disabledAttr}
-            >
+            ${mobileTitleIconsHTML(
+              p,
+              originalIndex
+            )}
 
           </div>
+
 
           <div class="stat-box">
 
             <span class="stat-lbl">
-              🅱️ Rebaixamentos
+              🅱️ REBAIXAMENTOS
             </span>
 
             <input
@@ -1614,142 +2637,238 @@ function render(){
 
         </div>
 
+
         <div class="mcard-badge">
           ${badgeText}
         </div>
+
       `;
 
+
       mobileCards.appendChild(mc);
+
     }
   );
+
+
+  /* =====================================================
+     EVENTOS DOS CAMPOS
+     ===================================================== */
 
   document
     .querySelectorAll(
       "input[type=number][data-field]"
     )
-    .forEach(
-      inp => {
+    .forEach(inp => {
 
-        inp.addEventListener(
-          "change",
-          e => {
+      inp.addEventListener(
+        "change",
+        e => {
 
-            if(!unlocked) return;
+          if(!unlocked)
+            return;
 
-            const idx =
-              Number(
-                e.target.dataset.idx
-              );
 
-            const field =
-              e.target.dataset.field;
+          const idx =
+            Number(
+              e.target.dataset.idx
+            );
 
-            let val =
-              parseInt(
-                e.target.value,
-                10
-              );
 
-            if(
-              isNaN(val) ||
-              val < 0
-            ){
-              val = 0;
-            }
+          const field =
+            e.target.dataset.field;
 
-            players[idx][field] = val;
 
-            render();
+          let val =
+            parseInt(
+              e.target.value,
+              10
+            );
+
+
+          if(
+            isNaN(val) ||
+            val < 0
+          ){
+
+            val = 0;
+
           }
-        );
-      }
-    );
+
+
+          players[idx][field] =
+            val;
+
+
+          /* TOTAL AUTOMÁTICO */
+
+          players[idx].titulos =
+            (
+              Number(
+                players[idx].cdb
+              ) || 0
+            ) +
+
+            (
+              Number(
+                players[idx].libertadores
+              ) || 0
+            ) +
+
+            (
+              Number(
+                players[idx].brasileirao
+              ) || 0
+            );
+
+
+          render();
+
+        }
+      );
+
+    });
+
+
+  /* =====================================================
+     EVENTO DAS FOTOS
+     ===================================================== */
 
   document
-    .querySelectorAll(".avatar-input")
-    .forEach(
-      inp => {
+    .querySelectorAll(
+      ".avatar-input"
+    )
+    .forEach(inp => {
 
-        inp.addEventListener(
-          "change",
-          async e => {
+      inp.addEventListener(
+        "change",
+        async e => {
 
-            if(!unlocked) return;
+          if(!unlocked)
+            return;
 
-            const idx =
-              Number(
-                e.target.dataset.idx
+
+          const idx =
+            Number(
+              e.target.dataset.idx
+            );
+
+
+          const file =
+            e.target.files[0];
+
+
+          if(!file)
+            return;
+
+
+          try{
+
+            const dataUrl =
+              await readAndCompressImage(
+                file
               );
 
-            const file =
-              e.target.files[0];
 
-            if(!file) return;
+            players[idx].foto =
+              dataUrl;
 
-            try{
 
-              const dataUrl =
-                await readAndCompressImage(
-                  file
-                );
+            render();
 
-              players[idx].foto =
-                dataUrl;
+          }catch(err){
 
-              render();
+            alert(
+              "Não foi possível carregar essa imagem."
+            );
 
-            }catch(err){
-
-              alert(
-                "Não foi possível carregar essa imagem."
-              );
-            }
           }
-        );
-      }
-    );
+
+        }
+      );
+
+    });
+
+
+  /* =====================================================
+     TOTAL DA LIGA
+     ===================================================== */
 
   const totalT =
     players.reduce(
-      (s,p) => s + p.titulos,
+      (s,p) =>
+        s +
+        (
+          Number(p.cdb) || 0
+        ) +
+        (
+          Number(p.libertadores) || 0
+        ) +
+        (
+          Number(p.brasileirao) || 0
+        ),
       0
     );
 
+
   const totalR =
     players.reduce(
-      (s,p) => s + p.rebaixamentos,
+      (s,p) =>
+        s +
+        (
+          Number(
+            p.rebaixamentos
+          ) || 0
+        ),
       0
     );
+
 
   document.getElementById(
     "totalRow"
   ).textContent =
+
     `TOTAL DA LIGA — 🏆 ${totalT} títulos · 🅱️ ${totalR} rebaixamentos`;
+
 
   document.getElementById(
     "addBtn"
-  ).disabled = !unlocked;
+  ).disabled =
+    !unlocked;
+
 
   document.getElementById(
     "resetBtn"
-  ).disabled = !unlocked;
+  ).disabled =
+    !unlocked;
+
 
   document.getElementById(
     "saveBtn"
-  ).disabled = !unlocked;
+  ).disabled =
+    !unlocked;
+
 
   renderStats(
     ranked,
     maxReb
   );
+
 }
+
+
+/* =========================================================
+   ESTATÍSTICAS
+   ========================================================= */
 
 function renderStats(
   ranked,
   maxReb
 ){
 
-  const lider = ranked[0];
+  const lider =
+    ranked[0];
+
 
   const reiReb =
     [...players].sort(
@@ -1757,6 +2876,7 @@ function renderStats(
         b.rebaixamentos -
         a.rebaixamentos
     )[0];
+
 
   const autoStats = [
 
@@ -1774,49 +2894,68 @@ function renderStats(
 
   ];
 
+
   const grid =
     document.getElementById(
       "statsGrid"
     );
 
+
   grid.innerHTML = "";
+
 
   autoStats.forEach(
     s => {
 
       const div =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       div.className =
         "stat-card auto";
 
+
       div.innerHTML = `
+
         <div class="cat">
+
           ${s.cat}
+
           <span class="auto-tag">
             (automática)
           </span>
+
         </div>
 
         <div class="val">
           ${s.jogador} — ${s.detalhe}
         </div>
+
       `;
 
+
       grid.appendChild(div);
+
     }
   );
+
 
   extraStats.forEach(
     (s,idx) => {
 
       const div =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       if(unlocked){
 
         div.className =
           "stat-card editing";
+
 
         div.innerHTML = `
 
@@ -1828,6 +2967,7 @@ function renderStats(
             ✕
           </button>
 
+
           <input
             class="stat-input"
             data-idx="${idx}"
@@ -1835,6 +2975,7 @@ function renderStats(
             value="${s.cat}"
             placeholder="Categoria"
           >
+
 
           <input
             class="stat-input"
@@ -1844,6 +2985,7 @@ function renderStats(
             placeholder="Jogador"
           >
 
+
           <input
             class="stat-input"
             data-idx="${idx}"
@@ -1851,6 +2993,7 @@ function renderStats(
             value="${s.detalhe}"
             placeholder="Detalhe"
           >
+
         `;
 
       }else{
@@ -1858,7 +3001,9 @@ function renderStats(
         div.className =
           "stat-card";
 
+
         div.innerHTML = `
+
           <div class="cat">
             ${s.cat}
           </div>
@@ -1866,189 +3011,232 @@ function renderStats(
           <div class="val">
             ${s.jogador} — ${s.detalhe}
           </div>
+
         `;
+
       }
 
+
       grid.appendChild(div);
+
     }
   );
+
 
   if(unlocked){
 
     const addDiv =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
+
 
     addDiv.className =
       "add-stat-card";
 
+
     addDiv.id =
       "addStatCard";
+
 
     addDiv.textContent =
       "+ adicionar estatística";
 
+
     grid.appendChild(addDiv);
 
+
     document
-      .getElementById("addStatCard")
+      .getElementById(
+        "addStatCard"
+      )
       .addEventListener(
         "click",
         () => {
 
           extraStats.push({
+
             cat:"🆕 Nova estatística",
+
             jogador:"Jogador",
+
             detalhe:"detalhe"
+
           });
+
 
           renderStats(
             ranked,
             maxReb
           );
+
         }
       );
+
 
     grid
-      .querySelectorAll(".stat-input")
-      .forEach(
-        inp => {
+      .querySelectorAll(
+        ".stat-input"
+      )
+      .forEach(inp => {
 
-          inp.addEventListener(
-            "change",
-            e => {
+        inp.addEventListener(
+          "change",
+          e => {
 
-              const idx =
-                Number(
-                  e.target.dataset.idx
-                );
+            const idx =
+              Number(
+                e.target.dataset.idx
+              );
 
-              const field =
-                e.target.dataset.field;
 
-              extraStats[idx][field] =
-                e.target.value;
-            }
-          );
-        }
-      );
+            const field =
+              e.target.dataset.field;
+
+
+            extraStats[idx][field] =
+              e.target.value;
+
+          }
+        );
+
+      });
+
 
     grid
-      .querySelectorAll(".stat-remove")
-      .forEach(
-        btnEl => {
+      .querySelectorAll(
+        ".stat-remove"
+      )
+      .forEach(btnEl => {
 
-          btnEl.addEventListener(
-            "click",
-            e => {
+        btnEl.addEventListener(
+          "click",
+          e => {
 
-              const idx =
-                Number(
-                  e.target.dataset.idx
-                );
-
-              extraStats.splice(
-                idx,
-                1
+            const idx =
+              Number(
+                e.target.dataset.idx
               );
 
-              renderStats(
-                ranked,
-                maxReb
-              );
-            }
-          );
-        }
-      );
+
+            extraStats.splice(
+              idx,
+              1
+            );
+
+
+            renderStats(
+              ranked,
+              maxReb
+            );
+
+          }
+        );
+
+      });
+
   }
+
 }
 
 
 /* =========================================================
    ADICIONAR JOGADOR
-   =========================================================
-   Alteração feita somente aqui:
-   agora o nome é solicitado antes de criar o jogador.
-   Não existe campo/barra de edição permanente.
-========================================================= */
+   ========================================================= */
 
-document.getElementById(
-  "addBtn"
-).addEventListener(
-  "click",
-  () => {
+document
+  .getElementById("addBtn")
+  .addEventListener(
+    "click",
+    () => {
 
-    if(!unlocked) return;
-
-    const nome =
-      prompt(
-        "Digite o nome do novo jogador:"
-      );
-
-    if(nome === null) return;
-
-    const nomeLimpo =
-      nome.trim();
-
-    if(!nomeLimpo){
-
-      alert(
-        "Digite um nome válido."
-      );
-
-      return;
-    }
-
-    players.push({
-      nome:nomeLimpo,
-      titulos:0,
-      rebaixamentos:0
-    });
-
-    render();
-  }
-);
+      if(!unlocked)
+        return;
 
 
-document.getElementById(
-  "resetBtn"
-).addEventListener(
-  "click",
-  () => {
+      players.push({
 
-    if(!unlocked) return;
+        nome:"Novo jogador",
 
-    if(
-      confirm(
-        "Restaurar os dados originais? As edições atuais serão perdidas."
-      )
-    ){
+        cdb:0,
 
-      players =
-        cloneDefault();
+        libertadores:0,
 
-      extraStats =
-        DEFAULT_EXTRA_STATS.map(
-          s => ({...s})
-        );
+        brasileirao:0,
+
+        titulos:0,
+
+        rebaixamentos:0
+
+      });
+
 
       render();
+
     }
-  }
-);
+  );
 
 
-document.getElementById(
-  "saveBtn"
-).addEventListener(
-  "click",
-  () => {
+/* =========================================================
+   RESTAURAR
+   ========================================================= */
 
-    if(!unlocked) return;
+document
+  .getElementById("resetBtn")
+  .addEventListener(
+    "click",
+    () => {
 
-    persist();
-  }
-);
+      if(!unlocked)
+        return;
 
+
+      if(
+        confirm(
+          "Restaurar os dados originais? As edições atuais serão perdidas."
+        )
+      ){
+
+        players =
+          cloneDefault();
+
+
+        extraStats =
+          DEFAULT_EXTRA_STATS.map(
+            s => ({...s})
+          );
+
+
+        render();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   SALVAR
+   ========================================================= */
+
+document
+  .getElementById("saveBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      if(!unlocked)
+        return;
+
+      persist();
+
+    }
+  );
+
+
+/* =========================================================
+   GERAR IMAGEM
+   ========================================================= */
 
 async function gerarCanvasRanking(){
 
@@ -2057,73 +3245,93 @@ async function gerarCanvasRanking(){
       ".gradient-frame"
     );
 
+
   const swaps = [];
+
 
   target
     .querySelectorAll(
       "input[type=number]"
     )
-    .forEach(
-      inp => {
+    .forEach(inp => {
 
-        const cs =
-          getComputedStyle(inp);
+      const cs =
+        getComputedStyle(inp);
 
-        const span =
-          document.createElement(
-            "span"
-          );
 
-        span.textContent =
-          inp.value;
-
-        span.style.display =
-          "inline-block";
-
-        span.style.width =
-          "100%";
-
-        span.style.fontFamily =
-          cs.fontFamily;
-
-        span.style.fontSize =
-          cs.fontSize;
-
-        span.style.fontWeight =
-          cs.fontWeight;
-
-        span.style.color =
-          cs.color;
-
-        span.style.textAlign =
-          "center";
-
-        span.style.lineHeight =
-          "1.3";
-
-        inp.insertAdjacentElement(
-          "afterend",
-          span
+      const span =
+        document.createElement(
+          "span"
         );
 
-        inp.style.display =
-          "none";
 
-        swaps.push({
-          inp,
-          span
-        });
-      }
-    );
+      span.textContent =
+        inp.value;
+
+
+      span.style.display =
+        "inline-block";
+
+
+      span.style.width =
+        "100%";
+
+
+      span.style.fontFamily =
+        cs.fontFamily;
+
+
+      span.style.fontSize =
+        cs.fontSize;
+
+
+      span.style.fontWeight =
+        cs.fontWeight;
+
+
+      span.style.color =
+        cs.color;
+
+
+      span.style.textAlign =
+        "center";
+
+
+      span.style.lineHeight =
+        "1.3";
+
+
+      inp.insertAdjacentElement(
+        "afterend",
+        span
+      );
+
+
+      inp.style.display =
+        "none";
+
+
+      swaps.push({
+        inp,
+        span
+      });
+
+    });
+
 
   try{
 
     return await html2canvas(
       target,
       {
-        backgroundColor:"#EDEBE3",
+
+        backgroundColor:
+          "#EDEBE3",
+
         scale:2,
+
         useCORS:true
+
       }
     );
 
@@ -2136,164 +3344,222 @@ async function gerarCanvasRanking(){
           "";
 
         span.remove();
+
       }
     );
+
   }
+
 }
 
 
-document.getElementById(
-  "exportBtn"
-).addEventListener(
-  "click",
-  async () => {
+/* =========================================================
+   EXPORTAR IMAGEM
+   ========================================================= */
 
-    const btn =
-      document.getElementById(
-        "exportBtn"
-      );
+document
+  .getElementById("exportBtn")
+  .addEventListener(
+    "click",
+    async () => {
 
-    const originalText =
-      btn.textContent;
-
-    btn.textContent =
-      "gerando imagem...";
-
-    btn.disabled = true;
-
-    try{
-
-      const canvas =
-        await gerarCanvasRanking();
-
-      const link =
-        document.createElement("a");
-
-      link.download =
-        "ranking-38-0.png";
-
-      link.href =
-        canvas.toDataURL(
-          "image/png"
+      const btn =
+        document.getElementById(
+          "exportBtn"
         );
 
-      link.click();
 
-    }catch(e){
-
-      alert(
-        "Não foi possível gerar a imagem. Tente novamente."
-      );
-    }
-
-    btn.textContent =
-      originalText;
-
-    btn.disabled = false;
-  }
-);
+      const originalText =
+        btn.textContent;
 
 
-document.getElementById(
-  "shareBtn"
-).addEventListener(
-  "click",
-  async () => {
+      btn.textContent =
+        "gerando imagem...";
 
-    const btn =
-      document.getElementById(
-        "shareBtn"
-      );
 
-    const originalText =
-      btn.textContent;
+      btn.disabled = true;
 
-    btn.textContent =
-      "preparando...";
 
-    btn.disabled = true;
+      try{
 
-    try{
+        const canvas =
+          await gerarCanvasRanking();
 
-      const canvas =
-        await gerarCanvasRanking();
-
-      const blob =
-        await new Promise(
-          resolve =>
-            canvas.toBlob(
-              resolve,
-              "image/png"
-            )
-        );
-
-      const file =
-        new File(
-          [blob],
-          "ranking-38-0.png",
-          {
-            type:"image/png"
-          }
-        );
-
-      if(
-        navigator.canShare &&
-        navigator.canShare({
-          files:[file]
-        })
-      ){
-
-        try{
-
-          await navigator.share({
-            files:[file],
-            title:"Ranking 38-0",
-            text:
-              "🏆 Confere o ranking atualizado da liga 38-0!"
-          });
-
-        }catch(shareErr){
-
-          if(
-            shareErr.name !==
-            "AbortError"
-          ){
-            throw shareErr;
-          }
-        }
-
-      }else{
 
         const link =
-          document.createElement("a");
+          document.createElement(
+            "a"
+          );
+
 
         link.download =
           "ranking-38-0.png";
 
+
         link.href =
-          URL.createObjectURL(blob);
+          canvas.toDataURL(
+            "image/png"
+          );
+
 
         link.click();
 
+
+      }catch(e){
+
         alert(
-          "Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web."
+          "Não foi possível gerar a imagem. Tente novamente."
         );
+
       }
 
-    }catch(e){
 
-      alert(
-        "Não foi possível preparar a imagem. Tente novamente."
-      );
+      btn.textContent =
+        originalText;
+
+
+      btn.disabled = false;
+
     }
+  );
 
-    btn.textContent =
-      originalText;
 
-    btn.disabled = false;
-  }
-);
+/* =========================================================
+   WHATSAPP / COMPARTILHAR
+   ========================================================= */
 
+document
+  .getElementById("shareBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const btn =
+        document.getElementById(
+          "shareBtn"
+        );
+
+
+      const originalText =
+        btn.textContent;
+
+
+      btn.textContent =
+        "preparando...";
+
+
+      btn.disabled = true;
+
+
+      try{
+
+        const canvas =
+          await gerarCanvasRanking();
+
+
+        const blob =
+          await new Promise(
+            resolve =>
+              canvas.toBlob(
+                resolve,
+                "image/png"
+              )
+          );
+
+
+        const file =
+          new File(
+            [blob],
+            "ranking-38-0.png",
+            {
+              type:"image/png"
+            }
+          );
+
+
+        if(
+          navigator.canShare &&
+          navigator.canShare({
+            files:[file]
+          })
+        ){
+
+          try{
+
+            await navigator.share({
+
+              files:[file],
+
+              title:
+                "Ranking 38-0",
+
+              text:
+                "🏆 Confere o ranking atualizado da liga 38-0!"
+
+            });
+
+          }catch(shareErr){
+
+            if(
+              shareErr.name !==
+              "AbortError"
+            ){
+
+              throw shareErr;
+
+            }
+
+          }
+
+        }else{
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+
+          link.download =
+            "ranking-38-0.png";
+
+
+          link.href =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          link.click();
+
+
+          alert(
+            "Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web."
+          );
+
+        }
+
+      }catch(e){
+
+        alert(
+          "Não foi possível preparar a imagem. Tente novamente."
+        );
+
+      }
+
+
+      btn.textContent =
+        originalText;
+
+
+      btn.disabled = false;
+
+    }
+  );
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
 
 players =
   cloneDefault();
@@ -2306,4 +3572,3 @@ initAuth();
 
 </body>
 </html>
-```
