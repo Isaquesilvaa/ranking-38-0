@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -46,9 +46,9 @@
   }
 
   @keyframes gradientShift{
-    0%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-    100%{ background-position:0% 50%; }
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
   }
 
   .card{
@@ -66,7 +66,7 @@
   }
 
   .badge38{
-    font-family:'Impact', 'Arial Narrow', sans-serif;
+    font-family:'Impact','Arial Narrow',sans-serif;
     font-size:26px;
     color:var(--texto);
     background:var(--creme2);
@@ -77,7 +77,7 @@
   }
 
   h1{
-    font-family:'Impact', 'Arial Narrow', sans-serif;
+    font-family:'Impact','Arial Narrow',sans-serif;
     font-weight:400;
     font-size:22px;
     color:var(--verde);
@@ -147,12 +147,12 @@
     border-bottom:1px solid #E7E2D6;
   }
 
-  tbody tr.gold{ background:var(--creme2); }
-  tbody tr.zebra{ background:#FFFFFF; }
-  tbody tr.risk{ background:var(--vermelho-bg); }
+  tbody tr.gold{background:var(--creme2);}
+  tbody tr.zebra{background:#FFFFFF;}
+  tbody tr.risk{background:var(--vermelho-bg);}
 
   .pos{
-    font-family:'Courier New', monospace;
+    font-family:'Courier New',monospace;
     font-weight:700;
   }
 
@@ -161,29 +161,14 @@
     font-weight:700;
   }
 
-  tr.risk .nome{ color:var(--vermelho-tx); }
+  tr.risk .nome{
+    color:var(--vermelho-tx);
+  }
 
   .nome-cell{
     display:flex;
     align-items:center;
     gap:8px;
-  }
-
-  /* NOVO: campo para editar nome */
-  .nome-input{
-    width:100%;
-    max-width:180px;
-    padding:5px 7px;
-    border:1px solid #D6D0C2;
-    border-radius:6px;
-    font-size:13px;
-    font-weight:700;
-    background:#fff;
-    color:var(--verde-claro);
-  }
-
-  .nome-input:focus{
-    outline:2px solid var(--dourado);
   }
 
   .avatar-wrap{
@@ -268,8 +253,13 @@
     color:var(--texto-suave);
   }
 
-  tr.risk .status{ color:var(--vermelho-tx); }
-  tr.gold .status{ color:#92400E; }
+  tr.risk .status{
+    color:var(--vermelho-tx);
+  }
+
+  tr.gold .status{
+    color:#92400E;
+  }
 
   .btn-row{
     display:flex;
@@ -319,7 +309,7 @@
   }
 
   .stats-title{
-    font-family:'Impact', 'Arial Narrow', sans-serif;
+    font-family:'Impact','Arial Narrow',sans-serif;
     font-weight:400;
     font-size:16px;
     color:var(--texto);
@@ -328,7 +318,7 @@
 
   .stats-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:10px;
   }
 
@@ -599,7 +589,7 @@
   }
 
   .mcard-rank{
-    font-family:'Courier New', monospace;
+    font-family:'Courier New',monospace;
     font-weight:800;
     font-size:22px;
     color:var(--texto-suave);
@@ -624,23 +614,6 @@
 
   .mcard--risk .mcard-name{
     color:var(--vermelho-tx);
-  }
-
-  /* NOVO: campo para editar nome no celular */
-  .mcard-name-input{
-    width:100%;
-    flex:1;
-    padding:6px 8px;
-    border:1px solid #D6D0C2;
-    border-radius:7px;
-    font-size:17px;
-    font-weight:800;
-    background:#fff;
-    color:var(--verde-claro);
-  }
-
-  .mcard-name-input:focus{
-    outline:2px solid var(--dourado);
   }
 
   .mcard .avatar-wrap{
@@ -732,10 +705,8 @@
     color:#fff;
   }
 
-  @media (max-width: 680px){
-    body{
-      padding:16px 8px;
-    }
+  @media (max-width:680px){
+    body{padding:16px 8px;}
 
     .gradient-frame{
       border-radius:14px;
@@ -841,13 +812,12 @@
     }
   }
 
-  @media (max-width: 380px){
+  @media (max-width:380px){
     .btn-row button{
       min-width:100%;
     }
   }
 </style>
-
 </head>
 
 <body>
@@ -857,92 +827,90 @@
     <h2 id="authTitle">🔒 Acesso restrito</h2>
     <p id="authDesc">Digite seu usuário e senha para acessar o ranking.</p>
 
-```
-<input type="text" id="authUser" placeholder="Usuário" autocomplete="off">
-<input type="password" id="authInput" placeholder="Senha" autocomplete="off">
-<input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
+    <input type="text" id="authUser" placeholder="Usuário" autocomplete="off">
+    <input type="password" id="authInput" placeholder="Senha" autocomplete="off">
+    <input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
 
-<div class="auth-error" id="authError"></div>
+    <div class="auth-error" id="authError"></div>
 
-<button class="primary" id="authBtn">Entrar</button>
+    <button class="primary" id="authBtn">Entrar</button>
 
-<div class="auth-divider">ou</div>
+    <div class="auth-divider">ou</div>
 
-<button class="visitor-btn" id="visitorBtn">
-  👁️ Entrar como visitante (só visualizar)
-</button>
+    <button class="visitor-btn" id="visitorBtn">
+      👁️ Entrar como visitante (só visualizar)
+    </button>
 
-<div class="auth-alt" id="authAlt"></div>
-```
-
+    <div class="auth-alt" id="authAlt"></div>
   </div>
 </div>
 
 <div class="gradient-frame">
   <div class="card">
 
-```
-<div class="header">
-  <div class="badge38">38-0</div>
-  <h1>RANKING GERAL DA LIGA (38-0)</h1>
+    <div class="header">
+      <div class="badge38">38-0</div>
+      <h1>RANKING GERAL DA LIGA (38-0)</h1>
 
-  <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">
-    🔒 protegido
-  </div>
-</div>
+      <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">
+        🔒 protegido
+      </div>
+    </div>
 
-<div class="sub-row">
-  <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
-  <span class="desc">FUTEBOL DE BOTÃO · CAMPANHA INVICTA</span>
+    <div class="sub-row">
+      <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
 
-  <span class="pill visitor" id="visitorPill" style="display:none;">
-    👁️ MODO VISITANTE
-  </span>
-</div>
+      <span class="desc">
+        FUTEBOL DE BOTÃO · CAMPANHA INVICTA
+      </span>
 
-<div class="rule-box">
-  🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
-  Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
-  Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
-  Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
-</div>
+      <span class="pill visitor" id="visitorPill" style="display:none;">
+        👁️ MODO VISITANTE
+      </span>
+    </div>
 
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th class="center">Pos</th>
-        <th>Jogador</th>
-        <th class="center">🏆 Títulos</th>
-        <th class="center">🅱️ Rebaixamentos</th>
-        <th>Status / Insígnia</th>
-      </tr>
-    </thead>
+    <div class="rule-box">
+      🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
+      Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
+      Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
+      Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
+    </div>
 
-    <tbody id="tbody"></tbody>
-  </table>
-</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="center">Pos</th>
+            <th>Jogador</th>
+            <th class="center">🏆 Títulos</th>
+            <th class="center">🅱️ Rebaixamentos</th>
+            <th>Status / Insígnia</th>
+          </tr>
+        </thead>
 
-<div class="mobile-cards" id="mobileCards"></div>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
 
-<div class="total-row" id="totalRow"></div>
+    <div class="mobile-cards" id="mobileCards"></div>
 
-<div class="btn-row">
-  <button id="addBtn">+ adicionar jogador</button>
-  <button id="resetBtn">restaurar dados originais</button>
-  <button id="saveBtn" class="primary">salvar</button>
-  <button id="exportBtn">📸 baixar imagem</button>
-  <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
+    <div class="total-row" id="totalRow"></div>
 
-  <span class="save-note" id="saveNote"></span>
-</div>
+    <div class="btn-row">
+      <button id="addBtn">+ adicionar jogador</button>
+      <button id="resetBtn">restaurar dados originais</button>
+      <button id="saveBtn" class="primary">salvar</button>
+      <button id="exportBtn">📸 baixar imagem</button>
+      <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
 
-<div class="stats-title" style="display:flex;align-items:center;gap:10px;">
-  📌 ESTATÍSTICAS DA LIGA
-</div>
+      <span class="save-note" id="saveNote"></span>
+    </div>
 
-<div class="stats-grid" id="statsGrid"></div>
-```
+    <div class="stats-title" style="display:flex;align-items:center;gap:10px;">
+      📌 ESTATÍSTICAS DA LIGA
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
 
   </div>
 </div>
@@ -977,24 +945,21 @@ let players = [];
 let extraStats = [];
 let unlocked = false;
 
-
-/* ---------- armazenamento compartilhado (JSONBin.io) ---------- */
-
 const JSONBIN_ID = "6a91efa0da38895dfe1db6ca";
 const JSONBIN_KEY = "$2a$10$nqRMwpkNc2ZnrMV28sGpcOpGBz/p26JUUkqyxWXOSxYTrD/4ZtATm";
 const JSONBIN_BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
 
-
 async function remoteGet(){
   try{
     const res = await fetch(`${JSONBIN_BASE}/latest`, {
-      headers: { "X-Master-Key": JSONBIN_KEY }
+      headers: {
+        "X-Master-Key": JSONBIN_KEY
+      }
     });
 
     if (!res.ok) return null;
 
     const json = await res.json();
-
     return json.record || null;
 
   }catch(e){
@@ -1002,18 +967,17 @@ async function remoteGet(){
   }
 }
 
-
 async function remoteSet(data){
   try{
     const res = await fetch(JSONBIN_BASE, {
-      method: "PUT",
+      method:"PUT",
 
-      headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": JSONBIN_KEY
+      headers:{
+        "Content-Type":"application/json",
+        "X-Master-Key":JSONBIN_KEY
       },
 
-      body: JSON.stringify(data)
+      body:JSON.stringify(data)
     });
 
     return res.ok;
@@ -1023,30 +987,25 @@ async function remoteSet(data){
   }
 }
 
-
-/* ---------- hashing simples (SHA-256) ---------- */
-
 async function hashText(text){
-
   const enc = new TextEncoder().encode(text);
 
-  const buf = await crypto.subtle.digest("SHA-256", enc);
+  const buf = await crypto.subtle.digest(
+    "SHA-256",
+    enc
+  );
 
-  return Array.from(new Uint8Array(buf))
-    .map(b => b.toString(16).padStart(2,"0"))
-    .join("");
+  return Array.from(
+    new Uint8Array(buf)
+  ).map(
+    b => b.toString(16).padStart(2,"0")
+  ).join("");
 }
 
-
-/* ---------- autenticação (usuário + senha) ---------- */
-
-// Credenciais pré-definidas: usuário isaque / senha 99197480
-
 const DEFAULT_AUTH = {
-  username: "isaque",
-  hash: "ebd643c02382c53592c3f85a125d2e852932631290dc242677c915b960b1e983"
+  username:"isaque",
+  hash:"ebd643c02382c53592c3f85a125d2e852932631290dc242677c915b960b1e983"
 };
-
 
 async function initAuth(){
 
@@ -1093,7 +1052,9 @@ async function initAuth(){
   }
 
   if (!remote.extraStats){
-    remote.extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+    remote.extraStats =
+      DEFAULT_EXTRA_STATS.map(s => ({...s}));
+
     needsBootstrap = true;
   }
 
@@ -1119,7 +1080,6 @@ async function initAuth(){
   alt.innerHTML =
     `<a id="forgotLink">esqueci minhas credenciais / redefinir</a>`;
 
-
   btn.onclick = async () => {
 
     errorEl.textContent = "";
@@ -1130,7 +1090,7 @@ async function initAuth(){
       u.toLowerCase() + "::" + input1.value.trim()
     );
 
-    if (
+    if(
       u &&
       hash === stored.hash &&
       u.toLowerCase() === stored.username.toLowerCase()
@@ -1140,7 +1100,9 @@ async function initAuth(){
 
       unlocked = true;
 
-      document.getElementById("visitorPill").style.display = "none";
+      document.getElementById(
+        "visitorPill"
+      ).style.display = "none";
 
       applyData(remote);
 
@@ -1151,74 +1113,84 @@ async function initAuth(){
     }
   };
 
-
   visitorBtn.onclick = () => {
 
     overlay.style.display = "none";
 
     unlocked = false;
 
-    document.getElementById("visitorPill").style.display =
-      "inline-block";
+    document.getElementById(
+      "visitorPill"
+    ).style.display = "inline-block";
 
     applyData(remote);
   };
 
+  document.getElementById("forgotLink").onclick =
+    async () => {
 
-  document.getElementById("forgotLink").onclick = async () => {
+      if(
+        !confirm(
+          "Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?"
+        )
+      ) return;
 
-    if (
-      !confirm(
-        "Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?"
-      )
-    ) return;
+      const current = await remoteGet();
 
-    const current = await remoteGet();
+      const payload = current || remote;
 
-    const payload = current || remote;
+      payload.auth = {...DEFAULT_AUTH};
 
-    payload.auth = {...DEFAULT_AUTH};
+      await remoteSet(payload);
 
-    await remoteSet(payload);
+      initAuth();
+    };
+
+  userInput.addEventListener(
+    "keydown",
+    e => {
+      if(e.key === "Enter") btn.click();
+    }
+  );
+
+  input1.addEventListener(
+    "keydown",
+    e => {
+      if(e.key === "Enter") btn.click();
+    }
+  );
+
+  input2.addEventListener(
+    "keydown",
+    e => {
+      if(e.key === "Enter") btn.click();
+    }
+  );
+}
+
+document.getElementById("lockBtn").addEventListener(
+  "click",
+  () => {
+
+    unlocked = false;
+
+    document.getElementById(
+      "visitorPill"
+    ).style.display = "none";
+
+    document.getElementById("authUser").value = "";
+    document.getElementById("authInput").value = "";
+    document.getElementById("authInput2").value = "";
 
     initAuth();
-  };
-
-
-  userInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") btn.click();
-  });
-
-  input1.addEventListener("keydown", e => {
-    if (e.key === "Enter") btn.click();
-  });
-
-  input2.addEventListener("keydown", e => {
-    if (e.key === "Enter") btn.click();
-  });
-}
-
-
-document.getElementById("lockBtn").addEventListener("click", () => {
-
-  unlocked = false;
-
-  document.getElementById("visitorPill").style.display = "none";
-
-  document.getElementById("authUser").value = "";
-  document.getElementById("authInput").value = "";
-  document.getElementById("authInput2").value = "";
-
-  initAuth();
-});
-
-
-/* ---------- dados do ranking ---------- */
+  }
+);
 
 function cloneDefault(){
-  return DEFAULT_DATA.map(p => ({...p}));
+  return DEFAULT_DATA.map(
+    p => ({...p})
+  );
 }
-
 
 async function loadData(){
 
@@ -1227,34 +1199,37 @@ async function loadData(){
   applyData(remote);
 }
 
-
 function applyData(remote){
 
-  if (remote && remote.players){
+  if(remote && remote.players){
 
     players = remote.players;
 
     extraStats =
       remote.extraStats ||
-      DEFAULT_EXTRA_STATS.map(s => ({...s}));
+      DEFAULT_EXTRA_STATS.map(
+        s => ({...s})
+      );
 
   }else{
 
     players = cloneDefault();
 
     extraStats =
-      DEFAULT_EXTRA_STATS.map(s => ({...s}));
+      DEFAULT_EXTRA_STATS.map(
+        s => ({...s})
+      );
   }
 
   render();
 }
 
-
 async function persist(){
 
-  if (!unlocked) return;
+  if(!unlocked) return;
 
-  const note = document.getElementById("saveNote");
+  const note =
+    document.getElementById("saveNote");
 
   note.textContent = "salvando...";
 
@@ -1263,10 +1238,11 @@ async function persist(){
   const payload = {
     players,
     extraStats,
+
     auth:
       (current && current.auth)
-        ? current.auth
-        : {...DEFAULT_AUTH}
+      ? current.auth
+      : {...DEFAULT_AUTH}
   };
 
   const ok = await remoteSet(payload);
@@ -1274,47 +1250,67 @@ async function persist(){
   note.textContent =
     ok ? "salvo ✓" : "não foi possível salvar";
 
-  setTimeout(() => {
-    note.textContent = "";
-  }, 2500);
+  setTimeout(
+    () => {
+      note.textContent = "";
+    },
+    2500
+  );
 }
-
 
 function sortedRanking(){
 
-  return [...players].sort((a,b) => {
+  return [...players].sort(
+    (a,b) => {
 
-    if (b.titulos !== a.titulos)
-      return b.titulos - a.titulos;
+      if(b.titulos !== a.titulos){
+        return b.titulos - a.titulos;
+      }
 
-    return a.rebaixamentos - b.rebaixamentos;
-  });
+      return a.rebaixamentos - b.rebaixamentos;
+    }
+  );
 }
-
-
-/* ---------- avatar / foto do jogador ---------- */
 
 function avatarHTML(p, idx){
 
   const initials =
-    (p.nome || "?").trim().charAt(0).toUpperCase();
+    (p.nome || "?")
+    .trim()
+    .charAt(0)
+    .toUpperCase();
 
   const editBtn = unlocked
-    ? `<label class="avatar-edit" title="Trocar foto">
-         📷
-         <input
-           type="file"
-           accept="image/*"
-           data-idx="${idx}"
-           class="avatar-input"
-           hidden
-         >
-       </label>`
+    ? `
+      <label
+        class="avatar-edit"
+        title="Trocar foto"
+      >
+        📷
+        <input
+          type="file"
+          accept="image/*"
+          data-idx="${idx}"
+          class="avatar-input"
+          hidden
+        >
+      </label>
+    `
     : "";
 
   const inner = p.foto
-    ? `<img src="${p.foto}" class="avatar-img" alt="${p.nome}">`
-    : `<span class="avatar-fallback">${initials}</span>`;
+    ? `
+      <img
+        src="${p.foto}"
+        class="avatar-img"
+        alt="${p.nome}"
+      >
+    `
+    : `
+      <span class="avatar-fallback">
+        ${initials}
+      </span>
+    `;
 
   return `
     <span class="avatar-wrap">
@@ -1324,110 +1320,128 @@ function avatarHTML(p, idx){
   `;
 }
 
-
 function readAndCompressImage(file){
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = (e) => {
+      reader.onload = e => {
 
-      const img = new Image();
+        const img = new Image();
 
-      img.onload = () => {
+        img.onload = () => {
 
-        const size = 96;
+          const size = 96;
 
-        const canvas = document.createElement("canvas");
+          const canvas =
+            document.createElement("canvas");
 
-        canvas.width = size;
-        canvas.height = size;
+          canvas.width = size;
+          canvas.height = size;
 
-        const ctx = canvas.getContext("2d");
+          const ctx =
+            canvas.getContext("2d");
 
-        const minSide =
-          Math.min(img.width, img.height);
+          const minSide =
+            Math.min(
+              img.width,
+              img.height
+            );
 
-        const sx =
-          (img.width - minSide) / 2;
+          const sx =
+            (img.width - minSide) / 2;
 
-        const sy =
-          (img.height - minSide) / 2;
+          const sy =
+            (img.height - minSide) / 2;
 
-        ctx.drawImage(
-          img,
-          sx,
-          sy,
-          minSide,
-          minSide,
-          0,
-          0,
-          size,
-          size
-        );
+          ctx.drawImage(
+            img,
+            sx,
+            sy,
+            minSide,
+            minSide,
+            0,
+            0,
+            size,
+            size
+          );
 
-        resolve(
-          canvas.toDataURL("image/jpeg", 0.75)
-        );
+          resolve(
+            canvas.toDataURL(
+              "image/jpeg",
+              0.75
+            )
+          );
+        };
+
+        img.onerror =
+          () => reject(
+            new Error("imagem inválida")
+          );
+
+        img.src = e.target.result;
       };
 
-      img.onerror =
-        () => reject(new Error("imagem inválida"));
+      reader.onerror =
+        () => reject(
+          new Error("falha ao ler arquivo")
+        );
 
-      img.src = e.target.result;
-    };
-
-    reader.onerror =
-      () => reject(new Error("falha ao ler arquivo"));
-
-    reader.readAsDataURL(file);
-  });
+      reader.readAsDataURL(file);
+    }
+  );
 }
 
+function badgeFor(
+  p,
+  rank,
+  total,
+  maxReb
+){
 
-function badgeFor(p, rank, total, maxReb){
-
-  if (rank === 1)
+  if(rank === 1)
     return "🥇 CAMPEÃO DOS CAMPEÕES";
 
-  if (rank === 2)
+  if(rank === 2)
     return "🥈 VICE DA LIGA";
 
-  if (rank === 3)
+  if(rank === 3)
     return "🥉 TERCEIRO LUGAR";
 
-  if (
+  if(
     p.titulos === 0 &&
     p.rebaixamentos === maxReb &&
     maxReb > 0
   )
     return "💀 REI DOS REBAIXAMENTOS";
 
-  if (p.titulos === 0)
+  if(p.titulos === 0)
     return "📉 SEM TÍTULOS NA TEMPORADA";
 
-  if (p.rebaixamentos >= 5)
+  if(p.rebaixamentos >= 5)
     return "⚠️ RISCO DE REBAIXAMENTO";
 
-  if (p.rebaixamentos === 0)
+  if(p.rebaixamentos === 0)
     return "🛡️ SEM REBAIXAMENTOS";
 
-  if (rank <= 5)
+  if(rank <= 5)
     return "MEMBRO TOP 5";
 
   return "CAMPEÃO DE EDIÇÃO";
 }
-
-
-/* ---------- render ---------- */
 
 function render(){
 
   const ranked = sortedRanking();
 
   const maxReb =
-    Math.max(...ranked.map(p => p.rebaixamentos));
+    Math.max(
+      ...ranked.map(
+        p => p.rebaixamentos
+      )
+    );
 
   const tbody =
     document.getElementById("tbody");
@@ -1438,168 +1452,75 @@ function render(){
   tbody.innerHTML = "";
   mobileCards.innerHTML = "";
 
+  ranked.forEach(
+    (p,idx) => {
 
-  ranked.forEach((p, idx) => {
+      const rank = idx + 1;
 
-    const rank = idx + 1;
+      const originalIndex =
+        players.indexOf(p);
 
-    const originalIndex =
-      players.indexOf(p);
+      const disabledAttr =
+        unlocked ? "" : "disabled";
 
-    const disabledAttr =
-      unlocked ? "" : "disabled";
+      let rowClass = "";
+      let cardClass = "";
 
+      if(rank === 1){
 
-    let rowClass = "";
-    let cardClass = "";
+        rowClass = "gold";
+        cardClass = "mcard--gold";
 
+      }else if(p.titulos === 0){
 
-    if (rank === 1){
+        rowClass = "risk";
+        cardClass = "mcard--risk";
 
-      rowClass = "gold";
-      cardClass = "mcard--gold";
+      }else{
 
-    }else if (p.titulos === 0){
+        rowClass =
+          idx % 2 === 0
+          ? "zebra"
+          : "";
 
-      rowClass = "risk";
-      cardClass = "mcard--risk";
+        if(rank === 2)
+          cardClass = "mcard--silver";
 
-    }else{
+        else if(rank === 3)
+          cardClass = "mcard--bronze";
+      }
 
-      rowClass =
-        idx % 2 === 0 ? "zebra" : "";
+      const badgeText =
+        badgeFor(
+          p,
+          rank,
+          ranked.length,
+          maxReb
+        );
 
-      if (rank === 2)
-        cardClass = "mcard--silver";
+      const tr =
+        document.createElement("tr");
 
-      else if (rank === 3)
-        cardClass = "mcard--bronze";
-    }
+      tr.className = rowClass;
 
-
-    const badgeText =
-      badgeFor(
-        p,
-        rank,
-        ranked.length,
-        maxReb
-      );
-
-
-    /* ---- linha da tabela ---- */
-
-    const tr =
-      document.createElement("tr");
-
-    tr.className = rowClass;
-
-
-    tr.innerHTML = `
-      <td class="center pos">#${rank}</td>
-
-      <td data-label="Jogador">
-        <div class="nome-cell">
-
-          ${avatarHTML(p, originalIndex)}
-
-          ${
-            unlocked
-              ? `
-                <input
-                  type="text"
-                  class="nome-input"
-                  value="${p.nome}"
-                  data-idx="${originalIndex}"
-                  data-field="nome"
-                  aria-label="Nome do jogador"
-                >
-              `
-              : `
-                <span class="nome">${p.nome}</span>
-              `
-          }
-
-        </div>
-      </td>
-
-      <td class="center" data-label="🏆 Títulos">
-        <input
-          type="number"
-          min="0"
-          value="${p.titulos}"
-          data-idx="${originalIndex}"
-          data-field="titulos"
-          ${disabledAttr}
-        >
-      </td>
-
-      <td class="center" data-label="🅱️ Rebaixamentos">
-        <input
-          type="number"
-          min="0"
-          value="${p.rebaixamentos}"
-          data-idx="${originalIndex}"
-          data-field="rebaixamentos"
-          ${disabledAttr}
-        >
-      </td>
-
-      <td class="status" data-label="Status">
-        ${badgeText}
-      </td>
-    `;
-
-    tbody.appendChild(tr);
-
-
-    /* ---- cartão para celular ---- */
-
-    const mc =
-      document.createElement("div");
-
-    mc.className =
-      `mcard ${cardClass}`;
-
-
-    mc.innerHTML = `
-      <div class="mcard-top">
-
-        <span class="mcard-rank">
+      tr.innerHTML = `
+        <td class="center pos">
           #${rank}
-        </span>
+        </td>
 
-        ${avatarHTML(p, originalIndex)}
+        <td data-label="Jogador">
+          <div class="nome-cell">
+            ${avatarHTML(p,originalIndex)}
+            <span class="nome">
+              ${p.nome}
+            </span>
+          </div>
+        </td>
 
-        ${
-          unlocked
-            ? `
-              <input
-                type="text"
-                class="mcard-name-input"
-                value="${p.nome}"
-                data-idx="${originalIndex}"
-                data-field="nome"
-                aria-label="Nome do jogador"
-              >
-            `
-            : `
-              <span class="mcard-name">
-                ${p.nome}
-              </span>
-            `
-        }
-
-      </div>
-
-
-      <div class="mcard-stats">
-
-        <div class="stat-box">
-
-          <span class="stat-lbl">
-            🏆 Títulos
-          </span>
-
+        <td
+          class="center"
+          data-label="🏆 Títulos"
+        >
           <input
             type="number"
             min="0"
@@ -1608,16 +1529,12 @@ function render(){
             data-field="titulos"
             ${disabledAttr}
           >
+        </td>
 
-        </div>
-
-
-        <div class="stat-box">
-
-          <span class="stat-lbl">
-            🅱️ Rebaixamentos
-          </span>
-
+        <td
+          class="center"
+          data-label="🅱️ Rebaixamentos"
+        >
           <input
             type="number"
             min="0"
@@ -1626,133 +1543,171 @@ function render(){
             data-field="rebaixamentos"
             ${disabledAttr}
           >
+        </td>
+
+        <td
+          class="status"
+          data-label="Status"
+        >
+          ${badgeText}
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+
+      const mc =
+        document.createElement("div");
+
+      mc.className =
+        `mcard ${cardClass}`;
+
+      mc.innerHTML = `
+        <div class="mcard-top">
+
+          <span class="mcard-rank">
+            #${rank}
+          </span>
+
+          ${avatarHTML(p,originalIndex)}
+
+          <span class="mcard-name">
+            ${p.nome}
+          </span>
 
         </div>
 
-      </div>
+        <div class="mcard-stats">
 
+          <div class="stat-box">
 
-      <div class="mcard-badge">
-        ${badgeText}
-      </div>
-    `;
+            <span class="stat-lbl">
+              🏆 Títulos
+            </span>
 
+            <input
+              type="number"
+              min="0"
+              value="${p.titulos}"
+              data-idx="${originalIndex}"
+              data-field="titulos"
+              ${disabledAttr}
+            >
 
-    mobileCards.appendChild(mc);
-  });
+          </div>
 
+          <div class="stat-box">
 
-  /* ---------- edição de títulos/rebaixamentos ---------- */
+            <span class="stat-lbl">
+              🅱️ Rebaixamentos
+            </span>
+
+            <input
+              type="number"
+              min="0"
+              value="${p.rebaixamentos}"
+              data-idx="${originalIndex}"
+              data-field="rebaixamentos"
+              ${disabledAttr}
+            >
+
+          </div>
+
+        </div>
+
+        <div class="mcard-badge">
+          ${badgeText}
+        </div>
+      `;
+
+      mobileCards.appendChild(mc);
+    }
+  );
 
   document
-    .querySelectorAll("input[type=number][data-field]")
-    .forEach(inp => {
+    .querySelectorAll(
+      "input[type=number][data-field]"
+    )
+    .forEach(
+      inp => {
 
-      inp.addEventListener("change", (e) => {
+        inp.addEventListener(
+          "change",
+          e => {
 
-        if (!unlocked) return;
+            if(!unlocked) return;
 
-        const idx =
-          Number(e.target.dataset.idx);
+            const idx =
+              Number(
+                e.target.dataset.idx
+              );
 
-        const field =
-          e.target.dataset.field;
+            const field =
+              e.target.dataset.field;
 
-        let val =
-          parseInt(e.target.value, 10);
+            let val =
+              parseInt(
+                e.target.value,
+                10
+              );
 
-        if (isNaN(val) || val < 0)
-          val = 0;
+            if(
+              isNaN(val) ||
+              val < 0
+            ){
+              val = 0;
+            }
 
-        players[idx][field] = val;
+            players[idx][field] = val;
 
-        render();
-      });
-    });
-
-
-  /* ---------- NOVO: edição do nome ---------- */
-
-  document
-    .querySelectorAll("input[data-field='nome']")
-    .forEach(inp => {
-
-      inp.addEventListener("change", (e) => {
-
-        if (!unlocked) return;
-
-        const idx =
-          Number(e.target.dataset.idx);
-
-        const novoNome =
-          e.target.value.trim();
-
-        if (novoNome){
-
-          players[idx].nome =
-            novoNome;
-
-        }else{
-
-          e.target.value =
-            players[idx].nome;
-        }
-
-        render();
-      });
-
-
-      /* Permite apertar Enter para confirmar */
-
-      inp.addEventListener("keydown", (e) => {
-
-        if (e.key === "Enter"){
-
-          e.preventDefault();
-
-          inp.blur();
-        }
-      });
-    });
-
-
-  /* ---------- edição de foto ---------- */
+            render();
+          }
+        );
+      }
+    );
 
   document
     .querySelectorAll(".avatar-input")
-    .forEach(inp => {
+    .forEach(
+      inp => {
 
-      inp.addEventListener("change", async (e) => {
+        inp.addEventListener(
+          "change",
+          async e => {
 
-        if (!unlocked) return;
+            if(!unlocked) return;
 
-        const idx =
-          Number(e.target.dataset.idx);
+            const idx =
+              Number(
+                e.target.dataset.idx
+              );
 
-        const file =
-          e.target.files[0];
+            const file =
+              e.target.files[0];
 
-        if (!file) return;
+            if(!file) return;
 
-        try{
+            try{
 
-          const dataUrl =
-            await readAndCompressImage(file);
+              const dataUrl =
+                await readAndCompressImage(
+                  file
+                );
 
-          players[idx].foto =
-            dataUrl;
+              players[idx].foto =
+                dataUrl;
 
-          render();
+              render();
 
-        }catch(err){
+            }catch(err){
 
-          alert(
-            "Não foi possível carregar essa imagem."
-          );
-        }
-      });
-    });
-
+              alert(
+                "Não foi possível carregar essa imagem."
+              );
+            }
+          }
+        );
+      }
+    );
 
   const totalT =
     players.reduce(
@@ -1766,20 +1721,22 @@ function render(){
       0
     );
 
-
-  document.getElementById("totalRow").textContent =
+  document.getElementById(
+    "totalRow"
+  ).textContent =
     `TOTAL DA LIGA — 🏆 ${totalT} títulos · 🅱️ ${totalR} rebaixamentos`;
 
+  document.getElementById(
+    "addBtn"
+  ).disabled = !unlocked;
 
-  document.getElementById("addBtn").disabled =
-    !unlocked;
+  document.getElementById(
+    "resetBtn"
+  ).disabled = !unlocked;
 
-  document.getElementById("resetBtn").disabled =
-    !unlocked;
-
-  document.getElementById("saveBtn").disabled =
-    !unlocked;
-
+  document.getElementById(
+    "saveBtn"
+  ).disabled = !unlocked;
 
   renderStats(
     ranked,
@@ -1787,13 +1744,12 @@ function render(){
   );
 }
 
+function renderStats(
+  ranked,
+  maxReb
+){
 
-/* ---------- estatísticas ---------- */
-
-function renderStats(ranked, maxReb){
-
-  const lider =
-    ranked[0];
+  const lider = ranked[0];
 
   const reiReb =
     [...players].sort(
@@ -1801,7 +1757,6 @@ function renderStats(ranked, maxReb){
         b.rebaixamentos -
         a.rebaixamentos
     )[0];
-
 
   const autoStats = [
 
@@ -1819,106 +1774,106 @@ function renderStats(ranked, maxReb){
 
   ];
 
-
   const grid =
-    document.getElementById("statsGrid");
+    document.getElementById(
+      "statsGrid"
+    );
 
   grid.innerHTML = "";
 
+  autoStats.forEach(
+    s => {
 
-  autoStats.forEach(s => {
-
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "stat-card auto";
-
-    div.innerHTML = `
-      <div class="cat">
-        ${s.cat}
-        <span class="auto-tag">
-          (automática)
-        </span>
-      </div>
-
-      <div class="val">
-        ${s.jogador} — ${s.detalhe}
-      </div>
-    `;
-
-    grid.appendChild(div);
-  });
-
-
-  extraStats.forEach((s, idx) => {
-
-    const div =
-      document.createElement("div");
-
-
-    if (unlocked){
+      const div =
+        document.createElement("div");
 
       div.className =
-        "stat-card editing";
-
-      div.innerHTML = `
-
-        <button
-          class="stat-remove"
-          data-idx="${idx}"
-          title="Remover"
-        >
-          ✕
-        </button>
-
-        <input
-          class="stat-input"
-          data-idx="${idx}"
-          data-field="cat"
-          value="${s.cat}"
-          placeholder="Categoria (ex: ⚡ Melhor campanha)"
-        >
-
-        <input
-          class="stat-input"
-          data-idx="${idx}"
-          data-field="jogador"
-          value="${s.jogador}"
-          placeholder="Jogador"
-        >
-
-        <input
-          class="stat-input"
-          data-idx="${idx}"
-          data-field="detalhe"
-          value="${s.detalhe}"
-          placeholder="Detalhe (ex: 91 pontos)"
-        >
-      `;
-
-    }else{
-
-      div.className =
-        "stat-card";
+        "stat-card auto";
 
       div.innerHTML = `
         <div class="cat">
           ${s.cat}
+          <span class="auto-tag">
+            (automática)
+          </span>
         </div>
 
         <div class="val">
           ${s.jogador} — ${s.detalhe}
         </div>
       `;
+
+      grid.appendChild(div);
     }
+  );
 
+  extraStats.forEach(
+    (s,idx) => {
 
-    grid.appendChild(div);
-  });
+      const div =
+        document.createElement("div");
 
+      if(unlocked){
 
-  if (unlocked){
+        div.className =
+          "stat-card editing";
+
+        div.innerHTML = `
+
+          <button
+            class="stat-remove"
+            data-idx="${idx}"
+            title="Remover"
+          >
+            ✕
+          </button>
+
+          <input
+            class="stat-input"
+            data-idx="${idx}"
+            data-field="cat"
+            value="${s.cat}"
+            placeholder="Categoria"
+          >
+
+          <input
+            class="stat-input"
+            data-idx="${idx}"
+            data-field="jogador"
+            value="${s.jogador}"
+            placeholder="Jogador"
+          >
+
+          <input
+            class="stat-input"
+            data-idx="${idx}"
+            data-field="detalhe"
+            value="${s.detalhe}"
+            placeholder="Detalhe"
+          >
+        `;
+
+      }else{
+
+        div.className =
+          "stat-card";
+
+        div.innerHTML = `
+          <div class="cat">
+            ${s.cat}
+          </div>
+
+          <div class="val">
+            ${s.jogador} — ${s.detalhe}
+          </div>
+        `;
+      }
+
+      grid.appendChild(div);
+    }
+  );
+
+  if(unlocked){
 
     const addDiv =
       document.createElement("div");
@@ -1934,93 +1889,135 @@ function renderStats(ranked, maxReb){
 
     grid.appendChild(addDiv);
 
-
     document
       .getElementById("addStatCard")
-      .addEventListener("click", () => {
+      .addEventListener(
+        "click",
+        () => {
 
-        extraStats.push({
-          cat:"🆕 Nova estatística",
-          jogador:"Jogador",
-          detalhe:"detalhe"
-        });
-
-        renderStats(
-          ranked,
-          maxReb
-        );
-      });
-
-
-    grid
-      .querySelectorAll(".stat-input")
-      .forEach(inp => {
-
-        inp.addEventListener("change", (e) => {
-
-          const idx =
-            Number(e.target.dataset.idx);
-
-          const field =
-            e.target.dataset.field;
-
-          extraStats[idx][field] =
-            e.target.value;
-        });
-      });
-
-
-    grid
-      .querySelectorAll(".stat-remove")
-      .forEach(btnEl => {
-
-        btnEl.addEventListener("click", (e) => {
-
-          const idx =
-            Number(e.target.dataset.idx);
-
-          extraStats.splice(
-            idx,
-            1
-          );
+          extraStats.push({
+            cat:"🆕 Nova estatística",
+            jogador:"Jogador",
+            detalhe:"detalhe"
+          });
 
           renderStats(
             ranked,
             maxReb
           );
-        });
-      });
+        }
+      );
+
+    grid
+      .querySelectorAll(".stat-input")
+      .forEach(
+        inp => {
+
+          inp.addEventListener(
+            "change",
+            e => {
+
+              const idx =
+                Number(
+                  e.target.dataset.idx
+                );
+
+              const field =
+                e.target.dataset.field;
+
+              extraStats[idx][field] =
+                e.target.value;
+            }
+          );
+        }
+      );
+
+    grid
+      .querySelectorAll(".stat-remove")
+      .forEach(
+        btnEl => {
+
+          btnEl.addEventListener(
+            "click",
+            e => {
+
+              const idx =
+                Number(
+                  e.target.dataset.idx
+                );
+
+              extraStats.splice(
+                idx,
+                1
+              );
+
+              renderStats(
+                ranked,
+                maxReb
+              );
+            }
+          );
+        }
+      );
   }
 }
 
 
-/* ---------- adicionar jogador ---------- */
+/* =========================================================
+   ADICIONAR JOGADOR
+   =========================================================
+   Alteração feita somente aqui:
+   agora o nome é solicitado antes de criar o jogador.
+   Não existe campo/barra de edição permanente.
+========================================================= */
 
-document
-  .getElementById("addBtn")
-  .addEventListener("click", () => {
+document.getElementById(
+  "addBtn"
+).addEventListener(
+  "click",
+  () => {
 
-    if (!unlocked) return;
+    if(!unlocked) return;
+
+    const nome =
+      prompt(
+        "Digite o nome do novo jogador:"
+      );
+
+    if(nome === null) return;
+
+    const nomeLimpo =
+      nome.trim();
+
+    if(!nomeLimpo){
+
+      alert(
+        "Digite um nome válido."
+      );
+
+      return;
+    }
 
     players.push({
-      nome:"Novo jogador",
+      nome:nomeLimpo,
       titulos:0,
       rebaixamentos:0
     });
 
     render();
-  });
+  }
+);
 
 
-/* ---------- restaurar ---------- */
+document.getElementById(
+  "resetBtn"
+).addEventListener(
+  "click",
+  () => {
 
-document
-  .getElementById("resetBtn")
-  .addEventListener("click", () => {
+    if(!unlocked) return;
 
-    if (!unlocked) return;
-
-    if (
+    if(
       confirm(
         "Restaurar os dados originais? As edições atuais serão perdidas."
       )
@@ -2036,82 +2033,88 @@ document
 
       render();
     }
-  });
+  }
+);
 
 
-/* ---------- salvar ---------- */
+document.getElementById(
+  "saveBtn"
+).addEventListener(
+  "click",
+  () => {
 
-document
-  .getElementById("saveBtn")
-  .addEventListener("click", () => {
-
-    if (!unlocked) return;
+    if(!unlocked) return;
 
     persist();
-  });
+  }
+);
 
-
-/* ---------- gerar imagem ---------- */
 
 async function gerarCanvasRanking(){
 
   const target =
-    document.querySelector(".gradient-frame");
+    document.querySelector(
+      ".gradient-frame"
+    );
 
   const swaps = [];
 
-
   target
-    .querySelectorAll("input[type=number]")
-    .forEach(inp => {
+    .querySelectorAll(
+      "input[type=number]"
+    )
+    .forEach(
+      inp => {
 
-      const cs =
-        getComputedStyle(inp);
+        const cs =
+          getComputedStyle(inp);
 
-      const span =
-        document.createElement("span");
+        const span =
+          document.createElement(
+            "span"
+          );
 
-      span.textContent =
-        inp.value;
+        span.textContent =
+          inp.value;
 
-      span.style.display =
-        "inline-block";
+        span.style.display =
+          "inline-block";
 
-      span.style.width =
-        "100%";
+        span.style.width =
+          "100%";
 
-      span.style.fontFamily =
-        cs.fontFamily;
+        span.style.fontFamily =
+          cs.fontFamily;
 
-      span.style.fontSize =
-        cs.fontSize;
+        span.style.fontSize =
+          cs.fontSize;
 
-      span.style.fontWeight =
-        cs.fontWeight;
+        span.style.fontWeight =
+          cs.fontWeight;
 
-      span.style.color =
-        cs.color;
+        span.style.color =
+          cs.color;
 
-      span.style.textAlign =
-        "center";
+        span.style.textAlign =
+          "center";
 
-      span.style.lineHeight =
-        "1.3";
+        span.style.lineHeight =
+          "1.3";
 
-      inp.insertAdjacentElement(
-        "afterend",
-        span
-      );
+        inp.insertAdjacentElement(
+          "afterend",
+          span
+        );
 
-      inp.style.display =
-        "none";
+        inp.style.display =
+          "none";
 
-      swaps.push({
-        inp,
-        span
-      });
-    });
-
+        swaps.push({
+          inp,
+          span
+        });
+      }
+    );
 
   try{
 
@@ -2139,14 +2142,16 @@ async function gerarCanvasRanking(){
 }
 
 
-/* ---------- baixar imagem ---------- */
-
-document
-  .getElementById("exportBtn")
-  .addEventListener("click", async () => {
+document.getElementById(
+  "exportBtn"
+).addEventListener(
+  "click",
+  async () => {
 
     const btn =
-      document.getElementById("exportBtn");
+      document.getElementById(
+        "exportBtn"
+      );
 
     const originalText =
       btn.textContent;
@@ -2154,9 +2159,7 @@ document
     btn.textContent =
       "gerando imagem...";
 
-    btn.disabled =
-      true;
-
+    btn.disabled = true;
 
     try{
 
@@ -2170,7 +2173,9 @@ document
         "ranking-38-0.png";
 
       link.href =
-        canvas.toDataURL("image/png");
+        canvas.toDataURL(
+          "image/png"
+        );
 
       link.click();
 
@@ -2181,23 +2186,24 @@ document
       );
     }
 
-
     btn.textContent =
       originalText;
 
-    btn.disabled =
-      false;
-  });
+    btn.disabled = false;
+  }
+);
 
 
-/* ---------- WhatsApp ---------- */
-
-document
-  .getElementById("shareBtn")
-  .addEventListener("click", async () => {
+document.getElementById(
+  "shareBtn"
+).addEventListener(
+  "click",
+  async () => {
 
     const btn =
-      document.getElementById("shareBtn");
+      document.getElementById(
+        "shareBtn"
+      );
 
     const originalText =
       btn.textContent;
@@ -2205,9 +2211,7 @@ document
     btn.textContent =
       "preparando...";
 
-    btn.disabled =
-      true;
-
+    btn.disabled = true;
 
     try{
 
@@ -2232,8 +2236,7 @@ document
           }
         );
 
-
-      if (
+      if(
         navigator.canShare &&
         navigator.canShare({
           files:[file]
@@ -2243,23 +2246,20 @@ document
         try{
 
           await navigator.share({
-
             files:[file],
-
-            title:
-              "Ranking 38-0",
-
+            title:"Ranking 38-0",
             text:
               "🏆 Confere o ranking atualizado da liga 38-0!"
           });
 
         }catch(shareErr){
 
-          if (
+          if(
             shareErr.name !==
             "AbortError"
-          )
+          ){
             throw shareErr;
+          }
         }
 
       }else{
@@ -2275,7 +2275,6 @@ document
 
         link.click();
 
-
         alert(
           "Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web."
         );
@@ -2288,16 +2287,13 @@ document
       );
     }
 
-
     btn.textContent =
       originalText;
 
-    btn.disabled =
-      false;
-  });
+    btn.disabled = false;
+  }
+);
 
-
-/* ---------- inicia ---------- */
 
 players =
   cloneDefault();
@@ -2310,3 +2306,4 @@ initAuth();
 
 </body>
 </html>
+```
