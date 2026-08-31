@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking 38-0</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
   :root{
     --verde: #005C36;
@@ -17,7 +19,9 @@
     --texto: #1A1815;
     --texto-suave: #78716C;
   }
+
   *{box-sizing:border-box;}
+
   body{
     margin:0;
     padding:40px 16px;
@@ -27,6 +31,7 @@
     display:flex;
     justify-content:center;
   }
+
   .gradient-frame{
     max-width:980px;
     width:100%;
@@ -39,16 +44,19 @@
     background-size:300% 300%;
     animation:gradientShift 10s ease infinite;
   }
+
   @keyframes gradientShift{
     0%{ background-position:0% 50%; }
     50%{ background-position:100% 50%; }
     100%{ background-position:0% 50%; }
   }
+
   .card{
     background:var(--creme);
     border-radius:14px;
     padding:28px 32px 36px;
   }
+
   .header{
     display:flex;
     align-items:center;
@@ -56,6 +64,7 @@
     margin-bottom:4px;
     flex-wrap:wrap;
   }
+
   .badge38{
     font-family:'Impact', 'Arial Narrow', sans-serif;
     font-size:26px;
@@ -66,6 +75,7 @@
     padding:6px 14px;
     letter-spacing:1px;
   }
+
   h1{
     font-family:'Impact', 'Arial Narrow', sans-serif;
     font-weight:400;
@@ -74,6 +84,7 @@
     margin:0;
     letter-spacing:0.5px;
   }
+
   .sub-row{
     display:flex;
     align-items:center;
@@ -81,6 +92,7 @@
     margin:10px 0 22px;
     flex-wrap:wrap;
   }
+
   .pill{
     background:var(--verde);
     color:#fff;
@@ -89,14 +101,17 @@
     padding:5px 12px;
     border-radius:20px;
   }
+
   .pill.visitor{
     background:var(--dourado);
     color:#1A1815;
   }
+
   .desc{
     color:var(--texto-suave);
     font-size:13px;
   }
+
   .rule-box{
     background:var(--creme2);
     border:1px dashed var(--dourado);
@@ -106,6 +121,7 @@
     color:var(--texto);
     margin-bottom:20px;
   }
+
   .rule-box b{color:var(--verde);}
 
   table{
@@ -113,6 +129,7 @@
     border-collapse:collapse;
     font-size:13.5px;
   }
+
   thead th{
     background:var(--verde);
     color:#fff;
@@ -121,22 +138,29 @@
     text-align:left;
     padding:10px 8px;
   }
-  thead th.center, tbody td.center{text-align:center;}
+
+  thead th.center,
+  tbody td.center{text-align:center;}
+
   tbody td{
     padding:9px 8px;
     border-bottom:1px solid #E7E2D6;
   }
+
   tbody tr.gold{ background:var(--creme2); }
   tbody tr.zebra{ background:#FFFFFF; }
   tbody tr.risk{ background:var(--vermelho-bg); }
+
   .pos{
     font-family:'Courier New', monospace;
     font-weight:700;
   }
+
   .nome{
     color:var(--verde-claro);
     font-weight:700;
   }
+
   tr.risk .nome{ color:var(--vermelho-tx); }
 
   .nome-cell{
@@ -144,12 +168,31 @@
     align-items:center;
     gap:8px;
   }
+
+  /* NOVO: campo para editar nome */
+  .nome-input{
+    width:100%;
+    max-width:180px;
+    padding:5px 7px;
+    border:1px solid #D6D0C2;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:700;
+    background:#fff;
+    color:var(--verde-claro);
+  }
+
+  .nome-input:focus{
+    outline:2px solid var(--dourado);
+  }
+
   .avatar-wrap{
     position:relative;
     width:30px;
     height:30px;
     flex-shrink:0;
   }
+
   .avatar-img{
     width:30px;
     height:30px;
@@ -158,6 +201,7 @@
     display:block;
     border:1px solid #D6D0C2;
   }
+
   .avatar-fallback{
     width:30px;
     height:30px;
@@ -170,7 +214,11 @@
     align-items:center;
     justify-content:center;
   }
-  tr.risk .avatar-fallback{ background:var(--vermelho-tx); }
+
+  tr.risk .avatar-fallback{
+    background:var(--vermelho-tx);
+  }
+
   .avatar-edit{
     position:absolute;
     bottom:-3px;
@@ -187,7 +235,11 @@
     cursor:pointer;
     line-height:1;
   }
-  .avatar-edit:hover{ background:var(--verde); }
+
+  .avatar-edit:hover{
+    background:var(--verde);
+  }
+
   input[type=number]{
     width:56px;
     padding:5px 6px;
@@ -199,13 +251,23 @@
     background:#fff;
     color:var(--texto);
   }
-  input[type=number]:focus{ outline:2px solid var(--dourado); }
-  input:disabled{ background:#F2F0EA; color:#A8A196; cursor:not-allowed; }
+
+  input[type=number]:focus{
+    outline:2px solid var(--dourado);
+  }
+
+  input:disabled{
+    background:#F2F0EA;
+    color:#A8A196;
+    cursor:not-allowed;
+  }
+
   .status{
     font-size:11.5px;
     font-weight:700;
     color:var(--texto-suave);
   }
+
   tr.risk .status{ color:var(--vermelho-tx); }
   tr.gold .status{ color:#92400E; }
 
@@ -216,6 +278,7 @@
     flex-wrap:wrap;
     align-items:center;
   }
+
   button{
     font-family:inherit;
     font-size:12.5px;
@@ -227,13 +290,33 @@
     color:var(--verde);
     cursor:pointer;
   }
-  button:hover{ background:var(--verde); color:#fff; }
-  button.primary{ background:var(--verde); color:#fff; }
-  button.primary:hover{ background:#00432793; }
-  button:disabled{
-    border-color:#D6D0C2; color:#A8A196; cursor:not-allowed; background:#F2F0EA;
+
+  button:hover{
+    background:var(--verde);
+    color:#fff;
   }
-  .save-note{ font-size:11.5px; color:var(--texto-suave); margin-left:auto; }
+
+  button.primary{
+    background:var(--verde);
+    color:#fff;
+  }
+
+  button.primary:hover{
+    background:#00432793;
+  }
+
+  button:disabled{
+    border-color:#D6D0C2;
+    color:#A8A196;
+    cursor:not-allowed;
+    background:#F2F0EA;
+  }
+
+  .save-note{
+    font-size:11.5px;
+    color:var(--texto-suave);
+    margin-left:auto;
+  }
 
   .stats-title{
     font-family:'Impact', 'Arial Narrow', sans-serif;
@@ -242,20 +325,40 @@
     color:var(--texto);
     margin:34px 0 12px;
   }
+
   .stats-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
     gap:10px;
   }
+
   .stat-card{
     background:var(--dourado);
     border-radius:10px;
     padding:10px 12px;
   }
-  .stat-card .cat{ font-size:11px; font-weight:700; color:#1A1815; }
-  .stat-card .val{ font-size:13px; color:#1A1815; margin-top:2px; }
-  .stat-card{ position:relative; }
-  .stat-card.editing{ background:var(--creme2); border:1px dashed var(--verde); }
+
+  .stat-card .cat{
+    font-size:11px;
+    font-weight:700;
+    color:#1A1815;
+  }
+
+  .stat-card .val{
+    font-size:13px;
+    color:#1A1815;
+    margin-top:2px;
+  }
+
+  .stat-card{
+    position:relative;
+  }
+
+  .stat-card.editing{
+    background:var(--creme2);
+    border:1px dashed var(--verde);
+  }
+
   .stat-card .stat-input{
     width:100%;
     padding:4px 6px;
@@ -267,6 +370,7 @@
     background:#fff;
     color:var(--texto);
   }
+
   .stat-card .stat-remove{
     position:absolute;
     top:4px;
@@ -286,8 +390,18 @@
     justify-content:center;
     padding:0;
   }
-  .stat-card.auto{ opacity:0.92; }
-  .stat-card .auto-tag{ font-size:9.5px; font-weight:700; color:#6B5A00; opacity:0.7; }
+
+  .stat-card.auto{
+    opacity:0.92;
+  }
+
+  .stat-card .auto-tag{
+    font-size:9.5px;
+    font-weight:700;
+    color:#6B5A00;
+    opacity:0.7;
+  }
+
   .add-stat-card{
     background:transparent;
     border:1px dashed var(--texto-suave);
@@ -301,7 +415,11 @@
     font-weight:700;
     color:var(--texto-suave);
   }
-  .add-stat-card:hover{ color:var(--verde); border-color:var(--verde); }
+
+  .add-stat-card:hover{
+    color:var(--verde);
+    border-color:var(--verde);
+  }
 
   .total-row{
     margin-top:14px;
@@ -322,9 +440,11 @@
     cursor:pointer;
     user-select:none;
   }
-  .lock-icon:hover{ color:var(--verde); }
 
-  /* ---- overlay de autenticação ---- */
+  .lock-icon:hover{
+    color:var(--verde);
+  }
+
   .auth-overlay{
     position:fixed;
     inset:0;
@@ -335,6 +455,7 @@
     z-index:999;
     padding:16px;
   }
+
   .auth-box{
     background:var(--creme);
     border-radius:14px;
@@ -343,6 +464,7 @@
     max-width:340px;
     box-shadow:0 10px 40px rgba(0,0,0,0.3);
   }
+
   .auth-box h2{
     font-family:'Impact','Arial Narrow',sans-serif;
     font-weight:400;
@@ -350,12 +472,14 @@
     color:var(--verde);
     margin:0 0 6px;
   }
+
   .auth-box p{
     font-size:12.5px;
     color:var(--texto-suave);
     margin:0 0 16px;
     line-height:1.4;
   }
+
   .auth-box input[type=password],
   .auth-box input[type=text]{
     width:100%;
@@ -367,15 +491,24 @@
     background:#fff;
     color:var(--texto);
   }
+
   .auth-box input[type=password]:focus,
-  .auth-box input[type=text]:focus{ outline:2px solid var(--dourado); }
-  .auth-box button{ width:100%; padding:10px; }
+  .auth-box input[type=text]:focus{
+    outline:2px solid var(--dourado);
+  }
+
+  .auth-box button{
+    width:100%;
+    padding:10px;
+  }
+
   .auth-error{
     font-size:12px;
     color:var(--vermelho-tx);
     margin:-4px 0 10px;
     min-height:14px;
   }
+
   .auth-alt{
     font-size:11.5px;
     color:var(--texto-suave);
@@ -385,7 +518,13 @@
     flex-direction:column;
     gap:6px;
   }
-  .auth-alt a{ color:var(--verde-claro); cursor:pointer; text-decoration:underline; }
+
+  .auth-alt a{
+    color:var(--verde-claro);
+    cursor:pointer;
+    text-decoration:underline;
+  }
+
   .auth-divider{
     display:flex;
     align-items:center;
@@ -394,12 +533,15 @@
     color:var(--texto-suave);
     font-size:11px;
   }
-  .auth-divider::before, .auth-divider::after{
+
+  .auth-divider::before,
+  .auth-divider::after{
     content:"";
     flex:1;
     height:1px;
     background:#D6D0C2;
   }
+
   .visitor-btn{
     width:100%;
     padding:10px;
@@ -407,12 +549,21 @@
     color:var(--verde);
     border:1px solid var(--verde);
   }
-  .visitor-btn:hover{ background:var(--verde); color:#fff; }
 
-  .table-wrap{ width:100%; overflow-x:auto; }
-  .mobile-cards{ display:none; }
+  .visitor-btn:hover{
+    background:var(--verde);
+    color:#fff;
+  }
 
-  /* ============ CARTÕES PARA CELULAR (mais fácil de ver) ============ */
+  .table-wrap{
+    width:100%;
+    overflow-x:auto;
+  }
+
+  .mobile-cards{
+    display:none;
+  }
+
   .mcard{
     background:#fff;
     border:1px solid #E7E2D6;
@@ -421,10 +572,24 @@
     margin-bottom:12px;
     box-shadow:0 1px 4px rgba(0,0,0,0.05);
   }
-  .mcard--gold{ border:2px solid var(--dourado); background:var(--creme2); }
-  .mcard--silver{ border:2px solid #A8A196; }
-  .mcard--bronze{ border:2px solid #C08A4E; }
-  .mcard--risk{ border:2px solid var(--vermelho-tx); background:var(--vermelho-bg); }
+
+  .mcard--gold{
+    border:2px solid var(--dourado);
+    background:var(--creme2);
+  }
+
+  .mcard--silver{
+    border:2px solid #A8A196;
+  }
+
+  .mcard--bronze{
+    border:2px solid #C08A4E;
+  }
+
+  .mcard--risk{
+    border:2px solid var(--vermelho-tx);
+    background:var(--vermelho-bg);
+  }
 
   .mcard-top{
     display:flex;
@@ -432,6 +597,7 @@
     gap:10px;
     margin-bottom:12px;
   }
+
   .mcard-rank{
     font-family:'Courier New', monospace;
     font-weight:800;
@@ -439,8 +605,15 @@
     color:var(--texto-suave);
     min-width:38px;
   }
-  .mcard--gold .mcard-rank{ color:#92400E; }
-  .mcard--risk .mcard-rank{ color:var(--vermelho-tx); }
+
+  .mcard--gold .mcard-rank{
+    color:#92400E;
+  }
+
+  .mcard--risk .mcard-rank{
+    color:var(--vermelho-tx);
+  }
+
   .mcard-name{
     font-size:18px;
     font-weight:800;
@@ -448,10 +621,45 @@
     flex:1;
     line-height:1.2;
   }
-  .mcard--risk .mcard-name{ color:var(--vermelho-tx); }
-  .mcard .avatar-wrap{ width:42px; height:42px; }
-  .mcard .avatar-img, .mcard .avatar-fallback{ width:42px; height:42px; font-size:16px; }
-  .mcard .avatar-edit{ width:18px; height:18px; font-size:11px; }
+
+  .mcard--risk .mcard-name{
+    color:var(--vermelho-tx);
+  }
+
+  /* NOVO: campo para editar nome no celular */
+  .mcard-name-input{
+    width:100%;
+    flex:1;
+    padding:6px 8px;
+    border:1px solid #D6D0C2;
+    border-radius:7px;
+    font-size:17px;
+    font-weight:800;
+    background:#fff;
+    color:var(--verde-claro);
+  }
+
+  .mcard-name-input:focus{
+    outline:2px solid var(--dourado);
+  }
+
+  .mcard .avatar-wrap{
+    width:42px;
+    height:42px;
+  }
+
+  .mcard .avatar-img,
+  .mcard .avatar-fallback{
+    width:42px;
+    height:42px;
+    font-size:16px;
+  }
+
+  .mcard .avatar-edit{
+    width:18px;
+    height:18px;
+    font-size:11px;
+  }
 
   .mcard-stats{
     display:grid;
@@ -459,13 +667,19 @@
     gap:10px;
     margin-bottom:12px;
   }
+
   .stat-box{
     background:var(--creme);
     border-radius:12px;
     padding:10px 6px 8px;
     text-align:center;
   }
-  .mcard--gold .stat-box, .mcard--risk .stat-box{ background:#ffffffb0; }
+
+  .mcard--gold .stat-box,
+  .mcard--risk .stat-box{
+    background:#ffffffb0;
+  }
+
   .stat-box .stat-lbl{
     display:block;
     font-size:11.5px;
@@ -473,6 +687,7 @@
     color:var(--texto-suave);
     margin-bottom:4px;
   }
+
   .stat-box input[type=number]{
     width:100%;
     font-size:28px;
@@ -483,8 +698,18 @@
     color:var(--texto);
     padding:0;
   }
-  .stat-box input[type=number]:disabled{ color:var(--texto); -webkit-text-fill-color:var(--texto); opacity:1; background:transparent; }
-  .stat-box input[type=number]:focus{ outline:2px solid var(--dourado); border-radius:6px; }
+
+  .stat-box input[type=number]:disabled{
+    color:var(--texto);
+    -webkit-text-fill-color:var(--texto);
+    opacity:1;
+    background:transparent;
+  }
+
+  .stat-box input[type=number]:focus{
+    outline:2px solid var(--dourado);
+    border-radius:6px;
+  }
 
   .mcard-badge{
     background:var(--verde);
@@ -496,122 +721,234 @@
     text-align:center;
     letter-spacing:0.2px;
   }
-  .mcard--gold .mcard-badge{ background:var(--dourado); color:#1A1815; }
-  .mcard--risk .mcard-badge{ background:var(--vermelho-tx); color:#fff; }
 
-  /* ============ RESPONSIVO / CELULAR ============ */
+  .mcard--gold .mcard-badge{
+    background:var(--dourado);
+    color:#1A1815;
+  }
+
+  .mcard--risk .mcard-badge{
+    background:var(--vermelho-tx);
+    color:#fff;
+  }
+
   @media (max-width: 680px){
-    body{ padding:16px 8px; }
-    .gradient-frame{ border-radius:14px; padding:4px; }
-    .card{ padding:18px 14px 26px; border-radius:11px; }
-    .badge38{ font-size:20px; padding:5px 10px; }
-    h1{ font-size:16px; line-height:1.25; }
-    .header{ gap:10px; }
-    .lock-icon{ margin-left:0; font-size:11.5px; }
-    .sub-row{ margin:8px 0 16px; }
-    .pill, .pill.visitor{ font-size:10.5px; padding:4px 9px; }
-    .desc{ font-size:11px; }
-    .rule-box{ font-size:12.5px; padding:10px 12px; line-height:1.5; }
+    body{
+      padding:16px 8px;
+    }
 
-    .table-wrap{ display:none; }
-    .mobile-cards{ display:block; }
+    .gradient-frame{
+      border-radius:14px;
+      padding:4px;
+    }
 
-    .btn-row{ gap:8px; }
-    .btn-row button{ flex:1 1 auto; min-width:calc(50% - 4px); padding:11px 8px; font-size:13px; }
-    .save-note{ margin-left:0; width:100%; text-align:center; order:99; }
+    .card{
+      padding:18px 14px 26px;
+      border-radius:11px;
+    }
 
-    .total-row{ font-size:14px; text-align:center; }
+    .badge38{
+      font-size:20px;
+      padding:5px 10px;
+    }
 
-    .stats-title{ font-size:15px; margin:26px 0 10px; }
-    .stats-grid{ grid-template-columns:1fr; gap:10px; }
-    .stat-card .val{ font-size:14.5px; }
+    h1{
+      font-size:16px;
+      line-height:1.25;
+    }
 
-    .auth-box{ padding:22px 18px; max-width:100%; }
-    .auth-box h2{ font-size:17px; }
+    .header{
+      gap:10px;
+    }
+
+    .lock-icon{
+      margin-left:0;
+      font-size:11.5px;
+    }
+
+    .sub-row{
+      margin:8px 0 16px;
+    }
+
+    .pill,
+    .pill.visitor{
+      font-size:10.5px;
+      padding:4px 9px;
+    }
+
+    .desc{
+      font-size:11px;
+    }
+
+    .rule-box{
+      font-size:12.5px;
+      padding:10px 12px;
+      line-height:1.5;
+    }
+
+    .table-wrap{
+      display:none;
+    }
+
+    .mobile-cards{
+      display:block;
+    }
+
+    .btn-row{
+      gap:8px;
+    }
+
+    .btn-row button{
+      flex:1 1 auto;
+      min-width:calc(50% - 4px);
+      padding:11px 8px;
+      font-size:13px;
+    }
+
+    .save-note{
+      margin-left:0;
+      width:100%;
+      text-align:center;
+      order:99;
+    }
+
+    .total-row{
+      font-size:14px;
+      text-align:center;
+    }
+
+    .stats-title{
+      font-size:15px;
+      margin:26px 0 10px;
+    }
+
+    .stats-grid{
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+
+    .stat-card .val{
+      font-size:14.5px;
+    }
+
+    .auth-box{
+      padding:22px 18px;
+      max-width:100%;
+    }
+
+    .auth-box h2{
+      font-size:17px;
+    }
   }
 
   @media (max-width: 380px){
-    .btn-row button{ min-width:100%; }
+    .btn-row button{
+      min-width:100%;
+    }
   }
 </style>
+
 </head>
+
 <body>
 
 <div id="authOverlay" class="auth-overlay" style="display:none;">
   <div class="auth-box">
     <h2 id="authTitle">🔒 Acesso restrito</h2>
     <p id="authDesc">Digite seu usuário e senha para acessar o ranking.</p>
-    <input type="text" id="authUser" placeholder="Usuário" autocomplete="off">
-    <input type="password" id="authInput" placeholder="Senha" autocomplete="off">
-    <input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
-    <div class="auth-error" id="authError"></div>
-    <button class="primary" id="authBtn">Entrar</button>
 
-    <div class="auth-divider">ou</div>
-    <button class="visitor-btn" id="visitorBtn">👁️ Entrar como visitante (só visualizar)</button>
+```
+<input type="text" id="authUser" placeholder="Usuário" autocomplete="off">
+<input type="password" id="authInput" placeholder="Senha" autocomplete="off">
+<input type="password" id="authInput2" placeholder="Confirme a senha" style="display:none;">
 
-    <div class="auth-alt" id="authAlt"></div>
+<div class="auth-error" id="authError"></div>
+
+<button class="primary" id="authBtn">Entrar</button>
+
+<div class="auth-divider">ou</div>
+
+<button class="visitor-btn" id="visitorBtn">
+  👁️ Entrar como visitante (só visualizar)
+</button>
+
+<div class="auth-alt" id="authAlt"></div>
+```
+
   </div>
 </div>
 
 <div class="gradient-frame">
   <div class="card">
 
-    <div class="header">
-      <div class="badge38">38-0</div>
-      <h1>RANKING GERAL DA LIGA (38-0)</h1>
-      <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">🔒 protegido</div>
-    </div>
-    <div class="sub-row">
-      <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
-      <span class="desc">FUTEBOL DE BOTÃO · CAMPANHA INVICTA</span>
-      <span class="pill visitor" id="visitorPill" style="display:none;">👁️ MODO VISITANTE</span>
-    </div>
+```
+<div class="header">
+  <div class="badge38">38-0</div>
+  <h1>RANKING GERAL DA LIGA (38-0)</h1>
 
-    <div class="rule-box">
-      🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
-      Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
-      Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
-      Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
-    </div>
+  <div class="lock-icon" id="lockBtn" title="Entrar / trocar de acesso">
+    🔒 protegido
+  </div>
+</div>
 
-    <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th class="center">Pos</th>
-          <th>Jogador</th>
-          <th class="center">🏆 Títulos</th>
-          <th class="center">🅱️ Rebaixamentos</th>
-          <th>Status / Insígnia</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-    </div>
+<div class="sub-row">
+  <span class="pill">⚡ DESAFIO DA LIGA #38-0</span>
+  <span class="desc">FUTEBOL DE BOTÃO · CAMPANHA INVICTA</span>
 
-    <div class="mobile-cards" id="mobileCards"></div>
+  <span class="pill visitor" id="visitorPill" style="display:none;">
+    👁️ MODO VISITANTE
+  </span>
+</div>
 
-    <div class="total-row" id="totalRow"></div>
+<div class="rule-box">
+  🔒 Edite <b>Títulos</b> e <b>Rebaixamentos</b> — a posição, o pódio e os selos se recalculam sozinhos.
+  Critério: mais títulos primeiro; empatados, quem tem <b>menos rebaixamentos</b> fica acima.
+  Nas estatísticas abaixo você também pode editar, remover e adicionar novos recordes livremente.
+  Edição protegida por usuário e senha. Quem não tiver as credenciais pode entrar como <b>visitante</b> para só ver o ranking, sem mexer em nada.
+</div>
 
-    <div class="btn-row">
-      <button id="addBtn">+ adicionar jogador</button>
-      <button id="resetBtn">restaurar dados originais</button>
-      <button id="saveBtn" class="primary">salvar</button>
-      <button id="exportBtn">📸 baixar imagem</button>
-      <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
-      <span class="save-note" id="saveNote"></span>
-    </div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="center">Pos</th>
+        <th>Jogador</th>
+        <th class="center">🏆 Títulos</th>
+        <th class="center">🅱️ Rebaixamentos</th>
+        <th>Status / Insígnia</th>
+      </tr>
+    </thead>
 
-    <div class="stats-title" style="display:flex;align-items:center;gap:10px;">
-      📌 ESTATÍSTICAS DA LIGA
-    </div>
-    <div class="stats-grid" id="statsGrid"></div>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="mobile-cards" id="mobileCards"></div>
+
+<div class="total-row" id="totalRow"></div>
+
+<div class="btn-row">
+  <button id="addBtn">+ adicionar jogador</button>
+  <button id="resetBtn">restaurar dados originais</button>
+  <button id="saveBtn" class="primary">salvar</button>
+  <button id="exportBtn">📸 baixar imagem</button>
+  <button id="shareBtn" class="primary">📲 enviar no WhatsApp</button>
+
+  <span class="save-note" id="saveNote"></span>
+</div>
+
+<div class="stats-title" style="display:flex;align-items:center;gap:10px;">
+  📌 ESTATÍSTICAS DA LIGA
+</div>
+
+<div class="stats-grid" id="statsGrid"></div>
+```
 
   </div>
 </div>
 
 <script>
+
 const DEFAULT_DATA = [
   {nome:"Isaque", titulos:8, rebaixamentos:4},
   {nome:"Rafoso", titulos:7, rebaixamentos:1},
@@ -630,7 +967,6 @@ const DEFAULT_DATA = [
   {nome:"William", titulos:0, rebaixamentos:9},
 ];
 
-// extra facts that can't be derived from titulos/rebaixamentos alone (dados iniciais, depois viram editáveis)
 const DEFAULT_EXTRA_STATS = [
   {cat:"⚡ Melhor campanha", jogador:"Rafoso", detalhe:"91 pontos"},
   {cat:"📉 Pior campanha", jogador:"Adriano", detalhe:"12 pts / 32 derrotas"},
@@ -641,58 +977,79 @@ let players = [];
 let extraStats = [];
 let unlocked = false;
 
-/* ---------- armazenamento compartilhado (JSONBin.io) ----------
-   Todos os visitantes leem/gravam o MESMO bin na nuvem, então
-   qualquer edição feita por quem está logado aparece pra todo
-   mundo, em qualquer aparelho. */
+
+/* ---------- armazenamento compartilhado (JSONBin.io) ---------- */
+
 const JSONBIN_ID = "6a91efa0da38895dfe1db6ca";
 const JSONBIN_KEY = "$2a$10$nqRMwpkNc2ZnrMV28sGpcOpGBz/p26JUUkqyxWXOSxYTrD/4ZtATm";
 const JSONBIN_BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
 
 async function remoteGet(){
   try{
     const res = await fetch(`${JSONBIN_BASE}/latest`, {
       headers: { "X-Master-Key": JSONBIN_KEY }
     });
+
     if (!res.ok) return null;
+
     const json = await res.json();
+
     return json.record || null;
+
   }catch(e){
     return null;
   }
 }
 
+
 async function remoteSet(data){
   try{
     const res = await fetch(JSONBIN_BASE, {
       method: "PUT",
+
       headers: {
         "Content-Type": "application/json",
         "X-Master-Key": JSONBIN_KEY
       },
+
       body: JSON.stringify(data)
     });
+
     return res.ok;
+
   }catch(e){
     return false;
   }
 }
 
+
 /* ---------- hashing simples (SHA-256) ---------- */
+
 async function hashText(text){
+
   const enc = new TextEncoder().encode(text);
+
   const buf = await crypto.subtle.digest("SHA-256", enc);
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+
+  return Array.from(new Uint8Array(buf))
+    .map(b => b.toString(16).padStart(2,"0"))
+    .join("");
 }
 
+
 /* ---------- autenticação (usuário + senha) ---------- */
+
 // Credenciais pré-definidas: usuário isaque / senha 99197480
+
 const DEFAULT_AUTH = {
   username: "isaque",
   hash: "ebd643c02382c53592c3f85a125d2e852932631290dc242677c915b960b1e983"
 };
 
+
 async function initAuth(){
+
   const overlay = document.getElementById("authOverlay");
   const title = document.getElementById("authTitle");
   const desc = document.getElementById("authDesc");
@@ -705,8 +1062,10 @@ async function initAuth(){
   const visitorBtn = document.getElementById("visitorBtn");
 
   overlay.style.display = "flex";
+
   title.textContent = "⏳ Carregando...";
   desc.textContent = "Buscando os dados da liga, um instante.";
+
   userInput.style.display = "none";
   input1.style.display = "none";
   input2.style.display = "none";
@@ -714,28 +1073,34 @@ async function initAuth(){
   visitorBtn.style.display = "none";
   alt.innerHTML = "";
 
-  // busca (ou cria, se ainda não existir) os dados remotos, incluindo a credencial
   let remote = await remoteGet();
+
   let needsBootstrap = false;
+
   if (!remote || typeof remote !== "object"){
     remote = {};
     needsBootstrap = true;
   }
+
   if (!remote.auth){
     remote.auth = {...DEFAULT_AUTH};
     needsBootstrap = true;
   }
+
   if (!remote.players){
     remote.players = cloneDefault();
     needsBootstrap = true;
   }
+
   if (!remote.extraStats){
     remote.extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
     needsBootstrap = true;
   }
+
   if (needsBootstrap){
     await remoteSet(remote);
   }
+
   const stored = remote.auth;
 
   userInput.style.display = "block";
@@ -743,437 +1108,1204 @@ async function initAuth(){
   input2.style.display = "none";
   btn.style.display = "block";
   visitorBtn.style.display = "block";
+
   title.textContent = "🔒 Acesso restrito";
-  desc.textContent = "Digite seu usuário e senha para editar o ranking, ou entre como visitante para só visualizar.";
+
+  desc.textContent =
+    "Digite seu usuário e senha para editar o ranking, ou entre como visitante para só visualizar.";
+
   btn.textContent = "Entrar";
-  alt.innerHTML = `<a id="forgotLink">esqueci minhas credenciais / redefinir</a>`;
+
+  alt.innerHTML =
+    `<a id="forgotLink">esqueci minhas credenciais / redefinir</a>`;
+
 
   btn.onclick = async () => {
+
     errorEl.textContent = "";
+
     const u = userInput.value.trim();
-    const hash = await hashText(u.toLowerCase() + "::" + input1.value.trim());
-    if (u && hash === stored.hash && u.toLowerCase() === stored.username.toLowerCase()){
+
+    const hash = await hashText(
+      u.toLowerCase() + "::" + input1.value.trim()
+    );
+
+    if (
+      u &&
+      hash === stored.hash &&
+      u.toLowerCase() === stored.username.toLowerCase()
+    ){
+
       overlay.style.display = "none";
+
       unlocked = true;
+
       document.getElementById("visitorPill").style.display = "none";
+
       applyData(remote);
-    } else {
-      errorEl.textContent = "Usuário ou senha incorretos.";
+
+    }else{
+
+      errorEl.textContent =
+        "Usuário ou senha incorretos.";
     }
   };
 
-  // acesso de visitante: entra sem senha, mas fica somente leitura (nada de edição/salvamento)
+
   visitorBtn.onclick = () => {
+
     overlay.style.display = "none";
+
     unlocked = false;
-    document.getElementById("visitorPill").style.display = "inline-block";
+
+    document.getElementById("visitorPill").style.display =
+      "inline-block";
+
     applyData(remote);
   };
 
+
   document.getElementById("forgotLink").onclick = async () => {
-    if (!confirm("Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?")) return;
+
+    if (
+      !confirm(
+        "Redefinir o usuário e a senha vai voltar para o padrão isaque (os dados do ranking continuam salvos). Deseja continuar?"
+      )
+    ) return;
+
     const current = await remoteGet();
+
     const payload = current || remote;
+
     payload.auth = {...DEFAULT_AUTH};
+
     await remoteSet(payload);
+
     initAuth();
   };
 
-  userInput.addEventListener("keydown", e => { if (e.key === "Enter") btn.click(); });
-  input1.addEventListener("keydown", e => { if (e.key === "Enter") btn.click(); });
-  input2.addEventListener("keydown", e => { if (e.key === "Enter") btn.click(); });
+
+  userInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") btn.click();
+  });
+
+  input1.addEventListener("keydown", e => {
+    if (e.key === "Enter") btn.click();
+  });
+
+  input2.addEventListener("keydown", e => {
+    if (e.key === "Enter") btn.click();
+  });
 }
 
+
 document.getElementById("lockBtn").addEventListener("click", () => {
+
   unlocked = false;
+
   document.getElementById("visitorPill").style.display = "none";
+
   document.getElementById("authUser").value = "";
   document.getElementById("authInput").value = "";
   document.getElementById("authInput2").value = "";
+
   initAuth();
 });
 
+
 /* ---------- dados do ranking ---------- */
+
 function cloneDefault(){
   return DEFAULT_DATA.map(p => ({...p}));
 }
 
+
 async function loadData(){
+
   const remote = await remoteGet();
+
   applyData(remote);
 }
 
+
 function applyData(remote){
+
   if (remote && remote.players){
+
     players = remote.players;
-    extraStats = remote.extraStats || DEFAULT_EXTRA_STATS.map(s => ({...s}));
-  } else {
+
+    extraStats =
+      remote.extraStats ||
+      DEFAULT_EXTRA_STATS.map(s => ({...s}));
+
+  }else{
+
     players = cloneDefault();
-    extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+
+    extraStats =
+      DEFAULT_EXTRA_STATS.map(s => ({...s}));
   }
+
   render();
 }
 
+
 async function persist(){
-  if (!unlocked) return; // trava extra: visitante jamais salva
+
+  if (!unlocked) return;
+
   const note = document.getElementById("saveNote");
+
   note.textContent = "salvando...";
-  // busca o registro remoto atual pra não sobrescrever a credencial de login
+
   const current = await remoteGet();
+
   const payload = {
     players,
     extraStats,
-    auth: (current && current.auth) ? current.auth : {...DEFAULT_AUTH}
+    auth:
+      (current && current.auth)
+        ? current.auth
+        : {...DEFAULT_AUTH}
   };
+
   const ok = await remoteSet(payload);
-  note.textContent = ok ? "salvo ✓" : "não foi possível salvar";
-  setTimeout(()=>{ note.textContent = ""; }, 2500);
+
+  note.textContent =
+    ok ? "salvo ✓" : "não foi possível salvar";
+
+  setTimeout(() => {
+    note.textContent = "";
+  }, 2500);
 }
 
+
 function sortedRanking(){
-  return [...players].sort((a,b)=>{
-    if (b.titulos !== a.titulos) return b.titulos - a.titulos;
+
+  return [...players].sort((a,b) => {
+
+    if (b.titulos !== a.titulos)
+      return b.titulos - a.titulos;
+
     return a.rebaixamentos - b.rebaixamentos;
   });
 }
 
+
 /* ---------- avatar / foto do jogador ---------- */
+
 function avatarHTML(p, idx){
-  const initials = (p.nome || "?").trim().charAt(0).toUpperCase();
+
+  const initials =
+    (p.nome || "?").trim().charAt(0).toUpperCase();
+
   const editBtn = unlocked
-    ? `<label class="avatar-edit" title="Trocar foto">📷<input type="file" accept="image/*" data-idx="${idx}" class="avatar-input" hidden></label>`
+    ? `<label class="avatar-edit" title="Trocar foto">
+         📷
+         <input
+           type="file"
+           accept="image/*"
+           data-idx="${idx}"
+           class="avatar-input"
+           hidden
+         >
+       </label>`
     : "";
+
   const inner = p.foto
     ? `<img src="${p.foto}" class="avatar-img" alt="${p.nome}">`
     : `<span class="avatar-fallback">${initials}</span>`;
-  return `<span class="avatar-wrap">${inner}${editBtn}</span>`;
+
+  return `
+    <span class="avatar-wrap">
+      ${inner}
+      ${editBtn}
+    </span>
+  `;
 }
 
+
 function readAndCompressImage(file){
+
   return new Promise((resolve, reject) => {
+
     const reader = new FileReader();
+
     reader.onload = (e) => {
+
       const img = new Image();
+
       img.onload = () => {
+
         const size = 96;
+
         const canvas = document.createElement("canvas");
+
         canvas.width = size;
         canvas.height = size;
+
         const ctx = canvas.getContext("2d");
-        const minSide = Math.min(img.width, img.height);
-        const sx = (img.width - minSide) / 2;
-        const sy = (img.height - minSide) / 2;
-        ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
-        resolve(canvas.toDataURL("image/jpeg", 0.75));
+
+        const minSide =
+          Math.min(img.width, img.height);
+
+        const sx =
+          (img.width - minSide) / 2;
+
+        const sy =
+          (img.height - minSide) / 2;
+
+        ctx.drawImage(
+          img,
+          sx,
+          sy,
+          minSide,
+          minSide,
+          0,
+          0,
+          size,
+          size
+        );
+
+        resolve(
+          canvas.toDataURL("image/jpeg", 0.75)
+        );
       };
-      img.onerror = () => reject(new Error("imagem inválida"));
+
+      img.onerror =
+        () => reject(new Error("imagem inválida"));
+
       img.src = e.target.result;
     };
-    reader.onerror = () => reject(new Error("falha ao ler arquivo"));
+
+    reader.onerror =
+      () => reject(new Error("falha ao ler arquivo"));
+
     reader.readAsDataURL(file);
   });
 }
 
+
 function badgeFor(p, rank, total, maxReb){
-  if (rank === 1) return "🥇 CAMPEÃO DOS CAMPEÕES";
-  if (rank === 2) return "🥈 VICE DA LIGA";
-  if (rank === 3) return "🥉 TERCEIRO LUGAR";
-  if (p.titulos === 0 && p.rebaixamentos === maxReb && maxReb > 0) return "💀 REI DOS REBAIXAMENTOS";
-  if (p.titulos === 0) return "📉 SEM TÍTULOS NA TEMPORADA";
-  if (p.rebaixamentos >= 5) return "⚠️ RISCO DE REBAIXAMENTO";
-  if (p.rebaixamentos === 0) return "🛡️ SEM REBAIXAMENTOS";
-  if (rank <= 5) return "MEMBRO TOP 5";
+
+  if (rank === 1)
+    return "🥇 CAMPEÃO DOS CAMPEÕES";
+
+  if (rank === 2)
+    return "🥈 VICE DA LIGA";
+
+  if (rank === 3)
+    return "🥉 TERCEIRO LUGAR";
+
+  if (
+    p.titulos === 0 &&
+    p.rebaixamentos === maxReb &&
+    maxReb > 0
+  )
+    return "💀 REI DOS REBAIXAMENTOS";
+
+  if (p.titulos === 0)
+    return "📉 SEM TÍTULOS NA TEMPORADA";
+
+  if (p.rebaixamentos >= 5)
+    return "⚠️ RISCO DE REBAIXAMENTO";
+
+  if (p.rebaixamentos === 0)
+    return "🛡️ SEM REBAIXAMENTOS";
+
+  if (rank <= 5)
+    return "MEMBRO TOP 5";
+
   return "CAMPEÃO DE EDIÇÃO";
 }
 
+
+/* ---------- render ---------- */
+
 function render(){
+
   const ranked = sortedRanking();
-  const maxReb = Math.max(...ranked.map(p=>p.rebaixamentos));
-  const tbody = document.getElementById("tbody");
-  const mobileCards = document.getElementById("mobileCards");
+
+  const maxReb =
+    Math.max(...ranked.map(p => p.rebaixamentos));
+
+  const tbody =
+    document.getElementById("tbody");
+
+  const mobileCards =
+    document.getElementById("mobileCards");
+
   tbody.innerHTML = "";
   mobileCards.innerHTML = "";
 
+
   ranked.forEach((p, idx) => {
+
     const rank = idx + 1;
-    const originalIndex = players.indexOf(p);
-    const disabledAttr = unlocked ? "" : "disabled";
+
+    const originalIndex =
+      players.indexOf(p);
+
+    const disabledAttr =
+      unlocked ? "" : "disabled";
+
 
     let rowClass = "";
     let cardClass = "";
+
+
     if (rank === 1){
-      rowClass = "gold"; cardClass = "mcard--gold";
-    } else if (p.titulos === 0){
-      rowClass = "risk"; cardClass = "mcard--risk";
-    } else {
-      rowClass = idx % 2 === 0 ? "zebra" : "";
-      if (rank === 2) cardClass = "mcard--silver";
-      else if (rank === 3) cardClass = "mcard--bronze";
+
+      rowClass = "gold";
+      cardClass = "mcard--gold";
+
+    }else if (p.titulos === 0){
+
+      rowClass = "risk";
+      cardClass = "mcard--risk";
+
+    }else{
+
+      rowClass =
+        idx % 2 === 0 ? "zebra" : "";
+
+      if (rank === 2)
+        cardClass = "mcard--silver";
+
+      else if (rank === 3)
+        cardClass = "mcard--bronze";
     }
 
-    const badgeText = badgeFor(p, rank, ranked.length, maxReb);
 
-    // ---- linha da tabela (telas maiores) ----
-    const tr = document.createElement("tr");
+    const badgeText =
+      badgeFor(
+        p,
+        rank,
+        ranked.length,
+        maxReb
+      );
+
+
+    /* ---- linha da tabela ---- */
+
+    const tr =
+      document.createElement("tr");
+
     tr.className = rowClass;
+
+
     tr.innerHTML = `
       <td class="center pos">#${rank}</td>
-      <td data-label="Jogador"><div class="nome-cell">${avatarHTML(p, originalIndex)}<span class="nome">${p.nome}</span></div></td>
-      <td class="center" data-label="🏆 Títulos"><input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}></td>
-      <td class="center" data-label="🅱️ Rebaixamentos"><input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}></td>
-      <td class="status" data-label="Status">${badgeText}</td>
+
+      <td data-label="Jogador">
+        <div class="nome-cell">
+
+          ${avatarHTML(p, originalIndex)}
+
+          ${
+            unlocked
+              ? `
+                <input
+                  type="text"
+                  class="nome-input"
+                  value="${p.nome}"
+                  data-idx="${originalIndex}"
+                  data-field="nome"
+                  aria-label="Nome do jogador"
+                >
+              `
+              : `
+                <span class="nome">${p.nome}</span>
+              `
+          }
+
+        </div>
+      </td>
+
+      <td class="center" data-label="🏆 Títulos">
+        <input
+          type="number"
+          min="0"
+          value="${p.titulos}"
+          data-idx="${originalIndex}"
+          data-field="titulos"
+          ${disabledAttr}
+        >
+      </td>
+
+      <td class="center" data-label="🅱️ Rebaixamentos">
+        <input
+          type="number"
+          min="0"
+          value="${p.rebaixamentos}"
+          data-idx="${originalIndex}"
+          data-field="rebaixamentos"
+          ${disabledAttr}
+        >
+      </td>
+
+      <td class="status" data-label="Status">
+        ${badgeText}
+      </td>
     `;
+
     tbody.appendChild(tr);
 
-    // ---- cartão (celular) ----
-    const mc = document.createElement("div");
-    mc.className = `mcard ${cardClass}`;
+
+    /* ---- cartão para celular ---- */
+
+    const mc =
+      document.createElement("div");
+
+    mc.className =
+      `mcard ${cardClass}`;
+
+
     mc.innerHTML = `
       <div class="mcard-top">
-        <span class="mcard-rank">#${rank}</span>
+
+        <span class="mcard-rank">
+          #${rank}
+        </span>
+
         ${avatarHTML(p, originalIndex)}
-        <span class="mcard-name">${p.nome}</span>
+
+        ${
+          unlocked
+            ? `
+              <input
+                type="text"
+                class="mcard-name-input"
+                value="${p.nome}"
+                data-idx="${originalIndex}"
+                data-field="nome"
+                aria-label="Nome do jogador"
+              >
+            `
+            : `
+              <span class="mcard-name">
+                ${p.nome}
+              </span>
+            `
+        }
+
       </div>
+
+
       <div class="mcard-stats">
+
         <div class="stat-box">
-          <span class="stat-lbl">🏆 Títulos</span>
-          <input type="number" min="0" value="${p.titulos}" data-idx="${originalIndex}" data-field="titulos" ${disabledAttr}>
+
+          <span class="stat-lbl">
+            🏆 Títulos
+          </span>
+
+          <input
+            type="number"
+            min="0"
+            value="${p.titulos}"
+            data-idx="${originalIndex}"
+            data-field="titulos"
+            ${disabledAttr}
+          >
+
         </div>
+
+
         <div class="stat-box">
-          <span class="stat-lbl">🅱️ Rebaixamentos</span>
-          <input type="number" min="0" value="${p.rebaixamentos}" data-idx="${originalIndex}" data-field="rebaixamentos" ${disabledAttr}>
+
+          <span class="stat-lbl">
+            🅱️ Rebaixamentos
+          </span>
+
+          <input
+            type="number"
+            min="0"
+            value="${p.rebaixamentos}"
+            data-idx="${originalIndex}"
+            data-field="rebaixamentos"
+            ${disabledAttr}
+          >
+
         </div>
+
       </div>
-      <div class="mcard-badge">${badgeText}</div>
+
+
+      <div class="mcard-badge">
+        ${badgeText}
+      </div>
     `;
+
+
     mobileCards.appendChild(mc);
   });
 
-  document.querySelectorAll("input[type=number][data-field]").forEach(inp => {
-    inp.addEventListener("change", (e) => {
-      if (!unlocked) return; // reforço: visitante nunca altera dados
-      const idx = Number(e.target.dataset.idx);
-      const field = e.target.dataset.field;
-      let val = parseInt(e.target.value, 10);
-      if (isNaN(val) || val < 0) val = 0;
-      players[idx][field] = val;
-      render();
-    });
-  });
 
-  document.querySelectorAll(".avatar-input").forEach(inp => {
-    inp.addEventListener("change", async (e) => {
-      if (!unlocked) return; // reforço: visitante nunca altera dados
-      const idx = Number(e.target.dataset.idx);
-      const file = e.target.files[0];
-      if (!file) return;
-      try{
-        const dataUrl = await readAndCompressImage(file);
-        players[idx].foto = dataUrl;
+  /* ---------- edição de títulos/rebaixamentos ---------- */
+
+  document
+    .querySelectorAll("input[type=number][data-field]")
+    .forEach(inp => {
+
+      inp.addEventListener("change", (e) => {
+
+        if (!unlocked) return;
+
+        const idx =
+          Number(e.target.dataset.idx);
+
+        const field =
+          e.target.dataset.field;
+
+        let val =
+          parseInt(e.target.value, 10);
+
+        if (isNaN(val) || val < 0)
+          val = 0;
+
+        players[idx][field] = val;
+
         render();
-      }catch(err){
-        alert("Não foi possível carregar essa imagem.");
-      }
+      });
     });
-  });
 
-  const totalT = players.reduce((s,p)=>s+p.titulos,0);
-  const totalR = players.reduce((s,p)=>s+p.rebaixamentos,0);
+
+  /* ---------- NOVO: edição do nome ---------- */
+
+  document
+    .querySelectorAll("input[data-field='nome']")
+    .forEach(inp => {
+
+      inp.addEventListener("change", (e) => {
+
+        if (!unlocked) return;
+
+        const idx =
+          Number(e.target.dataset.idx);
+
+        const novoNome =
+          e.target.value.trim();
+
+        if (novoNome){
+
+          players[idx].nome =
+            novoNome;
+
+        }else{
+
+          e.target.value =
+            players[idx].nome;
+        }
+
+        render();
+      });
+
+
+      /* Permite apertar Enter para confirmar */
+
+      inp.addEventListener("keydown", (e) => {
+
+        if (e.key === "Enter"){
+
+          e.preventDefault();
+
+          inp.blur();
+        }
+      });
+    });
+
+
+  /* ---------- edição de foto ---------- */
+
+  document
+    .querySelectorAll(".avatar-input")
+    .forEach(inp => {
+
+      inp.addEventListener("change", async (e) => {
+
+        if (!unlocked) return;
+
+        const idx =
+          Number(e.target.dataset.idx);
+
+        const file =
+          e.target.files[0];
+
+        if (!file) return;
+
+        try{
+
+          const dataUrl =
+            await readAndCompressImage(file);
+
+          players[idx].foto =
+            dataUrl;
+
+          render();
+
+        }catch(err){
+
+          alert(
+            "Não foi possível carregar essa imagem."
+          );
+        }
+      });
+    });
+
+
+  const totalT =
+    players.reduce(
+      (s,p) => s + p.titulos,
+      0
+    );
+
+  const totalR =
+    players.reduce(
+      (s,p) => s + p.rebaixamentos,
+      0
+    );
+
+
   document.getElementById("totalRow").textContent =
     `TOTAL DA LIGA — 🏆 ${totalT} títulos · 🅱️ ${totalR} rebaixamentos`;
 
-  document.getElementById("addBtn").disabled = !unlocked;
-  document.getElementById("resetBtn").disabled = !unlocked;
-  document.getElementById("saveBtn").disabled = !unlocked;
 
-  renderStats(ranked, maxReb);
+  document.getElementById("addBtn").disabled =
+    !unlocked;
+
+  document.getElementById("resetBtn").disabled =
+    !unlocked;
+
+  document.getElementById("saveBtn").disabled =
+    !unlocked;
+
+
+  renderStats(
+    ranked,
+    maxReb
+  );
 }
+
+
+/* ---------- estatísticas ---------- */
 
 function renderStats(ranked, maxReb){
-  const lider = ranked[0];
-  const reiReb = [...players].sort((a,b)=>b.rebaixamentos - a.rebaixamentos)[0];
+
+  const lider =
+    ranked[0];
+
+  const reiReb =
+    [...players].sort(
+      (a,b) =>
+        b.rebaixamentos -
+        a.rebaixamentos
+    )[0];
+
 
   const autoStats = [
-    {cat:"🔥 Líder de títulos", jogador: lider.nome, detalhe: `${lider.titulos} títulos`},
-    {cat:"💀 Rei dos rebaixamentos", jogador: reiReb.nome, detalhe: `${reiReb.rebaixamentos} rebaixamentos`},
+
+    {
+      cat:"🔥 Líder de títulos",
+      jogador:lider.nome,
+      detalhe:`${lider.titulos} títulos`
+    },
+
+    {
+      cat:"💀 Rei dos rebaixamentos",
+      jogador:reiReb.nome,
+      detalhe:`${reiReb.rebaixamentos} rebaixamentos`
+    }
+
   ];
 
-  const grid = document.getElementById("statsGrid");
+
+  const grid =
+    document.getElementById("statsGrid");
+
   grid.innerHTML = "";
 
-  // estatísticas automáticas (calculadas, não editáveis)
+
   autoStats.forEach(s => {
-    const div = document.createElement("div");
-    div.className = "stat-card auto";
-    div.innerHTML = `<div class="cat">${s.cat} <span class="auto-tag">(automática)</span></div><div class="val">${s.jogador} — ${s.detalhe}</div>`;
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "stat-card auto";
+
+    div.innerHTML = `
+      <div class="cat">
+        ${s.cat}
+        <span class="auto-tag">
+          (automática)
+        </span>
+      </div>
+
+      <div class="val">
+        ${s.jogador} — ${s.detalhe}
+      </div>
+    `;
+
     grid.appendChild(div);
   });
 
-  // estatísticas manuais (editáveis somente quando autenticado, não no modo visitante)
+
   extraStats.forEach((s, idx) => {
-    const div = document.createElement("div");
+
+    const div =
+      document.createElement("div");
+
+
     if (unlocked){
-      div.className = "stat-card editing";
+
+      div.className =
+        "stat-card editing";
+
       div.innerHTML = `
-        <button class="stat-remove" data-idx="${idx}" title="Remover">✕</button>
-        <input class="stat-input" data-idx="${idx}" data-field="cat" value="${s.cat}" placeholder="Categoria (ex: ⚡ Melhor campanha)">
-        <input class="stat-input" data-idx="${idx}" data-field="jogador" value="${s.jogador}" placeholder="Jogador">
-        <input class="stat-input" data-idx="${idx}" data-field="detalhe" value="${s.detalhe}" placeholder="Detalhe (ex: 91 pontos)">
+
+        <button
+          class="stat-remove"
+          data-idx="${idx}"
+          title="Remover"
+        >
+          ✕
+        </button>
+
+        <input
+          class="stat-input"
+          data-idx="${idx}"
+          data-field="cat"
+          value="${s.cat}"
+          placeholder="Categoria (ex: ⚡ Melhor campanha)"
+        >
+
+        <input
+          class="stat-input"
+          data-idx="${idx}"
+          data-field="jogador"
+          value="${s.jogador}"
+          placeholder="Jogador"
+        >
+
+        <input
+          class="stat-input"
+          data-idx="${idx}"
+          data-field="detalhe"
+          value="${s.detalhe}"
+          placeholder="Detalhe (ex: 91 pontos)"
+        >
       `;
-    } else {
-      div.className = "stat-card";
-      div.innerHTML = `<div class="cat">${s.cat}</div><div class="val">${s.jogador} — ${s.detalhe}</div>`;
+
+    }else{
+
+      div.className =
+        "stat-card";
+
+      div.innerHTML = `
+        <div class="cat">
+          ${s.cat}
+        </div>
+
+        <div class="val">
+          ${s.jogador} — ${s.detalhe}
+        </div>
+      `;
     }
+
+
     grid.appendChild(div);
   });
+
 
   if (unlocked){
-    const addDiv = document.createElement("div");
-    addDiv.className = "add-stat-card";
-    addDiv.id = "addStatCard";
-    addDiv.textContent = "+ adicionar estatística";
+
+    const addDiv =
+      document.createElement("div");
+
+    addDiv.className =
+      "add-stat-card";
+
+    addDiv.id =
+      "addStatCard";
+
+    addDiv.textContent =
+      "+ adicionar estatística";
+
     grid.appendChild(addDiv);
 
-    document.getElementById("addStatCard").addEventListener("click", () => {
-      extraStats.push({cat:"🆕 Nova estatística", jogador:"Jogador", detalhe:"detalhe"});
-      renderStats(ranked, maxReb);
-    });
 
-    grid.querySelectorAll(".stat-input").forEach(inp => {
-      inp.addEventListener("change", (e) => {
-        const idx = Number(e.target.dataset.idx);
-        const field = e.target.dataset.field;
-        extraStats[idx][field] = e.target.value;
-      });
-    });
+    document
+      .getElementById("addStatCard")
+      .addEventListener("click", () => {
 
-    grid.querySelectorAll(".stat-remove").forEach(btnEl => {
-      btnEl.addEventListener("click", (e) => {
-        const idx = Number(e.target.dataset.idx);
-        extraStats.splice(idx, 1);
-        renderStats(ranked, maxReb);
+        extraStats.push({
+          cat:"🆕 Nova estatística",
+          jogador:"Jogador",
+          detalhe:"detalhe"
+        });
+
+        renderStats(
+          ranked,
+          maxReb
+        );
       });
-    });
+
+
+    grid
+      .querySelectorAll(".stat-input")
+      .forEach(inp => {
+
+        inp.addEventListener("change", (e) => {
+
+          const idx =
+            Number(e.target.dataset.idx);
+
+          const field =
+            e.target.dataset.field;
+
+          extraStats[idx][field] =
+            e.target.value;
+        });
+      });
+
+
+    grid
+      .querySelectorAll(".stat-remove")
+      .forEach(btnEl => {
+
+        btnEl.addEventListener("click", (e) => {
+
+          const idx =
+            Number(e.target.dataset.idx);
+
+          extraStats.splice(
+            idx,
+            1
+          );
+
+          renderStats(
+            ranked,
+            maxReb
+          );
+        });
+      });
   }
 }
 
-document.getElementById("addBtn").addEventListener("click", () => {
-  if (!unlocked) return;
-  players.push({nome:"Novo jogador", titulos:0, rebaixamentos:0});
-  render();
-});
 
-document.getElementById("resetBtn").addEventListener("click", () => {
-  if (!unlocked) return;
-  if (confirm("Restaurar os dados originais? As edições atuais serão perdidas.")){
-    players = cloneDefault();
-    extraStats = DEFAULT_EXTRA_STATS.map(s => ({...s}));
+/* ---------- adicionar jogador ---------- */
+
+document
+  .getElementById("addBtn")
+  .addEventListener("click", () => {
+
+    if (!unlocked) return;
+
+    players.push({
+      nome:"Novo jogador",
+      titulos:0,
+      rebaixamentos:0
+    });
+
     render();
-  }
-});
-
-document.getElementById("saveBtn").addEventListener("click", () => {
-  if (!unlocked) return;
-  persist();
-});
-
-async function gerarCanvasRanking(){
-  const target = document.querySelector(".gradient-frame");
-
-  // html2canvas não desenha o texto de <input> com precisão (os números saem
-  // cortados). Solução: trocar cada input numérico por um <span> de texto
-  // simples só durante a captura, e devolver o input logo depois.
-  const swaps = [];
-  target.querySelectorAll("input[type=number]").forEach(inp => {
-    const cs = getComputedStyle(inp);
-    const span = document.createElement("span");
-    span.textContent = inp.value;
-    span.style.display = "inline-block";
-    span.style.width = "100%";
-    span.style.fontFamily = cs.fontFamily;
-    span.style.fontSize = cs.fontSize;
-    span.style.fontWeight = cs.fontWeight;
-    span.style.color = cs.color;
-    span.style.textAlign = "center";
-    span.style.lineHeight = "1.3";
-    inp.insertAdjacentElement("afterend", span);
-    inp.style.display = "none";
-    swaps.push({ inp, span });
   });
 
+
+/* ---------- restaurar ---------- */
+
+document
+  .getElementById("resetBtn")
+  .addEventListener("click", () => {
+
+    if (!unlocked) return;
+
+    if (
+      confirm(
+        "Restaurar os dados originais? As edições atuais serão perdidas."
+      )
+    ){
+
+      players =
+        cloneDefault();
+
+      extraStats =
+        DEFAULT_EXTRA_STATS.map(
+          s => ({...s})
+        );
+
+      render();
+    }
+  });
+
+
+/* ---------- salvar ---------- */
+
+document
+  .getElementById("saveBtn")
+  .addEventListener("click", () => {
+
+    if (!unlocked) return;
+
+    persist();
+  });
+
+
+/* ---------- gerar imagem ---------- */
+
+async function gerarCanvasRanking(){
+
+  const target =
+    document.querySelector(".gradient-frame");
+
+  const swaps = [];
+
+
+  target
+    .querySelectorAll("input[type=number]")
+    .forEach(inp => {
+
+      const cs =
+        getComputedStyle(inp);
+
+      const span =
+        document.createElement("span");
+
+      span.textContent =
+        inp.value;
+
+      span.style.display =
+        "inline-block";
+
+      span.style.width =
+        "100%";
+
+      span.style.fontFamily =
+        cs.fontFamily;
+
+      span.style.fontSize =
+        cs.fontSize;
+
+      span.style.fontWeight =
+        cs.fontWeight;
+
+      span.style.color =
+        cs.color;
+
+      span.style.textAlign =
+        "center";
+
+      span.style.lineHeight =
+        "1.3";
+
+      inp.insertAdjacentElement(
+        "afterend",
+        span
+      );
+
+      inp.style.display =
+        "none";
+
+      swaps.push({
+        inp,
+        span
+      });
+    });
+
+
   try{
-    return await html2canvas(target, {
-      backgroundColor: "#EDEBE3",
-      scale: 2,
-      useCORS: true
-    });
-  } finally {
-    swaps.forEach(({ inp, span }) => {
-      inp.style.display = "";
-      span.remove();
-    });
+
+    return await html2canvas(
+      target,
+      {
+        backgroundColor:"#EDEBE3",
+        scale:2,
+        useCORS:true
+      }
+    );
+
+  }finally{
+
+    swaps.forEach(
+      ({inp,span}) => {
+
+        inp.style.display =
+          "";
+
+        span.remove();
+      }
+    );
   }
 }
 
-document.getElementById("exportBtn").addEventListener("click", async () => {
-  const btn = document.getElementById("exportBtn");
-  const originalText = btn.textContent;
-  btn.textContent = "gerando imagem...";
-  btn.disabled = true;
-  try{
-    const canvas = await gerarCanvasRanking();
-    const link = document.createElement("a");
-    link.download = "ranking-38-0.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  }catch(e){
-    alert("Não foi possível gerar a imagem. Tente novamente.");
-  }
-  btn.textContent = originalText;
-  btn.disabled = false;
-});
 
-document.getElementById("shareBtn").addEventListener("click", async () => {
-  const btn = document.getElementById("shareBtn");
-  const originalText = btn.textContent;
-  btn.textContent = "preparando...";
-  btn.disabled = true;
-  try{
-    const canvas = await gerarCanvasRanking();
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-    const file = new File([blob], "ranking-38-0.png", { type: "image/png" });
+/* ---------- baixar imagem ---------- */
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })){
-      try{
-        await navigator.share({
-          files: [file],
-          title: "Ranking 38-0",
-          text: "🏆 Confere o ranking atualizado da liga 38-0!"
-        });
-      }catch(shareErr){
-        // usuário cancelou o compartilhamento — não precisa avisar nada
-        if (shareErr.name !== "AbortError") throw shareErr;
-      }
-    } else {
-      // navegador (geralmente desktop) sem suporte a compartilhar arquivos:
-      // baixa a imagem pra anexar manualmente no WhatsApp
-      const link = document.createElement("a");
-      link.download = "ranking-38-0.png";
-      link.href = URL.createObjectURL(blob);
+document
+  .getElementById("exportBtn")
+  .addEventListener("click", async () => {
+
+    const btn =
+      document.getElementById("exportBtn");
+
+    const originalText =
+      btn.textContent;
+
+    btn.textContent =
+      "gerando imagem...";
+
+    btn.disabled =
+      true;
+
+
+    try{
+
+      const canvas =
+        await gerarCanvasRanking();
+
+      const link =
+        document.createElement("a");
+
+      link.download =
+        "ranking-38-0.png";
+
+      link.href =
+        canvas.toDataURL("image/png");
+
       link.click();
-      alert("Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web.");
-    }
-  }catch(e){
-    alert("Não foi possível preparar a imagem. Tente novamente.");
-  }
-  btn.textContent = originalText;
-  btn.disabled = false;
-});
 
-// mostra a tabela (bloqueada) enquanto a autenticação carrega, e inicia o fluxo de login
-players = cloneDefault();
+    }catch(e){
+
+      alert(
+        "Não foi possível gerar a imagem. Tente novamente."
+      );
+    }
+
+
+    btn.textContent =
+      originalText;
+
+    btn.disabled =
+      false;
+  });
+
+
+/* ---------- WhatsApp ---------- */
+
+document
+  .getElementById("shareBtn")
+  .addEventListener("click", async () => {
+
+    const btn =
+      document.getElementById("shareBtn");
+
+    const originalText =
+      btn.textContent;
+
+    btn.textContent =
+      "preparando...";
+
+    btn.disabled =
+      true;
+
+
+    try{
+
+      const canvas =
+        await gerarCanvasRanking();
+
+      const blob =
+        await new Promise(
+          resolve =>
+            canvas.toBlob(
+              resolve,
+              "image/png"
+            )
+        );
+
+      const file =
+        new File(
+          [blob],
+          "ranking-38-0.png",
+          {
+            type:"image/png"
+          }
+        );
+
+
+      if (
+        navigator.canShare &&
+        navigator.canShare({
+          files:[file]
+        })
+      ){
+
+        try{
+
+          await navigator.share({
+
+            files:[file],
+
+            title:
+              "Ranking 38-0",
+
+            text:
+              "🏆 Confere o ranking atualizado da liga 38-0!"
+          });
+
+        }catch(shareErr){
+
+          if (
+            shareErr.name !==
+            "AbortError"
+          )
+            throw shareErr;
+        }
+
+      }else{
+
+        const link =
+          document.createElement("a");
+
+        link.download =
+          "ranking-38-0.png";
+
+        link.href =
+          URL.createObjectURL(blob);
+
+        link.click();
+
+
+        alert(
+          "Seu navegador não permite enviar direto pro WhatsApp por aqui. A imagem foi baixada — é só anexar ela numa conversa do WhatsApp Web."
+        );
+      }
+
+    }catch(e){
+
+      alert(
+        "Não foi possível preparar a imagem. Tente novamente."
+      );
+    }
+
+
+    btn.textContent =
+      originalText;
+
+    btn.disabled =
+      false;
+  });
+
+
+/* ---------- inicia ---------- */
+
+players =
+  cloneDefault();
+
 render();
+
 initAuth();
+
 </script>
 
 </body>
