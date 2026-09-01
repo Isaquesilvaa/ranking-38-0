@@ -1582,8 +1582,9 @@ async function gerarCanvasRanking(){
   const target = document.querySelector(".gradient-frame");
 
   /*
-    O html2canvas pode cortar textos dentro de inputs.
-    Durante a captura, substituímos os inputs numéricos por spans.
+    Captura em resolução alta e independente do tamanho da tela.
+    Isso evita que no celular a imagem seja renderizada em ~480 px.
+    Em aparelhos menores, forçamos o layout desktop durante a captura.
   */
   const swaps = [];
 
@@ -1614,18 +1615,34 @@ async function gerarCanvasRanking(){
     });
 
   /*
-    As imagens dos troféus são carregadas com crossorigin.
-    O useCORS abaixo permite que o html2canvas tente incluí-las.
+    Força temporariamente uma largura de captura grande.
+    A escala 3 gera uma imagem final muito mais nítida,
+    inclusive para salvar e compartilhar pelo celular.
   */
+  const previousWidth = target.style.width;
+  const previousMaxWidth = target.style.maxWidth;
+  const previousMargin = target.style.margin;
+
   try{
+    target.style.width = "1120px";
+    target.style.maxWidth = "1120px";
+    target.style.margin = "0 auto";
+
     return await html2canvas(target,{
       backgroundColor:"#EDEBE3",
-      scale:2,
+      scale:3,
       useCORS:true,
       allowTaint:false,
-      imageTimeout:15000
+      imageTimeout:15000,
+      logging:false,
+      windowWidth:1200,
+      windowHeight:2000
     });
   }finally{
+    target.style.width = previousWidth;
+    target.style.maxWidth = previousMaxWidth;
+    target.style.margin = previousMargin;
+
     swaps.forEach(({inp,span})=>{
       inp.style.display = "";
       span.remove();
