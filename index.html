@@ -143,8 +143,10 @@ tr.risk .nome{color:var(--vermelho-tx)}
   height:30px;
   border-radius:50%;
   object-fit:cover;
+  object-position:center center;
   display:block;
   border:1px solid #D6D0C2;
+  image-rendering:auto;
 }
 .avatar-fallback{
   width:30px;
@@ -218,12 +220,16 @@ tr.risk .avatar-fallback{background:var(--vermelho-tx)}
   align-items:center;
   justify-content:center;
   gap:3px;
+  width:100%;
+  margin:0 auto;
 }
 .trophy-edit img{
   width:44px;
   height:54px;
   object-fit:contain;
+  object-position:center center;
   display:block;
+  margin:0 auto;
   filter:drop-shadow(0 1px 1px rgba(0,0,0,.12));
 }
 .trophy-edit input{
@@ -534,6 +540,7 @@ button:disabled{
   width:58px;
   height:66px;
   object-fit:contain;
+  object-position:center center;
   display:block;
   margin:0 auto 4px;
 }
@@ -631,15 +638,40 @@ button:disabled{
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+  object-fit: contain !important;
+  object-position: center center !important;
   transform: translateX(0) !important;
 }
 .trophy-cell {
   text-align: center !important;
 }
+.trophy-edit {
+  width: 100% !important;
+  align-items: center !important;
+}
+.trophy-edit input {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+.mcard-trophy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 .mcard-trophy img {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+.mcard-trophy input {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 </style>
@@ -1079,12 +1111,16 @@ function readAndCompressImage(file){
       const img = new Image();
 
       img.onload = ()=>{
-        const size = 96;
+        // Resolução maior para a foto não sair pixelada (export e tela retina)
+        const size = 256;
         const canvas = document.createElement("canvas");
         canvas.width = size;
         canvas.height = size;
 
         const ctx = canvas.getContext("2d");
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+
         const minSide = Math.min(img.width,img.height);
         const sx = (img.width-minSide)/2;
         const sy = (img.height-minSide)/2;
@@ -1095,7 +1131,7 @@ function readAndCompressImage(file){
           0,0,size,size
         );
 
-        resolve(canvas.toDataURL("image/jpeg",.75));
+        resolve(canvas.toDataURL("image/jpeg",0.92));
       };
 
       img.onerror = ()=>reject(new Error("imagem inválida"));
