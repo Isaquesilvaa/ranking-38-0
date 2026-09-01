@@ -640,7 +640,6 @@ button:disabled{
   margin-right: auto !important;
   object-fit: contain !important;
   object-position: center center !important;
-  transform: translateX(0) !important;
 }
 .trophy-cell {
   text-align: center !important;
@@ -652,7 +651,6 @@ button:disabled{
 .trophy-edit input {
   margin-left: auto !important;
   margin-right: auto !important;
-  display: block !important;
 }
 .mcard-trophy {
   display: flex;
@@ -671,7 +669,21 @@ button:disabled{
 .mcard-trophy input {
   margin-left: auto;
   margin-right: auto;
-  display: block;
+}
+
+/* Taça do Brasileirão vem com o desenho deslocado à esquerda no PNG */
+.trophy-img-brasileirao,
+img[alt="Brasileirão"] {
+  object-position: 70% center !important;
+  transform: translateX(5px) !important;
+}
+.trophy-head img[alt="Brasileirão"] {
+  object-position: 70% center !important;
+  transform: translateX(5px) !important;
+}
+.mcard-trophy img[alt="Brasileirão"] {
+  object-position: 70% center !important;
+  transform: translateX(5px) !important;
 }
 
 </style>
@@ -1167,8 +1179,9 @@ function trophyEditorHTML(p,idx,field,image,label){
   const disabledAttr = unlocked ? "" : "disabled";
 
   return `
-    <div class="trophy-edit">
+    <div class="trophy-edit trophy-field-${field}">
       <img
+        class="trophy-img trophy-img-${field}"
         src="${image}"
         crossorigin="anonymous"
         alt="${label}"
@@ -1630,6 +1643,7 @@ async function gerarCanvasRanking(){
       const cs = getComputedStyle(inp);
 
       const span = document.createElement("span");
+      span.className = "export-num";
       span.textContent = inp.value;
       span.style.display = "inline-block";
       span.style.width = cs.width;
@@ -1643,9 +1657,14 @@ async function gerarCanvasRanking(){
       span.style.border = cs.border;
       span.style.borderRadius = cs.borderRadius;
       span.style.background = cs.backgroundColor;
+      span.style.boxSizing = "border-box";
+      span.style.marginLeft = "auto";
+      span.style.marginRight = "auto";
 
       inp.insertAdjacentElement("afterend",span);
-      inp.style.display = "none";
+      // !important para não ser sobrescrito por CSS do ranking
+      inp.style.setProperty("display","none","important");
+      inp.style.setProperty("visibility","hidden","important");
 
       swaps.push({inp,span});
     });
@@ -1680,7 +1699,8 @@ async function gerarCanvasRanking(){
     target.style.margin = previousMargin;
 
     swaps.forEach(({inp,span})=>{
-      inp.style.display = "";
+      inp.style.removeProperty("display");
+      inp.style.removeProperty("visibility");
       span.remove();
     });
   }
